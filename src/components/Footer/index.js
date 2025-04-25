@@ -10,7 +10,10 @@ function Footer() {
         <div className="row">
           <div className="col col--3">
             <div className={styles.footerLogo}>
-              <img src="https://stylopay-sandbox-ohio-dev-dump-public.s3.amazonaws.com/zoqq.jpg" alt="ZOQQ Logo" />
+              <img
+                src="https://stylopay-sandbox-ohio-dev-dump-public.s3.amazonaws.com/zoqq.jpg"
+                alt="ZOQQ Logo"
+              />
             </div>
             <div className={styles.footerText}>
               <p>© ZOQQ. All rights reserved. 2024.</p>
@@ -56,13 +59,13 @@ function Footer() {
             <h4 className={styles.footerTitle}>Company</h4>
             <ul className={styles.footerLinks}>
               <li>
-                <Link to="/about">About Us</Link>
+                <Link to="">About Us</Link>
               </li>
               <li>
-                <Link to="/careers">Careers</Link>
+                <Link to="">Careers</Link>
               </li>
               <li>
-                <Link to="/contact">Contact</Link>
+                <Link to="">Contact</Link>
               </li>
               <li>
                 <Link to="">Blog</Link>
@@ -78,7 +81,10 @@ function Footer() {
               rel="noopener noreferrer"
               className={styles.socialIcon}
             >
-              <img src="https://cdn.cms-twdigitalassets.com/content/dam/about-twitter/x/large-x-logo.png.twimg.2560.png" alt="Twitter" />
+              <img
+                src="https://cdn.cms-twdigitalassets.com/content/dam/about-twitter/x/large-x-logo.png.twimg.2560.png"
+                alt="Twitter"
+              />
             </a>
             <a
               href="https://linkedin.com/company/zoqq"
@@ -86,7 +92,10 @@ function Footer() {
               rel="noopener noreferrer"
               className={styles.socialIcon}
             >
-              <img src="https://businessyield.com/wp-content/uploads/2022/10/LinkedIn-Logo.png" alt="LinkedIn" />
+              <img
+                src="https://businessyield.com/wp-content/uploads/2022/10/LinkedIn-Logo.png"
+                alt="LinkedIn"
+              />
             </a>
             <a
               href="https://www.youtube.com/@ZOQQ_Global"
@@ -94,7 +103,10 @@ function Footer() {
               rel="noopener noreferrer"
               className={styles.socialIcon}
             >
-              <img src="https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-06-512.png" alt="GitHub" />
+              <img
+                src="https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-06-512.png"
+                alt="GitHub"
+              />
             </a>
           </div>
           <div className={styles.legalLinks}>
