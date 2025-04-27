@@ -3,6 +3,7 @@ id: onboarding
 title: Onboarding
 hide_table_of_contents: true
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -183,7 +184,7 @@ This API creates a new user in the system with business and personal details.
 
             try(OutputStream os = connection.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes("utf-8");
-                os.write(input, 0, input.length);           
+                os.write(input, 0, input.length);
             }
 
             try(BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"))) {
@@ -197,6 +198,7 @@ This API creates a new user in the system with business and personal details.
         }
     }
     ```
+
   </TabItem>
 
   <TabItem value="python" label="Python">
@@ -311,6 +313,7 @@ This API creates a new user in the system with business and personal details.
     response = requests.post(url, headers=headers, json=data)
     print(response.text)
     ```
+
   </TabItem>
 
   <TabItem value="php" label="Php">
@@ -433,6 +436,7 @@ This API creates a new user in the system with business and personal details.
     echo $response;
     ?>
     ```
+
   </TabItem>
 
   <TabItem value="csharp" label="C#">
@@ -448,13 +452,13 @@ This API creates a new user in the system with business and personal details.
         {
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Post, "{{baseUrl}}/zoqq/api/v1/user");
-            
+
             request.Headers.Add("x-api-key", "{{Shared Xapikey By ZOqq}}");
             request.Headers.Add("x-program-id", "{{BasedOnRequirement}}");
             request.Headers.Add("x-request-id", "{{IdempotencyKey}}");
             request.Headers.Add("x-user-id", "{{Useridentificationkey}}");
             request.Headers.Add("Authorization", "Bearer {{YOUR_TOKEN}}");
-            
+
             var json = @"{
                 ""account_details"": {
                     ""business_details"": {
@@ -549,16 +553,17 @@ This API creates a new user in the system with business and personal details.
                     ""mobile"": ""896300124""
                 }
             }";
-            
+
             request.Content = new StringContent(json, Encoding.UTF8, "application/json");
-            
+
             var response = await client.SendAsync(request);
             var responseString = await response.Content.ReadAsStringAsync();
-            
+
             Console.WriteLine(responseString);
         }
     }
     ```
+
   </TabItem>
 </Tabs>
   </div> 
@@ -620,24 +625,24 @@ This API retrieves user details from the system.
                 URL url = new URL("{{baseUrl}}/zoqq/api/v1/user");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
-                
+
                 // Set headers
                 conn.setRequestProperty("x-api-key", "{{Shared Xapikey By Zoqq}}");
                 conn.setRequestProperty("x-program-id", "{{BasedOnRequirement}}");
                 conn.setRequestProperty("x-request-id", "{{IdempotencyKey}}");
                 conn.setRequestProperty("x-user-id", "{{Useridentificationkey}}");
                 conn.setRequestProperty("Authorization", "Bearer {{Bearer Token}}");
-                
+
                 int responseCode = conn.getResponseCode();
                 BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 String inputLine;
                 StringBuffer response = new StringBuffer();
-                
+
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
                 in.close();
-                
+
                 System.out.println(response.toString());
             }
         }
@@ -698,14 +703,14 @@ This API retrieves user details from the system.
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create("{{baseUrl}}/zoqq/api/v1/user");
                 request.Method = "GET";
-                
+
                 // Set headers
                 request.Headers["x-api-key"] = "{{Shared Xapikey By Zoqq}}";
                 request.Headers["x-program-id"] = "{{BasedOnRequirement}}";
                 request.Headers["x-request-id"] = "{{IdempotencyKey}}";
                 request.Headers["x-user-id"] = "{{Useridentificationkey}}";
                 request.Headers["Authorization"] = "Bearer {{Bearer Token}}";
-                
+
                 try
                 {
                     HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -815,11 +820,11 @@ This API retrieves user details from the system.
         ```
       </TabItem>
     </Tabs>
+
   </div> 
 </div>
 
-
-## Accept Terms & Conditions
+## Accept Terms And Conditions
 
 This API allows users to accept the terms and conditions.
 
@@ -875,24 +880,24 @@ This API allows users to accept the terms and conditions.
                 URL url = new URL("{{baseUrl}}/zoqq/api/v1/user/terms&conditions/Id");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
-                
+
                 // Set headers
                 conn.setRequestProperty("x-api-key", "{{Shared Xapikey By Zoqq}}");
                 conn.setRequestProperty("x-program-id", "{{BasedOnRequirement}}");
                 conn.setRequestProperty("x-request-id", "{{IdempotencyKey}}");
                 conn.setRequestProperty("x-user-id", "{{Useridentificationkey}}");
                 conn.setRequestProperty("Authorization", "Bearer {{Bearer Token}}");
-                
+
                 int responseCode = conn.getResponseCode();
                 BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 String inputLine;
                 StringBuffer response = new StringBuffer();
-                
+
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
                 in.close();
-                
+
                 System.out.println(response.toString());
             }
         }
@@ -953,14 +958,14 @@ This API allows users to accept the terms and conditions.
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create("{{baseUrl}}/zoqq/api/v1/user/terms&conditions/Id");
                 request.Method = "GET";
-                
+
                 // Set headers
                 request.Headers["x-api-key"] = "{{Shared Xapikey By Zoqq}}";
                 request.Headers["x-program-id"] = "{{BasedOnRequirement}}";
                 request.Headers["x-request-id"] = "{{IdempotencyKey}}";
                 request.Headers["x-user-id"] = "{{Useridentificationkey}}";
                 request.Headers["Authorization"] = "Bearer {{Bearer Token}}";
-                
+
                 try
                 {
                     HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -999,6 +1004,7 @@ This API allows users to accept the terms and conditions.
         ```
       </TabItem>
     </Tabs>
+
   </div> 
 </div>
 
@@ -1058,24 +1064,24 @@ This API activates a user account in the system.
                 URL url = new URL("{{baseUrl}}/zoqq/api/v1/user/activate/Id");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
-                
+
                 // Set headers
                 conn.setRequestProperty("x-api-key", "{{Shared Xapikey By Zoqq}}");
                 conn.setRequestProperty("x-program-id", "{{BasedOnRequirement}}");
                 conn.setRequestProperty("x-request-id", "{{IdempotencyKey}}");
                 conn.setRequestProperty("x-user-id", "{{Useridentificationkey}}");
                 conn.setRequestProperty("Authorization", "Bearer {{Bearer Token}}");
-                
+
                 int responseCode = conn.getResponseCode();
                 BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 String inputLine;
                 StringBuffer response = new StringBuffer();
-                
+
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
                 in.close();
-                
+
                 System.out.println(response.toString());
             }
         }
@@ -1136,14 +1142,14 @@ This API activates a user account in the system.
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create("{{baseUrl}}/zoqq/api/v1/user/activate/Id");
                 request.Method = "GET";
-                
+
                 // Set headers
                 request.Headers["x-api-key"] = "{{Shared Xapikey By Zoqq}}";
                 request.Headers["x-program-id"] = "{{BasedOnRequirement}}";
                 request.Headers["x-request-id"] = "{{IdempotencyKey}}";
                 request.Headers["x-user-id"] = "{{Useridentificationkey}}";
                 request.Headers["Authorization"] = "Bearer {{Bearer Token}}";
-                
+
                 try
                 {
                     HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -1182,5 +1188,6 @@ This API activates a user account in the system.
         ```
       </TabItem>
     </Tabs>
+
   </div> 
 </div>

@@ -10,10 +10,7 @@ function Footer() {
         <div className="row">
           <div className="col col--3">
             <div className={styles.footerLogo}>
-              <img
-                src="https://stylopay-sandbox-ohio-dev-dump-public.s3.amazonaws.com/zoqq.jpg"
-                alt="ZOQQ Logo"
-              />
+              <img src="https://demo.zoqq.com/zoqq.svg" alt="ZOQQ Logo" />
             </div>
             <div className={styles.footerText}>
               <p>© ZOQQ. All rights reserved. 2024.</p>
@@ -104,8 +101,8 @@ function Footer() {
               className={styles.socialIcon}
             >
               <img
-                src="https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-06-512.png"
-                alt="GitHub"
+                src="https://www.freepnglogos.com/uploads/youtube-video-logo-png-4.png"
+                alt="youtube"
               />
             </a>
           </div>

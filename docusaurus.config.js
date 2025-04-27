@@ -1,33 +1,37 @@
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require("prism-react-renderer/themes/github");
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 module.exports = {
-  title: 'Zoqq Docs',
-  tagline: 'API Documentation for Zoqq Platform',
-  url: 'https://docs.zoqq.com',
-  baseUrl: '/',
-  favicon: 'img/favicon.ico',
+  title: "Zoqq Docs",
+  tagline: "API Documentation for Zoqq Platform",
+  url: "https://docs.zoqq.com",
+  baseUrl: "/",
+  favicon: "img/favicon.ico",
 
   themeConfig: {
     navbar: {
-      title: '',
+      title: "",
       logo: {
-        alt: 'Zoqq Logo',
-        src: 'https://stylopay-sandbox-ohio-dev-dump-public.s3.amazonaws.com/zoqq.jpg',
+        alt: "Zoqq Logo",
+        src: "https://demo.zoqq.com/zoqq.svg",
       },
       items: [
-        { to: '/docs/getting-started', label: 'Guides', position: 'left' },
-        { to: '/docs/api-reference/authentication', label: 'API Reference', position: 'left' },
-// { to: '/docs/api-reference/accounts', label: 'API Reference', position: 'left' },
-        { to: '/docs/changelog', label: 'Changelog', position: 'left' },
+        { to: "/docs/getting-started", label: "Guides", position: "left" },
         {
-          type: 'search',
-          position: 'right',
+          to: "/docs/api-reference/authentication",
+          label: "API Reference",
+          position: "left",
+        },
+        // { to: '/docs/api-reference/accounts', label: 'API Reference', position: 'left' },
+        { to: "/docs/changelog", label: "Changelog", position: "left" },
+        {
+          type: "search",
+          position: "right",
         },
       ],
     },
     colorMode: {
-      defaultMode: 'light',
+      defaultMode: "light",
       disableSwitch: false,
     },
     prism: {
@@ -38,14 +42,14 @@ module.exports = {
 
   presets: [
     [
-      '@docusaurus/preset-classic',
+      "@docusaurus/preset-classic",
       {
         docs: {
-          routeBasePath: '/docs',
-          sidebarPath: require.resolve('./sidebars.js'),
+          routeBasePath: "/docs",
+          sidebarPath: require.resolve("./sidebars.js"),
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: require.resolve("./src/css/custom.css"),
         },
       },
     ],

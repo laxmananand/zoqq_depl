@@ -13,14 +13,53 @@ const sidebars = {
       label: "API Reference",
       collapsed: false,
       items: [
-        "api-reference/authentication",
         {
-          type: "doc",
-          id: "api-reference/onboarding",
-          label: "Onboarding",
+          type: "category",
+          label: "Authentication",
+          items: [
+            {
+              type: "doc",
+              id: "api-reference/authentication",
+              label: "Overview",
+            },
+            {
+              type: "link",
+              href: "/docs/api-reference/authentication#authentication-login",
+              label: "🟡 POST Authentication Login",
+            },
+          ],
         },
-
-    
+        {
+          type: "category",
+          label: "Onboarding",
+          items: [
+            {
+              type: "doc",
+              id: "api-reference/onboarding",
+              label: "Overview",
+            },
+            {
+              type: "link",
+              href: "/docs/api-reference/onboarding#create-user",
+              label: "🟡 POST Create User",
+            },
+            {
+              type: "link",
+              href: "/docs/api-reference/onboarding#get-user",
+              label: "🟢 GET Get User",
+            },
+            {
+              type: "link",
+              href: "/docs/api-reference/onboarding#accept-terms-and-conditions",
+              label: "🟢 GET Accept Terms & Conditions",
+            },
+            {
+              type: "link",
+              href: "/docs/api-reference/onboarding#account-activation",
+              label: "🟢 GET Account Activation",
+            },
+          ],
+        },
         {
           type: "category",
           label: "Accounts",
@@ -84,12 +123,12 @@ const sidebars = {
             {
               type: "link",
               href: "/docs/api-reference/cards#update-card",
-              label: "🟡 PATCH Update Cards",
+              label: "🟣 PATCH Update Cards",
             },
             {
               type: "link",
               href: "/docs/api-reference/cards#update-card-holder",
-              label: "🟡 PATCH Update Card Holder",
+              label: "🟣 PATCH Update Card Holder",
             },
             {
               type: "link",
@@ -161,7 +200,7 @@ const sidebars = {
             {
               type: "link",
               href: "/docs/api-reference/payout#update-beneficiary",
-              label: "🟡 PATCH Update Beneficiary",
+              label: "🟣 PATCH Update Beneficiary",
             },
             {
               type: "link",
