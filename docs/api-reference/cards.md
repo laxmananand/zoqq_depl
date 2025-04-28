@@ -215,23 +215,7 @@ POST {{baseUrl}}/zoqq/api/v1/cardholder
     ```
 
       </TabItem>
-      <TabItem value="422" label="422: Validation Error">
-
-    ```json
-    {
-      "code": 422,
-      "status": "Error",
-      "message": "Validation failed",
-      "errors": [
-        {
-          "field": "individual.date_of_birth",
-          "message": "Must be at least 18 years ago"
-        }
-      ]
-    }
-    ```
-
-      </TabItem>
+    
     </Tabs>
   </div>
 </div>
@@ -472,23 +456,7 @@ POST {{baseUrl}}/zoqq/api/v1/cards
     ```
 
       </TabItem>
-      <TabItem value="422" label="422: Validation Error">
-
-    ```json
-    {
-      "code": 422,
-      "status": "Error",
-      "message": "Invalid card holder ID",
-      "errors": [
-        {
-          "field": "card_holder_id",
-          "message": "Card holder not found"
-        }
-      ]
-    }
-    ```
-
-      </TabItem>
+     
     </Tabs>
   </div>
 </div>
@@ -649,15 +617,7 @@ This API retrieves a list of all cards associated with the authenticated user.
         }
         ```
       </TabItem>
-      <TabItem value="404" label="404: Not Found">
-        ```json
-        {
-          "code": 404,
-          "status": "Error",
-          "message": "No cards found"
-        }
-        ```
-      </TabItem>
+     
     </Tabs>
   </div>
 </div>
@@ -794,28 +754,7 @@ POST {{baseUrl}}/zoqq/api/v1/cards/activate
     ```
 
       </TabItem>
-      <TabItem value="404" label="404: Not Found">
-
-    ```json
-    {
-      "code": 404,
-      "status": "Error",
-      "message": "Card not found"
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="409" label="409: Conflict">
-
-    ```json
-    {
-      "code": 409,
-      "status": "Error",
-      "message": "Card is already active"
-    }
-    ```
-
-      </TabItem>
+      
     </Tabs>
   </div>
 </div>
@@ -984,34 +923,8 @@ PATCH {{baseUrl}}/zoqq/api/v1/cards
     ```
 
       </TabItem>
-      <TabItem value="404" label="404: Not Found">
-
-    ```json
-    {
-      "code": 404,
-      "status": "Error",
-      "message": "Card not found"
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="422" label="422: Validation Error">
-
-    ```json
-    {
-      "code": 422,
-      "status": "Error",
-      "message": "Invalid amount specified",
-      "errors": [
-        {
-          "field": "authorization_controls.transaction_limits.limits[0].amount",
-          "message": "Amount exceeds maximum limit"
-        }
-      ]
-    }
-    ```
-
-      </TabItem>
+      
+      
     </Tabs>
   </div>
 </div>
@@ -1188,34 +1101,8 @@ PATCH {{baseUrl}}/zoqq/api/v1/cardHolders
     ```
 
       </TabItem>
-      <TabItem value="404" label="404: Not Found">
-
-    ```json
-    {
-      "code": 404,
-      "status": "Error",
-      "message": "Card holder not found"
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="422" label="422: Validation Error">
-
-    ```json
-    {
-      "code": 422,
-      "status": "Error",
-      "message": "Invalid address format",
-      "errors": [
-        {
-          "field": "individual.address.postcode",
-          "message": "Invalid postal code format"
-        }
-      ]
-    }
-    ```
-
-      </TabItem>
+      
+      
     </Tabs>
   </div>
 </div>
@@ -1364,28 +1251,7 @@ GET {{baseUrl}}/zoqq/api/v1/cards/limit
     ```
 
       </TabItem>
-      <TabItem value="404" label="404: Not Found">
-
-    ```json
-    {
-      "code": 404,
-      "status": "Error",
-      "message": "Card not found"
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="403" label="403: Forbidden">
-
-    ```json
-    {
-      "code": 403,
-      "status": "Error",
-      "message": "Not authorized to view these limits"
-    }
-    ```
-
-      </TabItem>
+     
     </Tabs>
   </div>
 </div>
@@ -1586,34 +1452,8 @@ POST {{baseUrl}}/zoqq/api/v1/cardHolders
     ```
 
       </TabItem>
-      <TabItem value="404" label="404: Not Found">
-
-    ```json
-    {
-      "code": 404,
-      "status": "Error",
-      "message": "Card not found"
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="422" label="422: Validation Error">
-
-    ```json
-    {
-      "code": 422,
-      "status": "Error",
-      "message": "Invalid date format",
-      "errors": [
-        {
-          "field": "start_date",
-          "message": "Must be in YYYY-MM-DD format"
-        }
-      ]
-    }
-    ```
-
-      </TabItem>
+      
+      
     </Tabs>
   </div>
 </div>

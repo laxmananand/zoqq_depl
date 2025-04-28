@@ -35,7 +35,7 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier based on requirement |
     | x-request-id | string | Yes | Idempotency key for request tracking |
     | x-user-id | string | Yes | User identification key |
@@ -80,7 +80,7 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
     ```bash
     curl --request POST \
       --url {{baseUrl}}/zoqq/api/v1/accounts \
-      --header 'x-api-key: {{Shared Xapikey By ZOqq}}' \
+      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
       --header 'x-user-id: {{Useridentificationkey}}' \
@@ -113,7 +113,7 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
     }
     
     headers = {
-        "x-api-key": "{{Shared Xapikey By ZOqq}}",
+        "x-api-key": "{{Shared Xapikey By Zoqq}}",
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
@@ -131,7 +131,7 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
     ```java
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("{{baseUrl}}/zoqq/api/v1/accounts"))
-        .header("x-api-key", "{{Shared Xapikey By ZOqq}}")
+        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
         .header("x-user-id", "{{Useridentificationkey}}")
@@ -165,7 +165,7 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
       CURLOPT_CUSTOMREQUEST => "POST",
       CURLOPT_POSTFIELDS => json_encode($data),
       CURLOPT_HTTPHEADER => [
-        "x-api-key: {{Shared Xapikey By ZOqq}}",
+        "x-api-key: {{Shared Xapikey By Zoqq}}",
         "x-program-id: {{BasedOnRequirement}}",
         "x-request-id: {{IdempotencyKey}}",
         "x-user-id: {{Useridentificationkey}}",
@@ -187,7 +187,7 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
     ```csharp
     var client = new RestClient("{{baseUrl}}/zoqq/api/v1/accounts");
     var request = new RestRequest(Method.POST);
-    request.AddHeader("x-api-key", "{{Shared Xapikey By ZOqq}}");
+    request.AddHeader("x-api-key", "{{Shared Xapikey By Zoqq}}");
     request.AddHeader("x-program-id", "{{BasedOnRequirement}}");
     request.AddHeader("x-request-id", "{{IdempotencyKey}}");
     request.AddHeader("x-user-id", "{{Useridentificationkey}}");
@@ -293,7 +293,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier based on requirement |
     | x-request-id | string | Yes | Idempotency key for request tracking |
     | x-user-id | string | Yes | User identification key |
@@ -326,7 +326,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts
     ```bash
     curl --request GET \
       --url {{baseUrl}}/zoqq/api/v1/accounts \
-      --header 'x-api-key: {{Shared Xapikey By ZOqq}}' \
+      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
       --header 'x-user-id: {{Useridentificationkey}}' \
@@ -342,7 +342,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts
     url = "{{baseUrl}}/zoqq/api/v1/accounts"
     
     headers = {
-        "x-api-key": "{{Shared Xapikey By ZOqq}}",
+        "x-api-key": "{{Shared Xapikey By Zoqq}}",
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
@@ -359,7 +359,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts
     ```java
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("{{baseUrl}}/zoqq/api/v1/accounts"))
-        .header("x-api-key", "{{Shared Xapikey By ZOqq}}")
+        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
         .header("x-user-id", "{{Useridentificationkey}}")
@@ -383,7 +383,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_CUSTOMREQUEST => "GET",
       CURLOPT_HTTPHEADER => [
-        "x-api-key: {{Shared Xapikey By ZOqq}}",
+        "x-api-key: {{Shared Xapikey By Zoqq}}",
         "x-program-id: {{BasedOnRequirement}}",
         "x-request-id: {{IdempotencyKey}}",
         "x-user-id: {{Useridentificationkey}}",
@@ -404,7 +404,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts
     ```csharp
     var client = new RestClient("{{baseUrl}}/zoqq/api/v1/accounts");
     var request = new RestRequest(Method.GET);
-    request.AddHeader("x-api-key", "{{Shared Xapikey By ZOqq}}");
+    request.AddHeader("x-api-key", "{{Shared Xapikey By Zoqq}}");
     request.AddHeader("x-program-id", "{{BasedOnRequirement}}");
     request.AddHeader("x-request-id", "{{IdempotencyKey}}");
     request.AddHeader("x-user-id", "{{Useridentificationkey}}");
@@ -521,7 +521,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/balance
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier based on requirement |
     | x-request-id | string | Yes | Idempotency key for request tracking |
     | x-user-id | string | Yes | User identification key |
@@ -558,7 +558,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/balance
     ```bash
     curl --request GET \
       --url '{{baseUrl}}/zoqq/api/v1/accounts/balance?currency=SGD' \
-      --header 'x-api-key: {{Shared Xapikey By ZOqq}}' \
+      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
       --header 'x-user-id: {{Useridentificationkey}}' \
@@ -576,7 +576,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/balance
     params = {"currency": "SGD"}
     
     headers = {
-        "x-api-key": "{{Shared Xapikey By ZOqq}}",
+        "x-api-key": "{{Shared Xapikey By Zoqq}}",
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
@@ -593,7 +593,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/balance
     ```java
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("{{baseUrl}}/zoqq/api/v1/accounts/balance?currency=SGD"))
-        .header("x-api-key", "{{Shared Xapikey By ZOqq}}")
+        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
         .header("x-user-id", "{{Useridentificationkey}}")
@@ -617,7 +617,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/balance
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_CUSTOMREQUEST => "GET",
       CURLOPT_HTTPHEADER => [
-        "x-api-key: {{Shared Xapikey By ZOqq}}",
+        "x-api-key: {{Shared Xapikey By Zoqq}}",
         "x-program-id: {{BasedOnRequirement}}",
         "x-request-id: {{IdempotencyKey}}",
         "x-user-id: {{Useridentificationkey}}",
@@ -638,7 +638,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/balance
     ```csharp
     var client = new RestClient("{{baseUrl}}/zoqq/api/v1/accounts/balance?currency=SGD");
     var request = new RestRequest(Method.GET);
-    request.AddHeader("x-api-key", "{{Shared Xapikey By ZOqq}}");
+    request.AddHeader("x-api-key", "{{Shared Xapikey By Zoqq}}");
     request.AddHeader("x-program-id", "{{BasedOnRequirement}}");
     request.AddHeader("x-request-id", "{{IdempotencyKey}}");
     request.AddHeader("x-user-id", "{{Useridentificationkey}}");
@@ -691,17 +691,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/balance
     ```
     
       </TabItem>
-      <TabItem value="404" label="404: Not Found">
-    
-    ```json
-    {
-      "code": 404,
-      "status": "error",
-      "message": "No balances found for specified criteria"
-    }
-    ```
-    
-      </TabItem>
+      
     </Tabs>
   </div>
 </div>
@@ -729,7 +719,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/transactions
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
@@ -772,7 +762,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/transactions
     ```bash
     curl --request GET \
       --url '{{baseUrl}}/zoqq/api/v1/accounts/transactions?page=1&size=20&from_date=2023-01-01&to_date=2023-12-31' \
-      --header 'x-api-key: {{Shared Xapikey By ZOqq}}' \
+      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
       --header 'x-user-id: {{Useridentificationkey}}' \
@@ -794,7 +784,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/transactions
     }
     
     headers = {
-        "x-api-key": "{{Shared Xapikey By ZOqq}}",
+        "x-api-key": "{{Shared Xapikey By Zoqq}}",
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
@@ -811,7 +801,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/transactions
     ```java
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("{{baseUrl}}/zoqq/api/v1/accounts/transactions?page=1&size=20&from_date=2023-01-01&to_date=2023-12-31"))
-        .header("x-api-key", "{{Shared Xapikey By ZOqq}}")
+        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
         .header("x-user-id", "{{Useridentificationkey}}")
@@ -872,17 +862,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/transactions
     ```
     
       </TabItem>
-      <TabItem value="404" label="404: Not Found">
-    
-    ```json
-    {
-      "code": 404,
-      "status": "Error",
-      "message": "No transactions found"
-    }
-    ```
-    
-      </TabItem>
+     
     </Tabs>
   </div>
 </div>

@@ -31,7 +31,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/quote
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
@@ -62,7 +62,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/quote
     ```bash
     curl --request GET \
       --url '{{baseUrl}}/zoqq/api/v1/transfer/quote?quote_type=payout&lock_period=5_mins&conversion_schedule=immediate&source_currencycode=USD&destination_currencycode=SGD&source_amount=100' \
-      --header 'x-api-key: {{Shared Xapikey By ZOqq}}' \
+      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
       --header 'x-user-id: {{Useridentificationkey}}' \
@@ -86,7 +86,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/quote
     }
 
     headers = {
-        "x-api-key": "{{Shared Xapikey By ZOqq}}",
+        "x-api-key": "{{Shared Xapikey By Zoqq}}",
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
@@ -103,7 +103,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/quote
     ```java
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("{{baseUrl}}/zoqq/api/v1/transfer/quote?quote_type=payout&lock_period=5_mins&conversion_schedule=immediate&source_currencycode=USD&destination_currencycode=SGD&source_amount=100"))
-        .header("x-api-key", "{{Shared Xapikey By ZOqq}}")
+        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
         .header("x-user-id", "{{Useridentificationkey}}")
@@ -157,34 +157,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/quote
     ```
 
       </TabItem>
-      <TabItem value="422" label="422: Validation Error">
-
-    ```json
-    {
-      "code": 422,
-      "status": "Error",
-      "message": "Invalid parameters",
-      "errors": [
-        {
-          "field": "source_amount",
-          "message": "Cannot specify both source_amount and destination_amount"
-        }
-      ]
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="429" label="429: Rate Limited">
-
-    ```json
-    {
-      "code": 429,
-      "status": "Error",
-      "message": "Too many quote requests"
-    }
-    ```
-
-      </TabItem>
+     
     </Tabs>
 
   </div>
@@ -212,7 +185,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/quotedetails
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
@@ -235,7 +208,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/quotedetails
     ```bash
     curl --request GET \
       --url '{{baseUrl}}/zoqq/api/v1/transfer/quotedetails?quote_id=quote_6wBIHIRhPElAHfcgVaDFZs' \
-      --header 'x-api-key: {{Shared Xapikey By ZOqq}}' \
+      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
       --header 'x-user-id: {{Useridentificationkey}}' \
@@ -254,7 +227,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/quotedetails
     }
 
     headers = {
-        "x-api-key": "{{Shared Xapikey By ZOqq}}",
+        "x-api-key": "{{Shared Xapikey By Zoqq}}",
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
@@ -271,7 +244,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/quotedetails
     ```java
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("{{baseUrl}}/zoqq/api/v1/transfer/quotedetails?quote_id=quote_6wBIHIRhPElAHfcgVaDFZs"))
-        .header("x-api-key", "{{Shared Xapikey By ZOqq}}")
+        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
         .header("x-user-id", "{{Useridentificationkey}}")
@@ -324,28 +297,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/quotedetails
     ```
 
       </TabItem>
-      <TabItem value="404" label="404: Not Found">
-
-    ```json
-    {
-      "code": 404,
-      "status": "Error",
-      "message": "Quote not found"
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="410" label="410: Expired">
-
-    ```json
-    {
-      "code": 410,
-      "status": "Error",
-      "message": "Quote has expired"
-    }
-    ```
-
-      </TabItem>
+      
     </Tabs>
 
   </div>
@@ -373,7 +325,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/conversion
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
@@ -401,7 +353,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/conversion
     ```bash
     curl --request POST \
       --url {{baseUrl}}/zoqq/api/v1/transfer/conversion \
-      --header 'x-api-key: {{Shared Xapikey By ZOqq}}' \
+      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
       --header 'x-user-id: {{Useridentificationkey}}' \
@@ -430,7 +382,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/conversion
     }
 
     headers = {
-        "x-api-key": "{{Shared Xapikey By ZOqq}}",
+        "x-api-key": "{{Shared Xapikey By Zoqq}}",
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
@@ -448,7 +400,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/conversion
     ```java
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("{{baseUrl}}/zoqq/api/v1/transfer/conversion"))
-        .header("x-api-key", "{{Shared Xapikey By ZOqq}}")
+        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
         .header("x-user-id", "{{Useridentificationkey}}")
@@ -502,45 +454,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/conversion
     ```
 
       </TabItem>
-      <TabItem value="404" label="404: Not Found">
-
-    ```json
-    {
-      "code": 404,
-      "status": "Error",
-      "message": "Quote not found or expired"
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="409" label="409: Conflict">
-
-    ```json
-    {
-      "code": 409,
-      "status": "Error",
-      "message": "Amounts don't match original quote"
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="422" label="422: Validation Error">
-
-    ```json
-    {
-      "code": 422,
-      "status": "Error",
-      "message": "Invalid parameters",
-      "errors": [
-        {
-          "field": "source_amount",
-          "message": "Must be positive number"
-        }
-      ]
-    }
-    ```
-
-      </TabItem>
+      
     </Tabs>
 
   </div>
@@ -568,7 +482,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/conversion
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
@@ -591,7 +505,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/conversion
     ```bash
     curl --request GET \
       --url '{{baseUrl}}/zoqq/api/v1/transfer/conversion?conversion_id=conversion_4UTXo2tQnThdZGrMz6FdQR' \
-      --header 'x-api-key: {{Shared Xapikey By ZOqq}}' \
+      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
       --header 'x-user-id: {{Useridentificationkey}}' \
@@ -610,7 +524,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/conversion
     }
 
     headers = {
-        "x-api-key": "{{Shared Xapikey By ZOqq}}",
+        "x-api-key": "{{Shared Xapikey By Zoqq}}",
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
@@ -627,7 +541,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/conversion
     ```java
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("{{baseUrl}}/zoqq/api/v1/transfer/conversion?conversion_id=conversion_4UTXo2tQnThdZGrMz6FdQR"))
-        .header("x-api-key", "{{Shared Xapikey By ZOqq}}")
+        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
         .header("x-user-id", "{{Useridentificationkey}}")
@@ -680,28 +594,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/conversion
     ```
 
       </TabItem>
-      <TabItem value="404" label="404: Not Found">
-
-    ```json
-    {
-      "code": 404,
-      "status": "Error",
-      "message": "Conversion not found"
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="410" label="410: Gone">
-
-    ```json
-    {
-      "code": 410,
-      "status": "Error",
-      "message": "Conversion record expired"
-    }
-    ```
-
-      </TabItem>
+     
     </Tabs>
 
   </div>

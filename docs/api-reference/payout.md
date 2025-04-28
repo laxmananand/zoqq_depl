@@ -29,7 +29,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
@@ -56,7 +56,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```bash
     curl --request GET \
       --url '{{baseUrl}}/zoqq/api/v1/transfer/beneficiary?account_currency=USD&bank_country_code=US&entity_type=PERSONAL&local_clearing_system=ACH&transfer_method=LOCAL' \
-      --header 'x-api-key: {{Shared Xapikey By ZOqq}}' \
+      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
       --header 'x-user-id: {{Useridentificationkey}}' \
@@ -79,7 +79,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     }
 
     headers = {
-        "x-api-key": "{{Shared Xapikey By ZOqq}}",
+        "x-api-key": "{{Shared Xapikey By Zoqq}}",
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
@@ -96,7 +96,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```java
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("{{baseUrl}}/zoqq/api/v1/transfer/beneficiary?account_currency=USD&bank_country_code=US&entity_type=PERSONAL&local_clearing_system=ACH&transfer_method=LOCAL"))
-        .header("x-api-key", "{{Shared Xapikey By ZOqq}}")
+        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
         .header("x-user-id", "{{Useridentificationkey}}")
@@ -172,34 +172,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```
 
       </TabItem>
-      <TabItem value="404" label="404: Not Supported">
-
-    ```json
-    {
-      "code": 404,
-      "status": "Error",
-      "message": "Corridor not supported"
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="422" label="422: Validation Error">
-
-    ```json
-    {
-      "code": 422,
-      "status": "Error",
-      "message": "Invalid parameters",
-      "errors": [
-        {
-          "field": "bank_country_code",
-          "message": "Must be a valid ISO country code"
-        }
-      ]
-    }
-    ```
-
-      </TabItem>
+     
     </Tabs>
 
   </div>
@@ -227,7 +200,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
@@ -263,7 +236,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```bash
     curl --request POST \
       --url {{baseUrl}}/zoqq/api/v1/transfer/beneficiary \
-      --header 'x-api-key: {{Shared Xapikey By ZOqq}}' \
+      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
       --header 'x-user-id: {{Useridentificationkey}}' \
@@ -302,7 +275,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     }
 
     headers = {
-        "x-api-key": "{{Shared Xapikey By ZOqq}}",
+        "x-api-key": "{{Shared Xapikey By Zoqq}}",
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
@@ -320,7 +293,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```java
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("{{baseUrl}}/zoqq/api/v1/transfer/beneficiary"))
-        .header("x-api-key", "{{Shared Xapikey By ZOqq}}")
+        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
         .header("x-user-id", "{{Useridentificationkey}}")
@@ -369,34 +342,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```
 
       </TabItem>
-      <TabItem value="422" label="422: Validation Error">
-
-    ```json
-    {
-      "code": 422,
-      "status": "Error",
-      "message": "Invalid account details",
-      "errors": [
-        {
-          "field": "routing_number",
-          "message": "Invalid ABA routing number"
-        }
-      ]
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="409" label="409: Conflict">
-
-    ```json
-    {
-      "code": 409,
-      "status": "Error",
-      "message": "Beneficiary already exists"
-    }
-    ```
-
-      </TabItem>
+     
     </Tabs>
 
   </div>
@@ -424,7 +370,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/validatebeneficiary
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
@@ -460,7 +406,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/validatebeneficiary
     ```bash
     curl --request POST \
       --url {{baseUrl}}/zoqq/api/v1/transfer/validatebeneficiary \
-      --header 'x-api-key: {{Shared Xapikey By ZOqq}}' \
+      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
       --header 'x-user-id: {{Useridentificationkey}}' \
@@ -499,7 +445,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/validatebeneficiary
     }
 
     headers = {
-        "x-api-key": "{{Shared Xapikey By ZOqq}}",
+        "x-api-key": "{{Shared Xapikey By Zoqq}}",
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
@@ -517,7 +463,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/validatebeneficiary
     ```java
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("{{baseUrl}}/zoqq/api/v1/transfer/validatebeneficiary"))
-        .header("x-api-key", "{{Shared Xapikey By ZOqq}}")
+        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
         .header("x-user-id", "{{Useridentificationkey}}")
@@ -559,38 +505,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/validatebeneficiary
     ```
 
       </TabItem>
-      <TabItem value="422" label="422: Validation Error">
-
-    ```json
-    {
-      "code": 422,
-      "status": "Error",
-      "message": "Validation failed",
-      "errors": [
-        {
-          "field": "routing_number",
-          "message": "Invalid ABA routing number format"
-        },
-        {
-          "field": "account_number",
-          "message": "Account number must be 9-12 digits"
-        }
-      ]
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="404" label="404: Not Found">
-
-    ```json
-    {
-      "code": 404,
-      "status": "Error",
-      "message": "Bank not found for given routing number"
-    }
-    ```
-
-      </TabItem>
+      
     </Tabs>
 
   </div>
@@ -618,7 +533,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
@@ -654,7 +569,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```bash
     curl --request PATCH \
       --url '{{baseUrl}}/zoqq/api/v1/transfer/beneficiary?beneficiary_id=beneficiary_123' \
-      --header 'x-api-key: {{Shared Xapikey By ZOqq}}' \
+      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
       --header 'x-user-id: {{Useridentificationkey}}' \
@@ -684,7 +599,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     }
 
     headers = {
-        "x-api-key": "{{Shared Xapikey By ZOqq}}",
+        "x-api-key": "{{Shared Xapikey By Zoqq}}",
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
@@ -702,7 +617,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```java
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("{{baseUrl}}/zoqq/api/v1/transfer/beneficiary?beneficiary_id=beneficiary_123"))
-        .header("x-api-key", "{{Shared Xapikey By ZOqq}}")
+        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
         .header("x-user-id", "{{Useridentificationkey}}")
@@ -744,34 +659,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```
 
       </TabItem>
-      <TabItem value="422" label="422: Validation Error">
-
-    ```json
-    {
-      "code": 422,
-      "status": "Error",
-      "message": "Validation failed",
-      "errors": [
-        {
-          "field": "account_number",
-          "message": "Invalid account number format"
-        }
-      ]
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="404" label="404: Not Found">
-
-    ```json
-    {
-      "code": 404,
-      "status": "Error",
-      "message": "Beneficiary not found"
-    }
-    ```
-
-      </TabItem>
+      
     </Tabs>
 
   </div>
@@ -799,7 +687,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
@@ -822,7 +710,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```bash
     curl --request GET \
       --url '{{baseUrl}}/zoqq/api/v1/transfer/beneficiary?beneficiary_id=beneficiary_123' \
-      --header 'x-api-key: {{Shared Xapikey By ZOqq}}' \
+      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
       --header 'x-user-id: {{Useridentificationkey}}' \
@@ -841,7 +729,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     }
 
     headers = {
-        "x-api-key": "{{Shared Xapikey By ZOqq}}",
+        "x-api-key": "{{Shared Xapikey By Zoqq}}",
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
@@ -858,7 +746,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```java
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("{{baseUrl}}/zoqq/api/v1/transfer/beneficiary?beneficiary_id=beneficiary_123"))
-        .header("x-api-key", "{{Shared Xapikey By ZOqq}}")
+        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
         .header("x-user-id", "{{Useridentificationkey}}")
@@ -915,28 +803,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```
 
       </TabItem>
-      <TabItem value="404" label="404: Not Found">
-
-    ```json
-    {
-      "code": 404,
-      "status": "Error",
-      "message": "Beneficiary not found"
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="403" label="403: Forbidden">
-
-    ```json
-    {
-      "code": 403,
-      "status": "Error",
-      "message": "Not authorized to view this beneficiary"
-    }
-    ```
-
-      </TabItem>
+      
     </Tabs>
 
   </div>
@@ -964,7 +831,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiarylist
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
@@ -990,7 +857,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiarylist
     ```bash
     curl --request GET \
       --url '{{baseUrl}}/zoqq/api/v1/transfer/beneficiarylist?limit=20&offset=0' \
-      --header 'x-api-key: {{Shared Xapikey By ZOqq}}' \
+      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
       --header 'x-user-id: {{Useridentificationkey}}' \
@@ -1010,7 +877,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiarylist
     }
 
     headers = {
-        "x-api-key": "{{Shared Xapikey By ZOqq}}",
+        "x-api-key": "{{Shared Xapikey By Zoqq}}",
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
@@ -1027,7 +894,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiarylist
     ```java
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create("{{baseUrl}}/zoqq/api/v1/transfer/beneficiarylist?limit=20&offset=0"))
-        .header("x-api-key", "{{Shared Xapikey By ZOqq}}")
+        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
         .header("x-user-id", "{{Useridentificationkey}}")
@@ -1098,28 +965,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiarylist
     ```
 
       </TabItem>
-      <TabItem value="404" label="404: Not Found">
-
-    ```json
-    {
-      "code": 404,
-      "status": "Error",
-      "message": "No beneficiaries found"
-    }
-    ```
-
-      </TabItem>
-      <TabItem value="429" label="429: Rate Limited">
-
-    ```json
-    {
-      "code": 429,
-      "status": "Error",
-      "message": "Too many requests"
-    }
-    ```
-
-      </TabItem>
+     
     </Tabs>
 
   </div>

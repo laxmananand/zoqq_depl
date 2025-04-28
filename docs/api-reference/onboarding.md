@@ -28,7 +28,7 @@ This API creates a new user in the system with business and personal details.
 
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
@@ -56,7 +56,7 @@ This API creates a new user in the system with business and personal details.
     ```bash
     curl --request POST \
       --url {{baseUrl}}/zoqq/api/v1/user \
-      --header 'x-api-key: {{Shared Xapikey By ZOqq}}' \
+      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
       --header 'x-user-id: {{Useridentificationkey}}' \
@@ -67,7 +67,7 @@ This API creates a new user in the system with business and personal details.
           "business_details": {
             "account_usage": {
               "estimated_monthly_revenue": {
-                "amount": "50",
+                "amount": "500",
                 "currency": "USD"
               },
               "product_reference": [
@@ -152,7 +152,7 @@ This API creates a new user in the system with business and personal details.
           "agreed_to_terms_and_conditions": true
         },
         "primary_contact": {
-          "email": "airwallex8@yopmail.com",
+          "email": "zoqq8@yopmail.com",
           "mobile": "896300124"
         }
       }'
@@ -172,7 +172,7 @@ This API creates a new user in the system with business and personal details.
             URL url = new URL("{{baseUrl}}/zoqq/api/v1/user");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
-            connection.setRequestProperty("x-api-key", "{{Shared Xapikey By ZOqq}}");
+            connection.setRequestProperty("x-api-key", "{{Shared Xapikey By Zoqq}}");
             connection.setRequestProperty("x-program-id", "{{BasedOnRequirement}}");
             connection.setRequestProperty("x-request-id", "{{IdempotencyKey}}");
             connection.setRequestProperty("x-user-id", "{{Useridentificationkey}}");
@@ -207,7 +207,7 @@ This API creates a new user in the system with business and personal details.
 
     url = "{{baseUrl}}/zoqq/api/v1/user"
     headers = {
-        "x-api-key": "{{Shared Xapikey By ZOqq}}",
+        "x-api-key": "{{Shared Xapikey By Zoqq}}",
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
@@ -321,7 +321,7 @@ This API creates a new user in the system with business and personal details.
     <?php
     $url = '{{baseUrl}}/zoqq/api/v1/user';
     $headers = [
-        'x-api-key: {{Shared Xapikey By ZOqq}}',
+        'x-api-key: {{Shared Xapikey By Zoqq}}',
         'x-program-id: {{BasedOnRequirement}}',
         'x-request-id: {{IdempotencyKey}}',
         'x-user-id: {{Useridentificationkey}}',
@@ -453,7 +453,7 @@ This API creates a new user in the system with business and personal details.
             var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Post, "{{baseUrl}}/zoqq/api/v1/user");
 
-            request.Headers.Add("x-api-key", "{{Shared Xapikey By ZOqq}}");
+            request.Headers.Add("x-api-key", "{{Shared Xapikey By Zoqq}}");
             request.Headers.Add("x-program-id", "{{BasedOnRequirement}}");
             request.Headers.Add("x-request-id", "{{IdempotencyKey}}");
             request.Headers.Add("x-user-id", "{{Useridentificationkey}}");
@@ -590,7 +590,7 @@ This API retrieves user details from the system.
 
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
@@ -845,7 +845,7 @@ This API allows users to accept the terms and conditions.
 
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
@@ -1029,7 +1029,7 @@ This API activates a user account in the system.
 
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by ZOqq |
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
