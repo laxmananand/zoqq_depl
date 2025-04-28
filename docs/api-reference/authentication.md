@@ -107,7 +107,7 @@ This API authenticates and retrieves an access token for API operations.
         print(response.json())
         ```
       </TabItem>
-      <TabItem value="php" label="Php">
+      <TabItem value="php" label="php">
         ```php
         <?php
         $url = '{{baseUrl}}/api/v1/authentication/login';

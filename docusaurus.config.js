@@ -6,7 +6,7 @@ module.exports = {
   tagline: "API Documentation for Zoqq Platform",
   url: "https://docs.zoqq.com",
   baseUrl: "/",
-  favicon: "img/favicon.ico",
+  favicon: "https://www.zoqq.com/favicon.png",
 
   themeConfig: {
     navbar: {

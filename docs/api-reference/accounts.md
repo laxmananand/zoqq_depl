@@ -145,7 +145,7 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
     ```
     
       </TabItem>
-      <TabItem value="php" label="PHP">
+      <TabItem value="php" label="php">
     
     ```php
     <?php
@@ -253,17 +253,7 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
     ```
     
       </TabItem>
-      <TabItem value="409" label="409: Conflict">
     
-    ```json
-    {
-      "code": 409,
-      "status": "error",
-      "message": "Account with these details already exists"
-    }
-    ```
-    
-      </TabItem>
     </Tabs>
   </div>
 </div>
@@ -372,7 +362,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts
     ```
     
       </TabItem>
-      <TabItem value="php" label="PHP">
+      <TabItem value="php" label="php">
     
     ```php
     <?php
@@ -606,7 +596,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/balance
     ```
     
       </TabItem>
-      <TabItem value="php" label="PHP">
+      <TabItem value="php" label="php">
     
     ```php
     <?php

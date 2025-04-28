@@ -316,7 +316,7 @@ This API creates a new user in the system with business and personal details.
 
   </TabItem>
 
-  <TabItem value="php" label="Php">
+  <TabItem value="php" label="php">
     ```php
     <?php
     $url = '{{baseUrl}}/zoqq/api/v1/user';
@@ -666,7 +666,7 @@ This API retrieves user details from the system.
         print(response.json())
         ```
       </TabItem>
-      <TabItem value="php" label="PHP">
+      <TabItem value="php" label="php">
         ```php
         <?php
         $url = '{{baseUrl}}/zoqq/api/v1/user';
@@ -921,7 +921,7 @@ This API allows users to accept the terms and conditions.
         print(response.json())
         ```
       </TabItem>
-      <TabItem value="php" label="PHP">
+      <TabItem value="php" label="php">
         ```php
         <?php
         $url = '{{baseUrl}}/zoqq/api/v1/user/terms&conditions/Id';
@@ -1105,7 +1105,7 @@ This API activates a user account in the system.
         print(response.json())
         ```
       </TabItem>
-      <TabItem value="php" label="PHP">
+      <TabItem value="php" label="php">
         ```php
         <?php
         $url = '{{baseUrl}}/zoqq/api/v1/user/activate/Id';

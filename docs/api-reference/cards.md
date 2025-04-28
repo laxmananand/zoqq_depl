@@ -182,10 +182,113 @@ POST {{baseUrl}}/zoqq/api/v1/cardholder
     HttpResponse<String> response = HttpClient.newHttpClient()
         .send(request, HttpResponse.BodyHandlers.ofString());
     System.out.println(response.body());
+    ``` 
+     </TabItem>
+
+     <TabItem value="php" label="php">
+
+    ```php
+    <?php
+    $url = '{{baseUrl}}/zoqq/api/v1/cardHolders';
+
+    $data = [
+        'email' => 'test+7f8a9b23@example.com',
+        'individual' => [
+            'date_of_birth' => '1982-11-02',
+            'express_consent_obtained' => 'yes',
+            'identification' => [
+                'country' => 'US',
+                'expiry_date' => '2030-08-28',
+                'number' => '001238243',
+                'type' => 'ID_CARD'
+            ],
+            'name' => [
+                'first_name' => 'John',
+                'last_name' => 'Doe'
+            ],
+            'address' => [
+                'city' => 'Los Angeles',
+                'country' => 'US',
+                'line1' => '1234 Maple Street',
+                'state' => 'CA',
+                'postcode' => '90001'
+            ]
+        ],
+        'mobile_number' => '91-95053039',
+        'postal_address' => [
+            'city' => 'Los Angeles',
+            'country' => 'US',
+            'line1' => '1234 Maple Street',
+            'state' => 'CA',
+            'postcode' => '90001'
+        ],
+        'type' => 'INDIVIDUAL'
+    ];
+
+    $headers = [
+        'x-api-key: {{Shared Xapikey By Zoqq}}',
+        'x-program-id: {{BasedOnRequirement}}',
+        'x-request-id: {{IdempotencyKey}}',
+        'x-user-id: {{Useridentificationkey}}',
+        'Content-Type: application/json',
+        'Authorization: Bearer {{YOUR_TOKEN}}'
+    ];
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    echo $response;
+    ?>
     ```
 
       </TabItem>
-    </Tabs>
+      <TabItem value="csharp" label="C#">
+
+    ```csharp
+    using System;
+    using System.Net.Http;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var client = new HttpClient();
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri("{{baseUrl}}/zoqq/api/v1/cardHolders"),
+                Headers = 
+                {
+                    { "x-api-key", "{{Shared Xapikey By Zoqq}}" },
+                    { "x-program-id", "{{BasedOnRequirement}}" },
+                    { "x-request-id", "{{IdempotencyKey}}" },
+                    { "x-user-id", "{{Useridentificationkey}}" },
+                    { "Authorization", "Bearer {{YOUR_TOKEN}}" }
+                },
+                Content = new StringContent("{\"email\":\"test+7f8a9b23@example.com\",\"individual\":{\"date_of_birth\":\"1982-11-02\",\"express_consent_obtained\":\"yes\",\"identification\":{\"country\":\"US\",\"expiry_date\":\"2030-08-28\",\"number\":\"001238243\",\"type\":\"ID_CARD\"},\"name\":{\"first_name\":\"John\",\"last_name\":\"Doe\"},\"address\":{\"city\":\"Los Angeles\",\"country\":\"US\",\"line1\":\"1234 Maple Street\",\"state\":\"CA\",\"postcode\":\"90001\"}},\"mobile_number\":\"91-95053039\",\"postal_address\":{\"city\":\"Los Angeles\",\"country\":\"US\",\"line1\":\"1234 Maple Street\",\"state\":\"CA\",\"postcode\":\"90001\"},\"type\":\"INDIVIDUAL\"}", Encoding.UTF8, "application/json")
+            };
+
+            using (var response = await client.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(body);
+            }
+        }
+    }
+    ```
+
+    </TabItem>
+    
+  </Tabs>
 
     <h3>Response Example</h3>
 
@@ -230,7 +333,7 @@ This API creates a new card for a cardholder in the system.
   <TabItem value="endpoint" label="Endpoint" default>
 
 ```
-POST {{baseUrl}}/zoqq/api/v1/cards
+POST {{baseUrl}}/zoqq/api/v1/card
 
 ```
  </TabItem>
@@ -280,7 +383,7 @@ POST {{baseUrl}}/zoqq/api/v1/cards
 
     ```bash
     curl --request POST \
-      --url {{baseUrl}}/zoqq/api/v1/cards \
+      --url {{baseUrl}}/zoqq/api/v1/card \
       --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
@@ -322,7 +425,7 @@ POST {{baseUrl}}/zoqq/api/v1/cards
     import requests
     import json
 
-    url = "{{baseUrl}}/zoqq/api/v1/cards"
+    url = "{{baseUrl}}/zoqq/api/v1/card"
 
     payload = {
         "card_issuance_action": "NEW",
@@ -369,7 +472,7 @@ POST {{baseUrl}}/zoqq/api/v1/cards
 
     ```java
     HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create("{{baseUrl}}/zoqq/api/v1/cards"))
+        .uri(URI.create("{{baseUrl}}/zoqq/api/v1/card"))
         .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
@@ -384,10 +487,73 @@ POST {{baseUrl}}/zoqq/api/v1/cards
     ```
 
       </TabItem>
+
+      <TabItem value="php" label="php">
+
+    ```php
+    <?php
+    $url = '{{baseUrl}}/zoqq/api/v1/card';
+
+    $data = [
+        'card_issuance_action' => 'NEW',
+        'card_type' => 'GPR_PHY',
+        'card_holder_id' => '',
+        'issuance_mode' => 'NORMAL_DELIVERY_LOCAL',
+        'created_by' => 'Postman Test',
+        'request_id' => '56789987654567',
+        'program' => [
+            'purpose' => 'COMMERCIAL',
+            'type' => 'DEBIT',
+            'sub_type' => 'B2B_TRAVEL'
+        ],
+        'authorization_controls' => [
+            'allowed_transaction_count' => 'MULTIPLE',
+            'transaction_limits' => [
+                'currency' => 'USD',
+                'limits' => [
+                    [
+                        'amount' => 10000,
+                        'interval' => 'PER_TRANSACTION'
+                    ]
+                ]
+            ]
+        ],
+        'is_personalized' => false
+    ];
+
+    $headers = [
+        'x-api-key: {{Shared Xapikey By Zoqq}}',
+        'x-program-id: {{BasedOnRequirement}}',
+        'x-request-id: {{IdempotencyKey}}',
+        'x-user-id: {{Useridentificationkey}}',
+        'Content-Type: application/json',
+        'Authorization: Bearer {{YOUR_TOKEN}}'
+    ];
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    echo $response;
+    ?>
+    ```
+
+      </TabItem>
+
+
+
+
+
+
       <TabItem value="csharp" label="C#">
 
     ```csharp
-    var client = new RestClient("{{baseUrl}}/zoqq/api/v1/cards");
+    var client = new RestClient("{{baseUrl}}/zoqq/api/v1/card");
     var request = new RestRequest(Method.POST);
     request.AddHeader("x-api-key", "{{Shared Xapikey By Zoqq}}");
     request.AddHeader("x-program-id", "{{BasedOnRequirement}}");
@@ -469,7 +635,7 @@ This API retrieves a list of all cards associated with the authenticated user.
 <Tabs>
   <TabItem value="endpoint" label="Endpoint" default>
 ```
-    GET {{baseUrl}}/zoqq/api/v1/cards
+    GET {{baseUrl}}/zoqq/api/v1/card
 ```
   </TabItem>
 </Tabs>
@@ -524,7 +690,7 @@ This API retrieves a list of all cards associated with the authenticated user.
       <TabItem value="curl" label="cURL" default>
         ```bash
         curl --request GET \
-          --url '{{baseUrl}}/zoqq/api/v1/cards?status=ACTIVE&card_type=VIRTUAL' \
+          --url '{{baseUrl}}/zoqq/api/v1/card?status=ACTIVE&card_type=VIRTUAL' \
           --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
           --header 'x-program-id: {{BasedOnRequirement}}' \
           --header 'x-request-id: {{IdempotencyKey}}' \
@@ -536,7 +702,7 @@ This API retrieves a list of all cards associated with the authenticated user.
         ```python
         import requests
 
-        url = "{{baseUrl}}/zoqq/api/v1/cards"
+        url = "{{baseUrl}}/zoqq/api/v1/card"
         params = {
             "status": "ACTIVE",
             "card_type": "VIRTUAL"
@@ -557,7 +723,7 @@ This API retrieves a list of all cards associated with the authenticated user.
       <TabItem value="java" label="Java">
         ```java
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create("{{baseUrl}}/zoqq/api/v1/cards?status=ACTIVE&card_type=VIRTUAL"))
+            .uri(URI.create("{{baseUrl}}/zoqq/api/v1/card?status=ACTIVE&card_type=VIRTUAL"))
             .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
             .header("x-program-id", "{{BasedOnRequirement}}")
             .header("x-request-id", "{{IdempotencyKey}}")
@@ -568,6 +734,66 @@ This API retrieves a list of all cards associated with the authenticated user.
         HttpResponse<String> response = HttpClient.newHttpClient()
             .send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(response.body());
+        ```
+      </TabItem>
+
+      <TabItem value="php" label="php">
+        ```php
+        <?php
+        $url = '{{baseUrl}}/zoqq/api/v1/card?status=ACTIVE&card_type=VIRTUAL';
+        
+        $headers = [
+            'x-api-key: {{Shared Xapikey By Zoqq}}',
+            'x-program-id: {{BasedOnRequirement}}',
+            'x-request-id: {{IdempotencyKey}}',
+            'x-user-id: {{Useridentificationkey}}',
+            'Authorization: Bearer {{YOUR_TOKEN}}'
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        
+        $response = curl_exec($ch);
+        curl_close($ch);
+        
+        echo $response;
+        ?>
+        ```
+      </TabItem>
+      <TabItem value="csharp" label="C#">
+        ```csharp
+        using System;
+        using System.Net.Http;
+        using System.Threading.Tasks;
+
+        class Program
+        {
+            static async Task Main(string[] args)
+            {
+                var client = new HttpClient();
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = new Uri("{{baseUrl}}/zoqq/api/v1/card?status=ACTIVE&card_type=VIRTUAL"),
+                    Headers = 
+                    {
+                        { "x-api-key", "{{Shared Xapikey By Zoqq}}" },
+                        { "x-program-id", "{{BasedOnRequirement}}" },
+                        { "x-request-id", "{{IdempotencyKey}}" },
+                        { "x-user-id", "{{Useridentificationkey}}" },
+                        { "Authorization", "Bearer {{YOUR_TOKEN}}" }
+                    }
+                };
+
+                using (var response = await client.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    var body = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(body);
+                }
+            }
+        }
         ```
       </TabItem>
     </Tabs>
@@ -631,7 +857,7 @@ This API activates an inactive card in the system.
   <TabItem value="endpoint" label="Endpoint" default>
 ````
 
-POST {{baseUrl}}/zoqq/api/v1/cards/activate
+POST {{baseUrl}}/zoqq/api/v1/card/activate
 
 ````
   </TabItem>
@@ -669,7 +895,7 @@ POST {{baseUrl}}/zoqq/api/v1/cards/activate
 
     ```bash
     curl --request POST \
-      --url {{baseUrl}}/zoqq/api/v1/cards/activate \
+      --url {{baseUrl}}/zoqq/api/v1/card/activate \
       --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
@@ -688,7 +914,7 @@ POST {{baseUrl}}/zoqq/api/v1/cards/activate
     import requests
     import json
 
-    url = "{{baseUrl}}/zoqq/api/v1/cards/activate"
+    url = "{{baseUrl}}/zoqq/api/v1/card/activate"
 
     payload = {
         "id": "card_1234567890abcdef"
@@ -712,7 +938,7 @@ POST {{baseUrl}}/zoqq/api/v1/cards/activate
 
     ```java
     HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create("{{baseUrl}}/zoqq/api/v1/cards/activate"))
+        .uri(URI.create("{{baseUrl}}/zoqq/api/v1/card/activate"))
         .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
@@ -726,6 +952,75 @@ POST {{baseUrl}}/zoqq/api/v1/cards/activate
     System.out.println(response.body());
     ```
 
+      </TabItem>
+
+      <TabItem value="php" label="php">
+        ```php
+        <?php
+        $url = '{{baseUrl}}/zoqq/api/v1/card/activate';
+        
+        $data = [
+            'id' => 'card_1234567890abcdef'
+        ];
+
+        $headers = [
+            'x-api-key: {{Shared Xapikey By Zoqq}}',
+            'x-program-id: {{BasedOnRequirement}}',
+            'x-request-id: {{IdempotencyKey}}',
+            'x-user-id: {{Useridentificationkey}}',
+            'Content-Type: application/json',
+            'Authorization: Bearer {{YOUR_TOKEN}}'
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        
+        $response = curl_exec($ch);
+        curl_close($ch);
+        
+        echo $response;
+        ?>
+        ```
+      </TabItem>
+      <TabItem value="csharp" label="C#">
+        ```csharp
+        using System;
+        using System.Net.Http;
+        using System.Text;
+        using System.Threading.Tasks;
+
+        class Program
+        {
+            static async Task Main(string[] args)
+            {
+                var client = new HttpClient();
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = new Uri("{{baseUrl}}/zoqq/api/v1/card/activate"),
+                    Headers = 
+                    {
+                        { "x-api-key", "{{Shared Xapikey By Zoqq}}" },
+                        { "x-program-id", "{{BasedOnRequirement}}" },
+                        { "x-request-id", "{{IdempotencyKey}}" },
+                        { "x-user-id", "{{Useridentificationkey}}" },
+                        { "Authorization", "Bearer {{YOUR_TOKEN}}" }
+                    },
+                    Content = new StringContent("{\"id\":\"card_1234567890abcdef\"}", Encoding.UTF8, "application/json")
+                };
+
+                using (var response = await client.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    var body = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(body);
+                }
+            }
+        }
+        ```
       </TabItem>
     </Tabs>
 
@@ -768,7 +1063,7 @@ This API updates card details including authorization controls and status.
   <TabItem value="endpoint" label="Endpoint" default>
 ````
 
-PATCH {{baseUrl}}/zoqq/api/v1/cards
+PATCH {{baseUrl}}/zoqq/api/v1/card
 
 ````
 
@@ -812,7 +1107,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/cards
 
     ```bash
     curl --request PATCH \
-      --url {{baseUrl}}/zoqq/api/v1/cards \
+      --url {{baseUrl}}/zoqq/api/v1/card \
       --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
@@ -844,7 +1139,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/cards
     import requests
     import json
 
-    url = "{{baseUrl}}/zoqq/api/v1/cards"
+    url = "{{baseUrl}}/zoqq/api/v1/card"
 
     payload = {
         "id": "card_1234567890abcdef",
@@ -881,7 +1176,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/cards
 
     ```java
     HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create("{{baseUrl}}/zoqq/api/v1/cards"))
+        .uri(URI.create("{{baseUrl}}/zoqq/api/v1/card"))
         .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
@@ -895,6 +1190,102 @@ PATCH {{baseUrl}}/zoqq/api/v1/cards
     System.out.println(response.body());
     ```
 
+      </TabItem>
+
+      <TabItem value="php" label="php">
+        ```php
+        <?php
+        $url = '{{baseUrl}}/zoqq/api/v1/card';
+        
+        $data = [
+            'id' => 'card_1234567890abcdef',
+            'authorization_controls' => [
+                'allowed_transaction_count' => 'MULTIPLE',
+                'transaction_limits' => [
+                    'currency' => 'USD',
+                    'limits' => [
+                        [
+                            'amount' => 20000,
+                            'interval' => 'ALL_TIME'
+                        ]
+                    ]
+                ]
+            ],
+            'card_status' => 'INACTIVE'
+        ];
+
+        $headers = [
+            'x-api-key: {{Shared Xapikey By Zoqq}}',
+            'x-program-id: {{BasedOnRequirement}}',
+            'x-request-id: {{IdempotencyKey}}',
+            'x-user-id: {{Useridentificationkey}}',
+            'Content-Type: application/json',
+            'Authorization: Bearer {{YOUR_TOKEN}}'
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        
+        $response = curl_exec($ch);
+        curl_close($ch);
+        
+        echo $response;
+        ?>
+        ```
+      </TabItem>
+      <TabItem value="csharp" label="C#">
+        ```csharp
+        using System;
+        using System.Net.Http;
+        using System.Text;
+        using System.Threading.Tasks;
+
+        class Program
+        {
+            static async Task Main(string[] args)
+            {
+                var client = new HttpClient();
+                var request = new HttpRequestMessage
+                {
+                    Method = new HttpMethod("PATCH"),
+                    RequestUri = new Uri("{{baseUrl}}/zoqq/api/v1/card"),
+                    Headers = 
+                    {
+                        { "x-api-key", "{{Shared Xapikey By Zoqq}}" },
+                        { "x-program-id", "{{BasedOnRequirement}}" },
+                        { "x-request-id", "{{IdempotencyKey}}" },
+                        { "x-user-id", "{{Useridentificationkey}}" },
+                        { "Authorization", "Bearer {{YOUR_TOKEN}}" }
+                    },
+                    Content = new StringContent(
+                        "{\"id\":\"card_1234567890abcdef\"," +
+                        "\"authorization_controls\":{" +
+                            "\"allowed_transaction_count\":\"MULTIPLE\"," +
+                            "\"transaction_limits\":{" +
+                                "\"currency\":\"USD\"," +
+                                "\"limits\":[{" +
+                                    "\"amount\":20000," +
+                                    "\"interval\":\"ALL_TIME\"" +
+                                "}]" +
+                            "}" +
+                        "}," +
+                        "\"card_status\":\"INACTIVE\"}",
+                        Encoding.UTF8,
+                        "application/json")
+                };
+
+                using (var response = await client.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    var body = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(body);
+                }
+            }
+        }
+        ```
       </TabItem>
     </Tabs>
 
@@ -938,7 +1329,7 @@ This API updates card holder details including address and contact information.
   <TabItem value="endpoint" label="Endpoint" default>
 ````
 
-PATCH {{baseUrl}}/zoqq/api/v1/cardHolders
+PATCH {{baseUrl}}/zoqq/api/v1/cardHolder
 
 ````
 
@@ -1074,6 +1465,113 @@ PATCH {{baseUrl}}/zoqq/api/v1/cardHolders
     ```
 
       </TabItem>
+
+      <TabItem value="php" label="php">
+        ```php
+        <?php
+        $url = '{{baseUrl}}/zoqq/api/v1/cardHolders';
+        
+        $data = [
+            'id' => '1e301167-ff1a-4a4e-bf2a-d2f84e144b03',
+            'individual' => [
+                'address' => [
+                    'city' => 'Austin',
+                    'country' => 'US',
+                    'line1' => '1234 Elm Street',
+                    'state' => 'TX',
+                    'postcode' => '94932'
+                ]
+            ],
+            'mobile_number' => '91-95053039',
+            'postal_address' => [
+                'city' => 'Los Angeles',
+                'country' => 'US',
+                'line1' => '5678 Oak Avenue',
+                'state' => 'CA',
+                'postcode' => '94932'
+            ]
+        ];
+
+        $headers = [
+            'x-api-key: {{Shared Xapikey By Zoqq}}',
+            'x-program-id: {{BasedOnRequirement}}',
+            'x-request-id: {{IdempotencyKey}}',
+            'x-user-id: {{Useridentificationkey}}',
+            'Content-Type: application/json',
+            'Authorization: Bearer {{YOUR_TOKEN}}'
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        
+        $response = curl_exec($ch);
+        curl_close($ch);
+        
+        echo $response;
+        ?>
+        ```
+      </TabItem>
+      <TabItem value="csharp" label="C#">
+        ```csharp
+        using System;
+        using System.Net.Http;
+        using System.Text;
+        using System.Threading.Tasks;
+
+        class Program
+        {
+            static async Task Main(string[] args)
+            {
+                var client = new HttpClient();
+                var request = new HttpRequestMessage
+                {
+                    Method = new HttpMethod("PATCH"),
+                    RequestUri = new Uri("{{baseUrl}}/zoqq/api/v1/cardHolders"),
+                    Headers = 
+                    {
+                        { "x-api-key", "{{Shared Xapikey By Zoqq}}" },
+                        { "x-program-id", "{{BasedOnRequirement}}" },
+                        { "x-request-id", "{{IdempotencyKey}}" },
+                        { "x-user-id", "{{Useridentificationkey}}" },
+                        { "Authorization", "Bearer {{YOUR_TOKEN}}" }
+                    },
+                    Content = new StringContent(
+                        "{\"id\":\"1e301167-ff1a-4a4e-bf2a-d2f84e144b03\"," +
+                        "\"individual\":{" +
+                            "\"address\":{" +
+                                "\"city\":\"Austin\"," +
+                                "\"country\":\"US\"," +
+                                "\"line1\":\"1234 Elm Street\"," +
+                                "\"state\":\"TX\"," +
+                                "\"postcode\":\"94932\"" +
+                            "}" +
+                        "}," +
+                        "\"mobile_number\":\"91-95053039\"," +
+                        "\"postal_address\":{" +
+                            "\"city\":\"Los Angeles\"," +
+                            "\"country\":\"US\"," +
+                            "\"line1\":\"5678 Oak Avenue\"," +
+                            "\"state\":\"CA\"," +
+                            "\"postcode\":\"94932\"" +
+                        "}" +
+                        "}",
+                        Encoding.UTF8,
+                        "application/json")
+                };
+
+                using (var response = await client.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    var body = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(body);
+                }
+            }
+        }
+        ```
+      </TabItem>
     </Tabs>
 
     <h3>Response Example</h3>
@@ -1116,7 +1614,7 @@ This API retrieves the current transaction limits for a specific card.
   <TabItem value="endpoint" label="Endpoint" default>
 ````
 
-GET {{baseUrl}}/zoqq/api/v1/cards/limit
+GET {{baseUrl}}/zoqq/api/v1/card/limit
 
 ````
 
@@ -1156,7 +1654,7 @@ GET {{baseUrl}}/zoqq/api/v1/cards/limit
 
     ```bash
     curl --request GET \
-      --url '{{baseUrl}}/zoqq/api/v1/cards/limit?id=card_1234567890abcdef&currency=USD' \
+      --url '{{baseUrl}}/zoqq/api/v1/card/limit?id=card_1234567890abcdef&currency=USD' \
       --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
       --header 'x-request-id: {{IdempotencyKey}}' \
@@ -1170,7 +1668,7 @@ GET {{baseUrl}}/zoqq/api/v1/cards/limit
     ```python
     import requests
 
-    url = "{{baseUrl}}/zoqq/api/v1/cards/limit"
+    url = "{{baseUrl}}/zoqq/api/v1/card/limit"
     params = {
         "id": "card_1234567890abcdef",
         "currency": "USD"
@@ -1193,7 +1691,7 @@ GET {{baseUrl}}/zoqq/api/v1/cards/limit
 
     ```java
     HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create("{{baseUrl}}/zoqq/api/v1/cards/limit?id=card_1234567890abcdef&currency=USD"))
+        .uri(URI.create("{{baseUrl}}/zoqq/api/v1/card/limit?id=card_1234567890abcdef&currency=USD"))
         .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
         .header("x-program-id", "{{BasedOnRequirement}}")
         .header("x-request-id", "{{IdempotencyKey}}")
@@ -1207,6 +1705,66 @@ GET {{baseUrl}}/zoqq/api/v1/cards/limit
     ```
 
       </TabItem>
+
+      <TabItem value="php" label="php">
+    ```php
+    <?php
+    $url = '{{baseUrl}}/zoqq/api/v1/card/limit?id=card_1234567890abcdef&currency=USD';
+    
+    $headers = [
+        'x-api-key: {{Shared Xapikey By Zoqq}}',
+        'x-program-id: {{BasedOnRequirement}}',
+        'x-request-id: {{IdempotencyKey}}',
+        'x-user-id: {{Useridentificationkey}}',
+        'Authorization: Bearer {{YOUR_TOKEN}}'
+    ];
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    
+    $response = curl_exec($ch);
+    curl_close($ch);
+    
+    echo $response;
+    ?>
+    ```
+  </TabItem>
+  <TabItem value="csharp" label="C#">
+    ```csharp
+    using System;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var client = new HttpClient();
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri("{{baseUrl}}/zoqq/api/v1/card/limit?id=card_1234567890abcdef&currency=USD"),
+                Headers = 
+                {
+                    { "x-api-key", "{{Shared Xapikey By Zoqq}}" },
+                    { "x-program-id", "{{BasedOnRequirement}}" },
+                    { "x-request-id", "{{IdempotencyKey}}" },
+                    { "x-user-id", "{{Useridentificationkey}}" },
+                    { "Authorization", "Bearer {{YOUR_TOKEN}}" }
+                }
+            };
+
+            using (var response = await client.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(body);
+            }
+        }
+    }
+    ```
+  </TabItem>
     </Tabs>
 
     <h3>Response Example</h3>
@@ -1264,7 +1822,7 @@ This API retrieves transaction history for a specific card.
   <TabItem value="endpoint" label="Endpoint" default>
 ````
 
-POST {{baseUrl}}/zoqq/api/v1/cardHolders
+GET {{baseUrl}}/zoqq/api/v1/card/transaction
 
 ````
 
@@ -1308,7 +1866,7 @@ POST {{baseUrl}}/zoqq/api/v1/cardHolders
       <TabItem value="curl" label="cURL" default>
 
     ```bash
-    curl --request POST \
+    curl --request GET \
       --url {{baseUrl}}/zoqq/api/v1/cardHolders \
       --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
       --header 'x-program-id: {{BasedOnRequirement}}' \
@@ -1377,6 +1935,89 @@ POST {{baseUrl}}/zoqq/api/v1/cardHolders
     ```
 
       </TabItem>
+
+
+      <TabItem value="php" label="php">
+    ```php
+    <?php
+    $url = '{{baseUrl}}/zoqq/api/v1/card/transaction';
+    
+    $headers = [
+        'x-api-key: {{Shared Xapikey By Zoqq}}',
+        'x-program-id: {{BasedOnRequirement}}',
+        'x-request-id: {{IdempotencyKey}}',
+        'x-user-id: {{Useridentificationkey}}',
+        'Content-Type: application/json',
+        'Authorization: Bearer {{YOUR_TOKEN}}'
+    ];
+
+    $data = [
+        'id' => '7f687fe6-dcf4-4462-92fa-80335301d9d2',
+        'limit' => 20,
+        'offset' => 0,
+        'start_date' => '2023-01-01',
+        'end_date' => '2023-12-31',
+        'status' => 'APPROVED'
+    ];
+
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    
+    $response = curl_exec($ch);
+    curl_close($ch);
+    
+    echo $response;
+    ?>
+    ```
+  </TabItem>
+  <TabItem value="csharp" label="C#">
+    ```csharp
+    using System;
+    using System.Net.Http;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    class Program
+    {
+        static async Task Main(string[] args)
+        {
+            var client = new HttpClient();
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri("{{baseUrl}}/zoqq/api/v1/card/transaction"),
+                Content = new StringContent(
+                    "{\"id\":\"7f687fe6-dcf4-4462-92fa-80335301d9d2\"," +
+                    "\"limit\":20," +
+                    "\"offset\":0," +
+                    "\"start_date\":\"2023-01-01\"," +
+                    "\"end_date\":\"2023-12-31\"," +
+                    "\"status\":\"APPROVED\"}",
+                    Encoding.UTF8,
+                    "application/json"),
+                Headers = 
+                {
+                    { "x-api-key", "{{Shared Xapikey By Zoqq}}" },
+                    { "x-program-id", "{{BasedOnRequirement}}" },
+                    { "x-request-id", "{{IdempotencyKey}}" },
+                    { "x-user-id", "{{Useridentificationkey}}" },
+                    { "Authorization", "Bearer {{YOUR_TOKEN}}" }
+                }
+            };
+
+            using (var response = await client.SendAsync(request))
+            {
+                response.EnsureSuccessStatusCode();
+                var body = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(body);
+            }
+        }
+    }
+    ```
+  </TabItem>
     </Tabs>
 
     <h3>Response Example</h3>

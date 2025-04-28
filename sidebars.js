@@ -118,12 +118,12 @@ const sidebars = {
             {
               type: "link",
               href: "/docs/api-reference/cards#activate-card",
-              label: "🟡 POST Activate Cards",
+              label: "🟡 POST Activate Card",
             },
             {
               type: "link",
               href: "/docs/api-reference/cards#update-card",
-              label: "🟣 PATCH Update Cards",
+              label: "🟣 PATCH Update Card",
             },
             {
               type: "link",
@@ -138,7 +138,7 @@ const sidebars = {
             {
               type: "link",
               href: "/docs/api-reference/cards#get-card-transactions",
-              label: "🟡 POST Get Card Transactions",
+              label: "🟢 GET Get Card Transactions",
             },
           ],
         },
