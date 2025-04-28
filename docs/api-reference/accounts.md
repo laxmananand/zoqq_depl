@@ -57,7 +57,7 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
     
     | Parameter | Type | Description |
     |-----------|------|-------------|
-    | code | number | Response code (201 for success) |
+    | code | number | Response code (200 for success) |
     | status | string | Status of the response (success/error) |
     | message | string | Additional information about the response |
     | data | object | Created account object |
@@ -210,11 +210,11 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
     <h3>Response Example</h3>
     
     <Tabs>
-      <TabItem value="201" label="201: Created" default>
+      <TabItem value="200" label="200: Created" default>
     
     ```json
     {
-      "code": 201,
+      "code": 200,
       "status": "success",
       "message": "Account created successfully",
       "data": {
