@@ -53,23 +53,6 @@ Use sandbox-specific API keys from your dashboard
 
 No real transactions are processed
 
-# 📖 Common Workflows
-
-🧩 Feature	🔗 Endpoint	⚡ Purpose
-Create Account	POST /accounts	Register a new account
-Get Account	GET /accounts?account_id={}	Retrieve account details
-Add Beneficiary	POST /transfer/beneficiary	Add payout recipient
-Get Beneficiary	GET /transfer/beneficiary?beneficiary_id={}	Fetch beneficiary by ID
-Check Balance	GET /accounts/balance?account_id={}	Get wallet balance
-🛡 Security Best Practices
-Always use HTTPS
-
-Do not hardcode API secrets in frontend apps
-
-Rotate secrets periodically
-
-Use secure vaults or environment variables for credentials
-
 ## 📎 Next Steps
 
 - 👉 [Create an Account](api-reference/accounts.md#create-account)
@@ -80,6 +63,3 @@ Use secure vaults or environment variables for credentials
 
 Need help? Contact our developer support at support@zoqq.com
 
-vbnet
-Copy
-Edit
