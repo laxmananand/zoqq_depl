@@ -4,7 +4,24 @@ const sidebars = {
       type: "category",
       label: "Getting Started",
       collapsed: false,
-      items: ["getting-started"],
+      items: [
+        {
+          type: "category",
+          label: "Account",
+          items: [
+            {
+              type: "doc",
+              id: "getting-started",
+              label: "Overview",
+            },
+            {
+              type: "link",
+              href: "getting-started#accounts",
+              label: "Account",
+            },
+          ],
+        },
+      ],
     },
   ],
   apiReference: [
