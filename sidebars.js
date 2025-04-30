@@ -19,6 +19,11 @@ const sidebars = {
               href: "getting-started#accounts",
               label: "Account",
             },
+            {
+              type: "link",
+              href: "/docs/getting-docs/account",
+              label: "Supported Regions & Currencies",
+            },
           ],
         },
       ],

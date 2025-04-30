@@ -74,7 +74,7 @@ No real transactions are processed
   }}
 >
   <a
-    href="./receive-bank-transfers"
+    href="/docs/getting-docs/account"
     className="feature-box"
     style={{
       display: "block",
