@@ -186,6 +186,11 @@ const sidebars = {
               href: "/docs/api-reference/cards#get-card-transactions",
               label: "🟢 GET Get Card Transactions",
             },
+            {
+              type: "link",
+              href: "/docs/api-reference/cards#get-card-details",
+              label: "🟢 GET Get Card Details",
+            },
           ],
         },
         {
