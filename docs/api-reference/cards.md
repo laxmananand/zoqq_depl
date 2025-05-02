@@ -2098,4 +2098,198 @@ GET {{baseUrl}}/zoqq/api/v1/card/transaction
     </Tabs>
   </div>
 </div>
-````
+
+
+## Get Card Details
+
+This API retrieves sensitive card details including card number, CVV, and expiration information.
+
+<Tabs>
+  <TabItem value="endpoint" label="Endpoint" default>
+```
+GET {{baseUrl}}/zoqq/api/v1/card/detail
+
+```
+
+  </TabItem>
+</Tabs>
+
+<div className="api-docs-container">
+  <div className="api-docs-left">
+    <h3>Description</h3>
+    <p>This endpoint returns sensitive card details that are typically masked in other endpoints. Requires appropriate permissions.</p>
+
+    <h3>Request Headers</h3>
+
+    | Parameter | Type | Required | Description |
+    |-----------|------|----------|-------------|
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
+    | x-program-id | string | Yes | Program identifier |
+    | x-request-id | string | Yes | Idempotency key |
+    | x-user-id | string | Yes | User identification key |
+    | Authorization | string | No | Bearer token (Nullable) |
+
+    <h3>Query Parameters</h3>
+
+    | Parameter | Type | Required | Description |
+    |-----------|------|----------|-------------|
+    | id | string | Yes | Card ID to retrieve details for |
+
+  </div>
+
+  <div className="api-docs-right">
+    <h3>Request Example</h3>
+
+    <Tabs>
+      <TabItem value="curl" label="cURL" default>
+        ```bash
+        curl --request GET \
+          --url '{{baseUrl}}/zoqq/api/v1/card/detail?id=card_1234567890abcdef' \
+          --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
+          --header 'x-program-id: {{BasedOnRequirement}}' \
+          --header 'x-request-id: {{IdempotencyKey}}' \
+          --header 'x-user-id: {{Useridentificationkey}}' \
+          --header 'Authorization: Bearer {{YOUR_TOKEN}
+          }'
+        ```
+
+      </TabItem>
+      <TabItem value="python" label="Python">
+        ```python
+        import requests
+
+        url = "{{baseUrl}}/zoqq/api/v1/card/detail"
+        params = {
+            "id": "card_1234567890abcdef"
+        }
+
+        headers = {
+            "x-api-key": "{{Shared Xapikey By Zoqq}}",
+            "x-program-id": "{{BasedOnRequirement}}",
+            "x-request-id": "{{IdempotencyKey}}",
+            "x-user-id": "{{Useridentificationkey}}",
+            "Authorization": "Bearer {{YOUR_TOKEN}}"
+        }
+
+        response = requests.get(url, headers=headers, params=params)
+        print(response.json())
+        ```
+      </TabItem>
+      <TabItem value="java" label="Java">
+        ```java
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("{{baseUrl}}/zoqq/api/v1/card/detail?id=card_1234567890abcdef"))
+            .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
+            .header("x-program-id", "{{BasedOnRequirement}}")
+            .header("x-request-id", "{{IdempotencyKey}}")
+            .header("x-user-id", "{{Useridentificationkey}}")
+            .header("Authorization", "Bearer {{YOUR_TOKEN}}")
+            .method("GET", HttpRequest.BodyPublishers.noBody())
+            .build();
+        HttpResponse<String> response = HttpClient.newHttpClient()
+            .send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println(response.body());
+        ```
+      </TabItem>
+
+      <TabItem value="php" label="php">
+        ```php
+        <?php
+        $url = '{{baseUrl}}/zoqq/api/v1/card/detail?id=card_1234567890abcdef';
+        
+        $headers = [
+            'x-api-key: {{Shared Xapikey By Zoqq}}',
+            'x-program-id: {{BasedOnRequirement}}',
+            'x-request-id: {{IdempotencyKey}}',
+            'x-user-id: {{Useridentificationkey}}',
+            'Authorization: Bearer {{YOUR_TOKEN}}'
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        
+        $response = curl_exec($ch);
+        curl_close($ch);
+        
+        echo $response;
+        ?>
+        ```
+      </TabItem>
+      <TabItem value="csharp" label="C#">
+        ```csharp
+        using System;
+        using System.Net.Http;
+        using System.Threading.Tasks;
+
+        class Program
+        {
+            static async Task Main(string[] args)
+            {
+                var client = new HttpClient();
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = new Uri("{{baseUrl}}/zoqq/api/v1/card/detail?id=card_1234567890abcdef"),
+                    Headers = 
+                    {
+                        { "x-api-key", "{{Shared Xapikey By Zoqq}}" },
+                        { "x-program-id", "{{BasedOnRequirement}}" },
+                        { "x-request-id", "{{IdempotencyKey}}" },
+                        { "x-user-id", "{{Useridentificationkey}}" },
+                        { "Authorization", "Bearer {{YOUR_TOKEN}}" }
+                    }
+                };
+
+                using (var response = await client.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    var body = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(body);
+                }
+            }
+        }
+        ```
+      </TabItem>
+
+
+
+
+    </Tabs>
+
+    
+
+    <h3>Response Example</h3>
+
+    <Tabs>
+      <TabItem value="200" label="200: Success" default>
+        ```json
+        {
+          "code": 200,
+          "status": "success",
+          "message": "",
+          "data": [
+            {
+              "card_number": "4503060009834639",
+              "cvv": "653",
+              "expiry_month": 4,
+              "expiry_year": 2028,
+              "name_on_card": "demozoqq"
+            }
+          ]
+        }
+        ```
+      </TabItem>
+      <TabItem value="400" label="400: Error">
+        ```json
+        {
+          "code": 400,
+          "status": "Error",
+          "message": "Something went wrong"
+        }
+        ```
+      </TabItem>
+
+    </Tabs>
+  </div>
+</div>
