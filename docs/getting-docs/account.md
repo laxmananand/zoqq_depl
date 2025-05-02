@@ -7,7 +7,7 @@ hide_table_of_contents: true
 
 # Supported Regions and Currencies
 
-This page provides information on the latest capabilities of Global Accounts. To explore coverage for Airwallex global payouts, Linked Accounts, and transactional FX capabilities, see [Market & Infrastructure Coverage](/docs/market-coverage).
+This page provides information on the latest capabilities of Global Accounts. To explore coverage for Airwallex global payouts, Linked Accounts, and transactional FX capabilities, see [Market & Infrastructure Coverage]().
 
 For any further questions regarding capabilities specific to your region and currency, please contact your Airwallex Account Manager.
 
