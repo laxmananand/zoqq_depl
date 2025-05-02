@@ -8,13 +8,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 ## Create User
-
-This API creates a new user in the system with business and personal details.
+This API creates a new user account with business and personal details.
 
 <Tabs>
   <TabItem value="endpoint" label="Endpoint" default>
-```
-    POST {{baseUrl}}/zoqq/api/v1/user
+``` 
+POST {{baseUrl}}/zoqq/api/v1/user
 ```
   </TabItem>
 </Tabs>
@@ -22,7 +21,7 @@ This API creates a new user in the system with business and personal details.
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint creates a new user with business details, personal information, and required documents. The user can be either an individual or a business entity.</p>
+    <p>This endpoint creates a new user account with comprehensive business, personal, and document information.</p>
 
     <h3>Request Headers</h3>
 
@@ -31,542 +30,349 @@ This API creates a new user in the system with business and personal details.
     | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
-    | x-user-id | string | Yes | User identification key |
-    | Authorization | string | Yes | Bearer token |
-    | Content-Type | string | Yes | Must be application/json |
+    | Authorization | string | No | Bearer token (Nullable) |
 
     <h3>Request Body Parameters</h3>
 
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | account_details | object | Yes | Contains business and personal details |
-    | account_details.business_details | object | Yes | Business information |
-    | account_details.business_person_details | array | Yes | Array of person details |
-    | account_details.legal_entity_type | string | Yes | BUSINESS or INDIVIDUAL |
-    | customer_agreements | object | Yes | User agreements |
-    | primary_contact | object | Yes | Primary contact information |
+    | emailId | string | Yes | User's email address |
+    | amount | string | Yes | Initial amount |
+    | currency | string | Yes | Currency code (e.g., USD) |
+    | businessName | string | Yes | Registered business name |
+    | businessStructure | string | Yes | Business structure type |
+    | contactNumber | string | Yes | Business contact number |
+    | identificationType | string | Yes | ID document type |
+    | firstName | string | Yes | User's first name |
+    | lastName | string | Yes | User's last name |
+    | dateOfBirth | string | Yes | Date of birth (YYYY-MM-DD) |
+    | mobile | string | Yes | Mobile number |
+    | [various address fields] | object | Yes | Business and residential addresses |
+    | [document fields] | object | Yes | Document references and metadata |
 
   </div>
 
   <div className="api-docs-right">
     <h3>Request Example</h3>
 
-<Tabs>
-  <TabItem value="curl" label="cURL" default>
-    ```bash
-    curl --request POST \
-      --url {{baseUrl}}/zoqq/api/v1/user \
-      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
-      --header 'x-program-id: {{BasedOnRequirement}}' \
-      --header 'x-request-id: {{IdempotencyKey}}' \
-      --header 'x-user-id: {{Useridentificationkey}}' \
-      --header 'Authorization: Bearer {{YOUR_TOKEN}}' \
-      --header 'Content-Type: application/json' \
-      --data '{
-        "account_details": {
-          "business_details": {
-            "account_usage": {
-              "estimated_monthly_revenue": {
-                "amount": "500",
-                "currency": "USD"
-              },
-              "product_reference": [
-                "ACCEPT_ONLINE_PAYMENTS",
-                "RECEIVE_TRANSFERS"
-              ]
-            },
-            "as_trustee": true,
-            "attachments": {
-              "business_documents": [
-                {
-                  "file_id": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA",
-                  "tag": "BUSINESS_LICENSE"
-                }
-              ]
-            },
-            "business_identifiers": [
-              {
-                "country_code": "SG",
-                "number": "A1098762872",
-                "type": "BRN"
-              }
-            ],
-            "business_name": "STYLOPAY Pty Ltd2",
-            "business_structure": "COMPANY",
-            "contact_number": "528854125",
-            "description_of_goods_or_services": "food",
-            "industry_category_code": "ICCV3_0000XX",
-            "operating_country": ["US", "AU", "SG"],
-            "registration_address": {
-              "address_line1": "200 Collins Street",
-              "address_line2": "200 Collins Street",
-              "country_code": "SG",
-              "postcode": "3000",
-              "state": "Singapore",
-              "suburb": "Melbourne"
-            }
-          },
-          "business_person_details": [
-            {
-              "attachments": {
-                "business_person_documents": [
-                  {
-                    "file_id": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA",
-                    "tag": "PERSON_PURPORTING_TO_ACT_AUTHORISATION_LETTER"
-                  }
-                ]
-              },
-              "residential_address": {
-                "address_line1": "200 Collins Street",
-                "country_code": "SG",
-                "postcode": "3000",
-                "state": "VIC",
-                "suburb": "Melbourne"
-              },
-              "email": "nivi@yopmail.com",
-              "date_of_birth": "1980-10-10",
-              "first_name": "testAir",
-              "roles": ["BENEFICIAL_OWNER"],
-              "identifications": {
-                "primary": {
-                  "identification_type": "PASSPORT",
-                  "issuing_country_code": "SG",
-                  "passport": {
-                    "effective_at": "2020-11-01",
-                    "expire_at": "2040-11-01",
-                    "front_file_id": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA",
-                    "number": "6275046"
-                  }
-                }
-              },
-              "last_name": "Smith",
-              "middle_name": "John",
-              "nationality": "SG",
-              "live_selfie_file_id": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA"
-            }
-          ],
-          "legal_entity_type": "BUSINESS"
-        },
-        "customer_agreements": {
-          "agreed_to_data_usage": true,
-          "agreed_to_terms_and_conditions": true
-        },
-        "primary_contact": {
-          "email": "zoqq8@yopmail.com",
-          "mobile": "896300124"
+    <Tabs>
+      <TabItem value="curl" label="cURL" default>
+        ```bash
+        curl --request POST \
+          --url {{baseUrl}}/zoqq/api/v1/user \
+          --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
+          --header 'x-program-id: {{BasedOnRequirement}}' \
+          --header 'x-request-id: {{IdempotencyKey}}' \
+          --header 'Authorization: Bearer {{YOUR_TOKEN}}' \
+          --data '{
+            "emailId": "testairWallex10@yopmail.com",
+            "amount": "10",
+            "currency": "USD",
+            "productReference": "ACCEPT_ONLINE_PAYMENTS",
+            "asTrustee": true,
+            "fileId": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA",
+            "tag": "BUSINESS_LICENSE",
+            "countryCode": "SG",
+            "number": "1234567890",
+            "type": "business",
+            "businessName": "STYLOPAY Pty Ltd2",
+            "businessStructure": "COMPANY",
+            "contactNumber": "1234567890",
+            "descriptionOfGoodsOrServices": "Payment gateway services",
+            "industryCategoryCode": "ICCV3_0000XX",
+            "registrationAddressLine1": "123 Market Street",
+            "registrationAddressLine2": "Suite 456",
+            "registrationCountryCode": "SG",
+            "registrationPostcode": "2000",
+            "registrationState": "NSW",
+            "registrationSuburb": "Sydney",
+            "operatingCountry": "AU",
+            "personDocumentsFileId": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA",
+            "personDocumentsTag": "PERSON_PURPORTING_TO_ACT_AUTHORISATION_LETTER",
+            "residentialAddressLine1": "456 King Street",
+            "residentialCountryCode": "SG",
+            "residentialPostcode": "2010",
+            "residentialState": "NSW",
+            "residentialSuburb": "Newtown",
+            "identificationType": "Passport",
+            "issuingCountryCode": "SG",
+            "effectiveAt": "2020-01-01",
+            "expireAt": "2030-01-01",
+            "frontFileId": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA",
+            "Idnumber": "X1234567",
+            "roles": "BENEFICIAL_OWNER",
+            "dateOfBirth": "1985-05-15",
+            "firstName": "nivi",
+            "lastName": "Doe",
+            "middleName": "A",
+            "nationality": "SG",
+            "liveSelfieFileId": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA",
+            "legalEntityType": "BUSINESS",
+            "agreedToTermsAndConditions": false,
+            "mobile": "912500678"
+          }'
+        ```
+      </TabItem>
+
+      <TabItem value="python" label="Python">
+        ```python
+        import requests
+        import json
+
+        url = "{{baseUrl}}/zoqq/api/v1/user"
+
+        payload = {
+            "emailId": "testairWallex10@yopmail.com",
+            "amount": "10",
+            "currency": "USD",
+            "productReference": "ACCEPT_ONLINE_PAYMENTS",
+            "asTrustee": True,
+            "fileId": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA",
+            "tag": "BUSINESS_LICENSE",
+            "countryCode": "SG",
+            "number": "1234567890",
+            "type": "business",
+            "businessName": "STYLOPAY Pty Ltd2",
+            "businessStructure": "COMPANY",
+            "contactNumber": "1234567890",
+            "descriptionOfGoodsOrServices": "Payment gateway services",
+            "industryCategoryCode": "ICCV3_0000XX",
+            "registrationAddressLine1": "123 Market Street",
+            "registrationAddressLine2": "Suite 456",
+            "registrationCountryCode": "SG",
+            "registrationPostcode": "2000",
+            "registrationState": "NSW",
+            "registrationSuburb": "Sydney",
+            "operatingCountry": "AU",
+            "personDocumentsFileId": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA",
+            "personDocumentsTag": "PERSON_PURPORTING_TO_ACT_AUTHORISATION_LETTER",
+            "residentialAddressLine1": "456 King Street",
+            "residentialCountryCode": "SG",
+            "residentialPostcode": "2010",
+            "residentialState": "NSW",
+            "residentialSuburb": "Newtown",
+            "identificationType": "Passport",
+            "issuingCountryCode": "SG",
+            "effectiveAt": "2020-01-01",
+            "expireAt": "2030-01-01",
+            "frontFileId": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA",
+            "Idnumber": "X1234567",
+            "roles": "BENEFICIAL_OWNER",
+            "dateOfBirth": "1985-05-15",
+            "firstName": "nivi",
+            "lastName": "Doe",
+            "middleName": "A",
+            "nationality": "SG",
+            "liveSelfieFileId": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA",
+            "legalEntityType": "BUSINESS",
+            "agreedToTermsAndConditions": False,
+            "mobile": "912500678"
         }
-      }'
-    ```
-  </TabItem>
 
-  <TabItem value="java" label="Java">
-    ```java
-    import java.net.HttpURLConnection;
-    import java.net.URL;
-    import java.io.OutputStream;
-    import java.io.BufferedReader;
-    import java.io.InputStreamReader;
-
-    public class CreateUser {
-        public static void main(String[] args) throws Exception {
-            URL url = new URL("{{baseUrl}}/zoqq/api/v1/user");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("x-api-key", "{{Shared Xapikey By Zoqq}}");
-            connection.setRequestProperty("x-program-id", "{{BasedOnRequirement}}");
-            connection.setRequestProperty("x-request-id", "{{IdempotencyKey}}");
-            connection.setRequestProperty("x-user-id", "{{Useridentificationkey}}");
-            connection.setRequestProperty("Authorization", "Bearer {{YOUR_TOKEN}}");
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setDoOutput(true);
-
-            String jsonInputString = "{\"account_details\": {\"business_details\": {\"account_usage\": {\"estimated_monthly_revenue\": {\"amount\": \"50\",\"currency\": \"USD\"},\"product_reference\": [\"ACCEPT_ONLINE_PAYMENTS\",\"RECEIVE_TRANSFERS\"]},\"as_trustee\": true,\"attachments\": {\"business_documents\": [{\"file_id\": \"NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA\",\"tag\": \"BUSINESS_LICENSE\"}]},\"business_identifiers\": [{\"country_code\": \"SG\",\"number\": \"A1098762872\",\"type\": \"BRN\"}],\"business_name\": \"STYLOPAY Pty Ltd2\",\"business_structure\": \"COMPANY\",\"contact_number\": \"528854125\",\"description_of_goods_or_services\": \"food\",\"industry_category_code\": \"ICCV3_0000XX\",\"operating_country\": [\"US\",\"AU\",\"SG\"],\"registration_address\": {\"address_line1\": \"200 Collins Street\",\"address_line2\": \"200 Collins Street\",\"country_code\": \"SG\",\"postcode\": \"3000\",\"state\": \"Singapore\",\"suburb\": \"Melbourne\"}},\"business_person_details\": [{\"attachments\": {\"business_person_documents\": [{\"file_id\": \"NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA\",\"tag\": \"PERSON_PURPORTING_TO_ACT_AUTHORISATION_LETTER\"}]},\"residential_address\": {\"address_line1\": \"200 Collins Street\",\"country_code\": \"SG\",\"postcode\": \"3000\",\"state\": \"VIC\",\"suburb\": \"Melbourne\"},\"email\": \"nivi@yopmail.com\",\"date_of_birth\": \"1980-10-10\",\"first_name\": \"testAir\",\"roles\": [\"BENEFICIAL_OWNER\"],\"identifications\": {\"primary\": {\"identification_type\": \"PASSPORT\",\"issuing_country_code\": \"SG\",\"passport\": {\"effective_at\": \"2020-11-01\",\"expire_at\": \"2040-11-01\",\"front_file_id\": \"NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA\",\"number\": \"6275046\"}}},\"last_name\": \"Smith\",\"middle_name\": \"John\",\"nationality\": \"SG\",\"live_selfie_file_id\": \"NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA\"}],\"legal_entity_type\": \"BUSINESS\"},\"customer_agreements\": {\"agreed_to_data_usage\": true,\"agreed_to_terms_and_conditions\": true},\"primary_contact\": {\"email\": \"airwallex8@yopmail.com\",\"mobile\": \"896300124\"}}";
-
-            try(OutputStream os = connection.getOutputStream()) {
-                byte[] input = jsonInputString.getBytes("utf-8");
-                os.write(input, 0, input.length);
-            }
-
-            try(BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"))) {
-                StringBuilder response = new StringBuilder();
-                String responseLine = null;
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
-                }
-                System.out.println(response.toString());
-            }
+        headers = {
+            "x-api-key": "{{Shared Xapikey By Zoqq}}",
+            "x-program-id": "{{BasedOnRequirement}}",
+            "x-request-id": "{{IdempotencyKey}}",
+            "Authorization": "Bearer {{YOUR_TOKEN}}",
+            "Content-Type": "application/json"
         }
-    }
-    ```
 
-  </TabItem>
+        response = requests.post(url, headers=headers, data=json.dumps(payload))
+        print(response.json())
+        ```
+      </TabItem>
 
-  <TabItem value="python" label="Python">
-    ```python
-    import requests
 
-    url = "{{baseUrl}}/zoqq/api/v1/user"
-    headers = {
-        "x-api-key": "{{Shared Xapikey By Zoqq}}",
-        "x-program-id": "{{BasedOnRequirement}}",
-        "x-request-id": "{{IdempotencyKey}}",
-        "x-user-id": "{{Useridentificationkey}}",
-        "Authorization": "Bearer {{YOUR_TOKEN}}",
-        "Content-Type": "application/json"
-    }
+      
+      <TabItem value="php" label="php">
+        ```php
+        <?php
+        $url = '{{baseUrl}}/zoqq/api/v1/user';
+        
+        $data = [
+            'emailId' => 'testairWallex10@yopmail.com',
+            'amount' => '10',
+            'currency' => 'USD',
+            'productReference' => 'ACCEPT_ONLINE_PAYMENTS',
+            'asTrustee' => true,
+            'fileId' => 'NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA',
+            'tag' => 'BUSINESS_LICENSE',
+            'countryCode' => 'SG',
+            'number' => '1234567890',
+            'type' => 'business',
+            'businessName' => 'STYLOPAY Pty Ltd2',
+            'businessStructure' => 'COMPANY',
+            'contactNumber' => '1234567890',
+            'descriptionOfGoodsOrServices' => 'Payment gateway services',
+            'industryCategoryCode' => 'ICCV3_0000XX',
+            'registrationAddressLine1' => '123 Market Street',
+            'registrationAddressLine2' => 'Suite 456',
+            'registrationCountryCode' => 'SG',
+            'registrationPostcode' => '2000',
+            'registrationState' => 'NSW',
+            'registrationSuburb' => 'Sydney',
+            'operatingCountry' => 'AU',
+            'personDocumentsFileId' => 'NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA',
+            'personDocumentsTag' => 'PERSON_PURPORTING_TO_ACT_AUTHORISATION_LETTER',
+            'residentialAddressLine1' => '456 King Street',
+            'residentialCountryCode' => 'SG',
+            'residentialPostcode' => '2010',
+            'residentialState' => 'NSW',
+            'residentialSuburb' => 'Newtown',
+            'identificationType' => 'Passport',
+            'issuingCountryCode' => 'SG',
+            'effectiveAt' => '2020-01-01',
+            'expireAt' => '2030-01-01',
+            'frontFileId' => 'NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA',
+            'Idnumber' => 'X1234567',
+            'roles' => 'BENEFICIAL_OWNER',
+            'dateOfBirth' => '1985-05-15',
+            'firstName' => 'nivi',
+            'lastName' => 'Doe',
+            'middleName' => 'A',
+            'nationality' => 'SG',
+            'liveSelfieFileId' => 'NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA',
+            'legalEntityType' => 'BUSINESS',
+            'agreedToTermsAndConditions' => false,
+            'mobile' => '912500678'
+        ];
 
-    data = {
-        "account_details": {
-            "business_details": {
-                "account_usage": {
-                    "estimated_monthly_revenue": {
-                        "amount": "50",
-                        "currency": "USD"
-                    },
-                    "product_reference": [
-                        "ACCEPT_ONLINE_PAYMENTS",
-                        "RECEIVE_TRANSFERS"
-                    ]
-                },
-                "as_trustee": True,
-                "attachments": {
-                    "business_documents": [
-                        {
-                            "file_id": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA",
-                            "tag": "BUSINESS_LICENSE"
-                        }
-                    ]
-                },
-                "business_identifiers": [
-                    {
-                        "country_code": "SG",
-                        "number": "A1098762872",
-                        "type": "BRN"
-                    }
-                ],
-                "business_name": "STYLOPAY Pty Ltd2",
-                "business_structure": "COMPANY",
-                "contact_number": "528854125",
-                "description_of_goods_or_services": "food",
-                "industry_category_code": "ICCV3_0000XX",
-                "operating_country": ["US", "AU", "SG"],
-                "registration_address": {
-                    "address_line1": "200 Collins Street",
-                    "address_line2": "200 Collins Street",
-                    "country_code": "SG",
-                    "postcode": "3000",
-                    "state": "Singapore",
-                    "suburb": "Melbourne"
-                }
-            },
-            "business_person_details": [
-                {
-                    "attachments": {
-                        "business_person_documents": [
-                            {
-                                "file_id": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA",
-                                "tag": "PERSON_PURPORTING_TO_ACT_AUTHORISATION_LETTER"
-                            }
-                        ]
-                    },
-                    "residential_address": {
-                        "address_line1": "200 Collins Street",
-                        "country_code": "SG",
-                        "postcode": "3000",
-                        "state": "VIC",
-                        "suburb": "Melbourne"
-                    },
-                    "email": "nivi@yopmail.com",
-                    "date_of_birth": "1980-10-10",
-                    "first_name": "testAir",
-                    "roles": ["BENEFICIAL_OWNER"],
-                    "identifications": {
-                        "primary": {
-                            "identification_type": "PASSPORT",
-                            "issuing_country_code": "SG",
-                            "passport": {
-                                "effective_at": "2020-11-01",
-                                "expire_at": "2040-11-01",
-                                "front_file_id": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA",
-                                "number": "6275046"
-                            }
-                        }
-                    },
-                    "last_name": "Smith",
-                    "middle_name": "John",
-                    "nationality": "SG",
-                    "live_selfie_file_id": "NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA"
-                }
-            ],
-            "legal_entity_type": "BUSINESS"
-        },
-        "customer_agreements": {
-            "agreed_to_data_usage": True,
-            "agreed_to_terms_and_conditions": True
-        },
-        "primary_contact": {
-            "email": "airwallex8@yopmail.com",
-            "mobile": "896300124"
-        }
-    }
+        $headers = [
+            'x-api-key: {{Shared Xapikey By Zoqq}}',
+            'x-program-id: {{BasedOnRequirement}}',
+            'x-request-id: {{IdempotencyKey}}',
+            'Authorization: Bearer {{YOUR_TOKEN}}',
+            'Content-Type: application/json'
+        ];
 
-    response = requests.post(url, headers=headers, json=data)
-    print(response.text)
-    ```
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        
+        $response = curl_exec($ch);
+        curl_close($ch);
+        
+        echo $response;
+        ?>
+        ```
+      </TabItem>
+      <TabItem value="csharp" label="C#">
+        ```csharp
+        using System;
+        using System.Net.Http;
+        using System.Text;
+        using System.Threading.Tasks;
 
-  </TabItem>
-
-  <TabItem value="php" label="php">
-    ```php
-    <?php
-    $url = '{{baseUrl}}/zoqq/api/v1/user';
-    $headers = [
-        'x-api-key: {{Shared Xapikey By Zoqq}}',
-        'x-program-id: {{BasedOnRequirement}}',
-        'x-request-id: {{IdempotencyKey}}',
-        'x-user-id: {{Useridentificationkey}}',
-        'Authorization: Bearer {{YOUR_TOKEN}}',
-        'Content-Type: application/json'
-    ];
-
-    $data = [
-        'account_details' => [
-            'business_details' => [
-                'account_usage' => [
-                    'estimated_monthly_revenue' => [
-                        'amount' => '50',
-                        'currency' => 'USD'
-                    ],
-                    'product_reference' => [
-                        'ACCEPT_ONLINE_PAYMENTS',
-                        'RECEIVE_TRANSFERS'
-                    ]
-                ],
-                'as_trustee' => true,
-                'attachments' => [
-                    'business_documents' => [
-                        [
-                            'file_id' => 'NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA',
-                            'tag' => 'BUSINESS_LICENSE'
-                        ]
-                    ]
-                ],
-                'business_identifiers' => [
-                    [
-                        'country_code' => 'SG',
-                        'number' => 'A1098762872',
-                        'type' => 'BRN'
-                    ]
-                ],
-                'business_name' => 'STYLOPAY Pty Ltd2',
-                'business_structure' => 'COMPANY',
-                'contact_number' => '528854125',
-                'description_of_goods_or_services' => 'food',
-                'industry_category_code' => 'ICCV3_0000XX',
-                'operating_country' => ['US', 'AU', 'SG'],
-                'registration_address' => [
-                    'address_line1' => '200 Collins Street',
-                    'address_line2' => '200 Collins Street',
-                    'country_code' => 'SG',
-                    'postcode' => '3000',
-                    'state' => 'Singapore',
-                    'suburb' => 'Melbourne'
-                ]
-            ],
-            'business_person_details' => [
-                [
-                    'attachments' => [
-                        'business_person_documents' => [
-                            [
-                                'file_id' => 'NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA',
-                                'tag' => 'PERSON_PURPORTING_TO_ACT_AUTHORISATION_LETTER'
-                            ]
-                        ]
-                    ],
-                    'residential_address' => [
-                        'address_line1' => '200 Collins Street',
-                        'country_code' => 'SG',
-                        'postcode' => '3000',
-                        'state' => 'VIC',
-                        'suburb' => 'Melbourne'
-                    ],
-                    'email' => 'nivi@yopmail.com',
-                    'date_of_birth' => '1980-10-10',
-                    'first_name' => 'testAir',
-                    'roles' => ['BENEFICIAL_OWNER'],
-                    'identifications' => [
-                        'primary' => [
-                            'identification_type' => 'PASSPORT',
-                            'issuing_country_code' => 'SG',
-                            'passport' => [
-                                'effective_at' => '2020-11-01',
-                                'expire_at' => '2040-11-01',
-                                'front_file_id' => 'NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA',
-                                'number' => '6275046'
-                            ]
-                        ]
-                    ],
-                    'last_name' => 'Smith',
-                    'middle_name' => 'John',
-                    'nationality' => 'SG',
-                    'live_selfie_file_id' => 'NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA'
-                ]
-            ],
-            'legal_entity_type' => 'BUSINESS'
-        ],
-        'customer_agreements' => [
-            'agreed_to_data_usage' => true,
-            'agreed_to_terms_and_conditions' => true
-        ],
-        'primary_contact' => [
-            'email' => 'airwallex8@yopmail.com',
-            'mobile' => '896300124'
-        ]
-    ];
-
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-
-    $response = curl_exec($ch);
-    curl_close($ch);
-
-    echo $response;
-    ?>
-    ```
-
-  </TabItem>
-
-  <TabItem value="csharp" label="C#">
-    ```csharp
-    using System;
-    using System.Net.Http;
-    using System.Text;
-    using System.Threading.Tasks;
-
-    class Program
-    {
-        static async Task Main(string[] args)
+        class Program
         {
-            var client = new HttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Post, "{{baseUrl}}/zoqq/api/v1/user");
-
-            request.Headers.Add("x-api-key", "{{Shared Xapikey By Zoqq}}");
-            request.Headers.Add("x-program-id", "{{BasedOnRequirement}}");
-            request.Headers.Add("x-request-id", "{{IdempotencyKey}}");
-            request.Headers.Add("x-user-id", "{{Useridentificationkey}}");
-            request.Headers.Add("Authorization", "Bearer {{YOUR_TOKEN}}");
-
-            var json = @"{
-                ""account_details"": {
-                    ""business_details"": {
-                        ""account_usage"": {
-                            ""estimated_monthly_revenue"": {
-                                ""amount"": ""50"",
-                                ""currency"": ""USD""
-                            },
-                            ""product_reference"": [
-                                ""ACCEPT_ONLINE_PAYMENTS"",
-                                ""RECEIVE_TRANSFERS""
-                            ]
-                        },
-                        ""as_trustee"": true,
-                        ""attachments"": {
-                            ""business_documents"": [
-                                {
-                                    ""file_id"": ""NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA"",
-                                    ""tag"": ""BUSINESS_LICENSE""
-                                }
-                            ]
-                        },
-                        ""business_identifiers"": [
-                            {
-                                ""country_code"": ""SG"",
-                                ""number"": ""A1098762872"",
-                                ""type"": ""BRN""
-                            }
-                        ],
-                        ""business_name"": ""STYLOPAY Pty Ltd2"",
-                        ""business_structure"": ""COMPANY"",
-                        ""contact_number"": ""528854125"",
-                        ""description_of_goods_or_services"": ""food"",
-                        ""industry_category_code"": ""ICCV3_0000XX"",
-                        ""operating_country"": [""US"", ""AU"", ""SG""],
-                        ""registration_address"": {
-                            ""address_line1"": ""200 Collins Street"",
-                            ""address_line2"": ""200 Collins Street"",
-                            ""country_code"": ""SG"",
-                            ""postcode"": ""3000"",
-                            ""state"": ""Singapore"",
-                            ""suburb"": ""Melbourne""
-                        }
+            static async Task Main(string[] args)
+            {
+                var client = new HttpClient();
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = new Uri("{{baseUrl}}/zoqq/api/v1/user"),
+                    Headers = 
+                    {
+                        { "x-api-key", "{{Shared Xapikey By Zoqq}}" },
+                        { "x-program-id", "{{BasedOnRequirement}}" },
+                        { "x-request-id", "{{IdempotencyKey}}" },
+                        { "Authorization", "Bearer {{YOUR_TOKEN}}" }
                     },
-                    ""business_person_details"": [
-                        {
-                            ""attachments"": {
-                                ""business_person_documents"": [
-                                    {
-                                        ""file_id"": ""NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA"",
-                                        ""tag"": ""PERSON_PURPORTING_TO_ACT_AUTHORISATION_LETTER""
-                                    }
-                                ]
-                            },
-                            ""residential_address"": {
-                                ""address_line1"": ""200 Collins Street"",
-                                ""country_code"": ""SG"",
-                                ""postcode"": ""3000"",
-                                ""state"": ""VIC"",
-                                ""suburb"": ""Melbourne""
-                            },
-                            ""email"": ""nivi@yopmail.com"",
-                            ""date_of_birth"": ""1980-10-10"",
-                            ""first_name"": ""testAir"",
-                            ""roles"": [""BENEFICIAL_OWNER""],
-                            ""identifications"": {
-                                ""primary"": {
-                                    ""identification_type"": ""PASSPORT"",
-                                    ""issuing_country_code"": ""SG"",
-                                    ""passport"": {
-                                        ""effective_at"": ""2020-11-01"",
-                                        ""expire_at"": ""2040-11-01"",
-                                        ""front_file_id"": ""NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA"",
-                                        ""number"": ""6275046""
-                                    }
-                                }
-                            },
-                            ""last_name"": ""Smith"",
-                            ""middle_name"": ""John"",
-                            ""nationality"": ""SG"",
-                            ""live_selfie_file_id"": ""NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA""
-                        }
-                    ],
-                    ""legal_entity_type"": ""BUSINESS""
-                },
-                ""customer_agreements"": {
-                    ""agreed_to_data_usage"": true,
-                    ""agreed_to_terms_and_conditions"": true
-                },
-                ""primary_contact"": {
-                    ""email"": ""airwallex8@yopmail.com"",
-                    ""mobile"": ""896300124""
+                    Content = new StringContent(
+                        "{" +
+                        "\"emailId\":\"testairWallex10@yopmail.com\"," +
+                        "\"amount\":\"10\"," +
+                        "\"currency\":\"USD\"," +
+                        "\"productReference\":\"ACCEPT_ONLINE_PAYMENTS\"," +
+                        "\"asTrustee\":true," +
+                        "\"fileId\":\"NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA\"," +
+                        "\"tag\":\"BUSINESS_LICENSE\"," +
+                        "\"countryCode\":\"SG\"," +
+                        "\"number\":\"1234567890\"," +
+                        "\"type\":\"business\"," +
+                        "\"businessName\":\"STYLOPAY Pty Ltd2\"," +
+                        "\"businessStructure\":\"COMPANY\"," +
+                        "\"contactNumber\":\"1234567890\"," +
+                        "\"descriptionOfGoodsOrServices\":\"Payment gateway services\"," +
+                        "\"industryCategoryCode\":\"ICCV3_0000XX\"," +
+                        "\"registrationAddressLine1\":\"123 Market Street\"," +
+                        "\"registrationAddressLine2\":\"Suite 456\"," +
+                        "\"registrationCountryCode\":\"SG\"," +
+                        "\"registrationPostcode\":\"2000\"," +
+                        "\"registrationState\":\"NSW\"," +
+                        "\"registrationSuburb\":\"Sydney\"," +
+                        "\"operatingCountry\":\"AU\"," +
+                        "\"personDocumentsFileId\":\"NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA\"," +
+                        "\"personDocumentsTag\":\"PERSON_PURPORTING_TO_ACT_AUTHORISATION_LETTER\"," +
+                        "\"residentialAddressLine1\":\"456 King Street\"," +
+                        "\"residentialCountryCode\":\"SG\"," +
+                        "\"residentialPostcode\":\"2010\"," +
+                        "\"residentialState\":\"NSW\"," +
+                        "\"residentialSuburb\":\"Newtown\"," +
+                        "\"identificationType\":\"Passport\"," +
+                        "\"issuingCountryCode\":\"SG\"," +
+                        "\"effectiveAt\":\"2020-01-01\"," +
+                        "\"expireAt\":\"2030-01-01\"," +
+                        "\"frontFileId\":\"NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA\"," +
+                        "\"Idnumber\":\"X1234567\"," +
+                        "\"roles\":\"BENEFICIAL_OWNER\"," +
+                        "\"dateOfBirth\":\"1985-05-15\"," +
+                        "\"firstName\":\"nivi\"," +
+                        "\"lastName\":\"Doe\"," +
+                        "\"middleName\":\"A\"," +
+                        "\"nationality\":\"SG\"," +
+                        "\"liveSelfieFileId\":\"NzViMjBjNzgtMjJmYy00ZTAwLWFlOGYtNmEwNTc3MDlhZmFjLHwsaG9uZ2tvbmcsfCxibGFuay5wZGZfMTc0MzQ5NTg5MTYzMA\"," +
+                        "\"legalEntityType\":\"BUSINESS\"," +
+                        "\"agreedToTermsAndConditions\":false," +
+                        "\"mobile\":\"912500678\"" +
+                        "}",
+                        Encoding.UTF8,
+                        "application/json")
+                };
+
+                using (var response = await client.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    var body = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine(body);
                 }
-            }";
-
-            request.Content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var response = await client.SendAsync(request);
-            var responseString = await response.Content.ReadAsStringAsync();
-
-            Console.WriteLine(responseString);
+            }
         }
-    }
-    ```
+        ```
+      </TabItem>
+    </Tabs>
 
-  </TabItem>
-</Tabs>
-  </div> 
+    <h3>Response Example</h3>
+
+    <Tabs>
+      <TabItem value="200" label="200: Success" default>
+        ```json
+        {
+            "status": "Success",
+            "message": "User Created Successfully",
+            "code": 200,
+            "data": [
+                {
+                    "accountid": "XXXXXXX"
+                }
+            ]
+        }
+        ```
+      </TabItem>
+      <TabItem value="400" label="400: Error">
+        ```json
+        {
+            "code": 400,
+            "status": "Error",
+            "message": "failed reason"
+        }
+        ```
+      </TabItem>
+    </Tabs>
+  </div>
 </div>
 
 ## Get User
@@ -594,8 +400,8 @@ This API retrieves user details from the system.
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | Yes | Bearer token |
-
+    | Authorization | string | No | Bearer token (Nullable) |
+    
   </div>
 
   <div className="api-docs-right">
@@ -727,99 +533,103 @@ This API retrieves user details from the system.
         ```
       </TabItem>
     </Tabs>
+    <h3>Response Example</h3>
 
-    <h3>Response Examples</h3>
-
-    <Tabs>
-      <TabItem value="200" label="200: Success" default>
-        ```json
-        {
-          "account_details": {
+   <Tabs>
+  <TabItem value="200" label="200: Success" default>
+    ```json
+    {
+      "status": "success",
+      "message": "User Details Fetched Successfully",
+      "code": 200,
+      "data": {
+        "account_details": {
+          "attachments": {
+            "additional_files": []
+          },
+          "business_details": {
+            "account_usage": {
+              "estimated_monthly_revenue": {
+                "amount": "10.0",
+                "currency": "USD"
+              },
+              "product_reference": [
+                "ACCEPT_ONLINE_PAYMENTS",
+                "SG"
+              ]
+            },
+            "as_trustee": true,
             "attachments": {
-              "additional_files": []
+              "business_documents": []
             },
-            "business_details": {
-              "account_usage": {
-                "estimated_monthly_revenue": {
-                  "amount": "10.0",
-                  "currency": "USD"
-                },
-                "product_reference": [
-                  "ACCEPT_ONLINE_PAYMENTS",
-                  "SG"
-                ]
-              },
-              "as_trustee": true,
-              "attachments": {
-                "business_documents": []
-              },
-              "business_address": null,
-              "business_identifiers": [],
-              "business_name": "STYLOPAY Pty Ltd2",
-              "business_name_english": null,
-              "business_name_trading": null,
-              "business_start_date": null,
-              "business_structure": "COMPANY",
-              "contact_number": null,
-              "description_of_goods_or_services": "Payment gateway services",
-              "explanation_for_high_risk_countries_exposure": null,
-              "has_nominee_shareholders": null,
-              "industry_category_code": "ICCV3_0000XX",
-              "no_shareholders_with_over_25percent": null,
-              "operating_country": [],
-              "registration_address": {
-                "address_line1": "123 Market Street",
-                "address_line2": "Suite 456",
-                "country_code": "SG",
-                "postcode": "2010",
-                "state": "NSW",
-                "suburb": "Newtown"
-              },
-              "registration_address_english": null,
-              "state_of_incorporation": null,
-              "url": null,
-              "urls": null
+            "business_address": null,
+            "business_identifiers": [],
+            "business_name": "STYLOPAY Pty Ltd2",
+            "business_name_english": null,
+            "business_name_trading": null,
+            "business_start_date": null,
+            "business_structure": "COMPANY",
+            "contact_number": null,
+            "description_of_goods_or_services": "Payment gateway services",
+            "explanation_for_high_risk_countries_exposure": null,
+            "has_nominee_shareholders": null,
+            "industry_category_code": "ICCV3_0000XX",
+            "no_shareholders_with_over_25percent": null,
+            "operating_country": [],
+            "registration_address": {
+              "address_line1": "123 Market Street",
+              "address_line2": "Suite 456",
+              "country_code": "SG",
+              "postcode": "2010",
+              "state": "NSW",
+              "suburb": "Newtown"
             },
-            "business_person_details": [],
-            "trustee_details": null,
-            "individual_details": null,
-            "legal_entity_id": "le_5lhQNwZMOJaTmINmCGBOsA",
-            "legal_entity_identifier": null,
-            "legal_entity_type": "BUSINESS"
+            "registration_address_english": null,
+            "state_of_incorporation": null,
+            "url": null,
+            "urls": null
           },
-          "created_at": "2025-04-07T08:14:13+0000",
-          "customer_agreements": {
-            "agreed_to_data_usage": true,
-            "agreed_to_terms_and_conditions": true,
-            "terms_and_conditions": {
-              "device_data": {},
-              "service_agreement_type": "FULL"
-            }
+          "business_person_details": [],
+          "trustee_details": null,
+          "individual_details": null,
+          "legal_entity_id": "le_CZY8LKCSOzK5LMsCEd7c_A",
+          "legal_entity_identifier": null,
+          "legal_entity_type": "BUSINESS"
+        },
+        "created_at": "2025-04-25T13:38:40+0000",
+        "customer_agreements": {
+          "agreed_to_data_usage": true,
+          "agreed_to_terms_and_conditions": true,
+          "terms_and_conditions": {
+            "device_data": {},
+            "service_agreement_type": "FULL"
+          }
+        },
+        "id": "acct_mdUe_PvMMzqYGd0Qmlib9g",
+        "nickname": "acct_mdUe_PvMMzqYGd0Qmlib9g",
+        "primary_contact": {
+          "attachments": {
+            "identity_files": []
           },
-          "id": "acct_M41_8fDmNT6AvcpwdvzHXw",
-          "nickname": "acct_M41_8fDmNT6AvcpwdvzHXw",
-          "primary_contact": {
-            "attachments": {
-              "identity_files": []
-            },
-            "email": "testairwallex3@yopmail.com",
-            "mobile": "912514678"
-          },
-          "status": "CREATED",
-          "view_type": "EXCLUDED_PII"
-        }
-        ```
-      </TabItem>
-      <TabItem value="400" label="400: Error">
-        ```json
-        {
-          "code": 400,
-          "status": "Error",
-          "message": "failed reason"
-        }
-        ```
-      </TabItem>
-    </Tabs>
+          "email": "testairWallex7@yopmail.com",
+          "mobile": "912514678"
+        },
+        "status": "CREATED",
+        "view_type": "EXCLUDED_PII"
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem value="400" label="400: Error">
+    ```json
+    {
+      "code": 400,
+      "status": "error",
+      "message": "Failed to fetch user details"
+    }
+    ```
+  </TabItem>
+</Tabs>
 
   </div> 
 </div>
@@ -831,7 +641,7 @@ This API allows users to accept the terms and conditions.
 <Tabs>
   <TabItem value="endpoint" label="Endpoint" default>
 ```
-    GET {{baseUrl}}/zoqq/api/v1/user/terms&conditions/Id
+    GET  {{baseUrl}}/zoqq/api/v1/user/termsConditions
 ```
   </TabItem>
 </Tabs>
@@ -860,7 +670,7 @@ This API allows users to accept the terms and conditions.
       <TabItem value="curl" label="cURL" default>
         ```bash
         curl --request GET \
-          --url {{baseUrl}}/zoqq/api/v1/user/terms&conditions/Id \
+          --url {{baseUrl}}/zoqq/api/v1/user/termsConditions \
           --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
           --header 'x-program-id: {{BasedOnRequirement}}' \
           --header 'x-request-id: {{IdempotencyKey}}' \
@@ -877,7 +687,7 @@ This API allows users to accept the terms and conditions.
 
         public class AcceptTerms {
             public static void main(String[] args) throws Exception {
-                URL url = new URL("{{baseUrl}}/zoqq/api/v1/user/terms&conditions/Id");
+                URL url = new URL("{{baseUrl}}/zoqq/api/v1/user/termsConditions");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
 
@@ -907,7 +717,7 @@ This API allows users to accept the terms and conditions.
         ```python
         import requests
 
-        url = "{{baseUrl}}/zoqq/api/v1/user/terms&conditions/Id"
+        url = "{{baseUrl}}/zoqq/api/v1/user/termsConditions"
 
         headers = {
             "x-api-key": "{{Shared Xapikey By Zoqq}}",
@@ -924,7 +734,7 @@ This API allows users to accept the terms and conditions.
       <TabItem value="php" label="php">
         ```php
         <?php
-        $url = '{{baseUrl}}/zoqq/api/v1/user/terms&conditions/Id';
+        $url = '{{baseUrl}}/zoqq/api/v1/user/termsConditions';
 
         $headers = array(
             'x-api-key: {{Shared Xapikey By Zoqq}}',
@@ -956,7 +766,7 @@ This API allows users to accept the terms and conditions.
         {
             static void Main()
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("{{baseUrl}}/zoqq/api/v1/user/terms&conditions/Id");
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("{{baseUrl}}/zoqq/api/v1/user/termsConditions");
                 request.Method = "GET";
 
                 // Set headers
@@ -1015,7 +825,7 @@ This API activates a user account in the system.
 <Tabs>
   <TabItem value="endpoint" label="Endpoint" default>
 ```
-    GET {{baseUrl}}/zoqq/api/v1/user/activate/Id
+    GET {{baseUrl}}/zoqq/api/v1/user/activate
 ```
   </TabItem>
 </Tabs>
@@ -1044,7 +854,7 @@ This API activates a user account in the system.
       <TabItem value="curl" label="cURL" default>
         ```bash
         curl --request GET \
-          --url {{baseUrl}}/zoqq/api/v1/user/activate/Id \
+          --url {{baseUrl}}/zoqq/api/v1/user/activate \
           --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
           --header 'x-program-id: {{BasedOnRequirement}}' \
           --header 'x-request-id: {{IdempotencyKey}}' \
@@ -1061,7 +871,7 @@ This API activates a user account in the system.
 
         public class ActivateAccount {
             public static void main(String[] args) throws Exception {
-                URL url = new URL("{{baseUrl}}/zoqq/api/v1/user/activate/Id");
+                URL url = new URL("{{baseUrl}}/zoqq/api/v1/user/activate");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
 
@@ -1091,7 +901,7 @@ This API activates a user account in the system.
         ```python
         import requests
 
-        url = "{{baseUrl}}/zoqq/api/v1/user/activate/Id"
+        url = "{{baseUrl}}/zoqq/api/v1/user/activate"
 
         headers = {
             "x-api-key": "{{Shared Xapikey By Zoqq}}",
@@ -1108,7 +918,7 @@ This API activates a user account in the system.
       <TabItem value="php" label="php">
         ```php
         <?php
-        $url = '{{baseUrl}}/zoqq/api/v1/user/activate/Id';
+        $url = '{{baseUrl}}/zoqq/api/v1/user/activate';
 
         $headers = array(
             'x-api-key: {{Shared Xapikey By Zoqq}}',
@@ -1140,7 +950,7 @@ This API activates a user account in the system.
         {
             static void Main()
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("{{baseUrl}}/zoqq/api/v1/user/activate/Id");
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("{{baseUrl}}/zoqq/api/v1/user/activate");
                 request.Method = "GET";
 
                 // Set headers
