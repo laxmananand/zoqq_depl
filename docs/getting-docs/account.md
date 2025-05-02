@@ -1,6 +1,7 @@
 ---
 title: Supported Regions and Currencies
 sidebar_label: Supported Regions & Currencies
+sidebar_position: 1
 hide_table_of_contents: true
 ---
 

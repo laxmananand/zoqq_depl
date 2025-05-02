@@ -22,7 +22,7 @@ module.exports = {
           label: "API Reference",
           position: "left",
         },
-        // { to: '/docs/api-reference/accounts', label: 'API Reference', position: 'left' },
+        // { to: "/docs/getting-docs/account", label: "Accounts", position: "left" },
         { to: "/docs/changelog", label: "Changelog", position: "left" },
         {
           type: "search",

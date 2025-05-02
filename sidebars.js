@@ -29,6 +29,30 @@ const sidebars = {
       ],
     },
   ],
+  accounts: [
+    {
+      type: "category",
+      label: "Accounts",
+      collapsed: false,
+      items: [
+        {
+          type: "doc",
+          id: "getting-docs/account",
+          label: "Supported Regions & Currencies",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/account#global-accounts-coverage",
+          label: "Global Accounts Coverage",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/account#notes",
+          label: "Notes",
+        },
+      ],
+    },
+  ],
   apiReference: [
     {
       type: "category",
@@ -236,6 +260,44 @@ const sidebars = {
             },
           ],
         },
+
+        {
+          type: "category",
+          label: "Webhook",
+          items: [
+            {
+              type: "doc",
+              id: "api-reference/webhook",
+              label: "Overview",
+            },
+            {
+              type: "link",
+              href: "/docs/api-reference/webhook#get-create-beneficiary-schema",
+              label: "🟢 GET Get-Create-Beneficiary-Schema",
+            },
+            {
+              type: "link",
+              href: "/docs/api-reference/webhook#create-beneficiary",
+              label: "🟡 POST Create Beneficiary",
+            },
+            {
+              type: "link",
+              href: "/docs/api-reference/webhook#validate-create-beneficiary",
+              label: "🟡 POST Validate Create Beneficiary",
+            },
+            {
+              type: "link",
+              href: "/docs/api-reference/webhook#validate-create-beneficiary",
+              label: "🟡 POST Validate Create Beneficiary",
+            },
+            
+          ],
+        },
+
+
+
+
+
       ],
     },
   ],
