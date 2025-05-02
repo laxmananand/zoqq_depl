@@ -4,15 +4,14 @@ title: Webhook
 hide_table_of_contents: true
 ---
 
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 # Zoqq Webhook Events
 
+Integrating the webhook service enables end users to receive notifications and updates regarding their account activity, transactions, security alerts, and other pertinent information. This integration ensures that users are promptly informed about important events related to their accounts.
+
 This document outlines the structure of webhook events sent by Zoqq. All events contain a consistent structure with a top-level `id`, `name`, `account_id`, `data`, `created_at`, and `version`.
-
-
 
 ## 1. Account Status
 
@@ -37,7 +36,7 @@ Triggered when an account application is first submitted for verification.
     | version | string | API version |
 
     <h3>Common Headers</h3>
-    
+
     | Header | Description |
     |--------|-------------|
     | X-Request-ID | Unique request identifier |
@@ -97,7 +96,7 @@ Triggered when an account becomes active after successful verification.
     | version | string | API version |
 
     <h3>Common Headers</h3>
-    
+
     | Header | Description |
     |--------|-------------|
     | X-Request-ID | Unique request identifier |
@@ -156,7 +155,6 @@ Triggered when an account becomes active after successful verification.
   </div>
 </div>
 
-
 ## Account Suspended
 
 Triggered when account verification fails or is suspended.
@@ -178,7 +176,7 @@ Triggered when account verification fails or is suspended.
     | version | string | API version |
 
     <h3>Common Headers</h3>
-    
+
     | Header | Description |
     |--------|-------------|
     | X-Request-ID | Unique request identifier |
@@ -231,8 +229,7 @@ Triggered when account verification fails or is suspended.
   </div>
 </div>
 
-
-## Action Required
+## Account Action Required
 
 Triggered when additional information is needed to complete account verification.
 
@@ -254,7 +251,7 @@ Triggered when additional information is needed to complete account verification
     | version | string | API version |
 
     <h3>Common Headers</h3>
-    
+
     | Header | Description |
     |--------|-------------|
     | X-Request-ID | Unique request identifier |
@@ -319,9 +316,10 @@ Triggered when additional information is needed to complete account verification
   "transaction_type": "DEPOSIT"
 }
 ``` -->
+
 ## 2. Global Accounts
 
-## Global Account - New Deposit
+## Global Account New
 
 Triggered when a deposit is received via Global Account, pending settlement to wallet balance.
 
@@ -345,7 +343,7 @@ Triggered when a deposit is received via Global Account, pending settlement to w
     | version | string | API version |
 
     <h3>Common Headers</h3>
-    
+
     | Header | Description |
     |--------|-------------|
     | X-Request-ID | Unique request identifier |
@@ -399,7 +397,6 @@ Triggered when a deposit is received via Global Account, pending settlement to w
   </div>
 </div>
 
-
 ## Balance Collection
 
 Triggered when wallet balance increases due to a settled deposit from Global Account.
@@ -424,7 +421,7 @@ Triggered when wallet balance increases due to a settled deposit from Global Acc
     | version | string | API version |
 
     <h3>Common Headers</h3>
-    
+
     | Header | Description |
     |--------|-------------|
     | X-Request-ID | Unique request identifier |
@@ -514,7 +511,7 @@ Triggered when a currency conversion has been successfully booked and scheduled 
     | version | string | API version |
 
     <h3>Common Headers</h3>
-    
+
     | Header | Description |
     |--------|-------------|
     | X-Request-ID | Unique request identifier |
@@ -601,7 +598,7 @@ Triggered when funds from a currency conversion have been successfully settled i
     | version | string | API version |
 
     <h3>Common Headers</h3>
-    
+
     | Header | Description |
     |--------|-------------|
     | X-Request-ID | Unique request identifier |
@@ -693,7 +690,7 @@ Triggered when a deposit has been successfully processed and settled to the wall
     | version | string | API version |
 
     <h3>Common Headers</h3>
-    
+
     | Header | Description |
     |--------|-------------|
     | X-Request-ID | Unique request identifier |
@@ -785,7 +782,7 @@ Triggered when a deposit has been rejected during processing by Airwallex or the
     | version | string | API version |
 
     <h3>Common Headers</h3>
-    
+
     | Header | Description |
     |--------|-------------|
     | X-Request-ID | Unique request identifier |
@@ -892,7 +889,7 @@ Triggered when a deposit has been rejected during processing by Airwallex or the
     | version | string | API version |
 
     <h3>Common Headers</h3>
-    
+
     | Header | Description |
     |--------|-------------|
     | X-Request-ID | Unique request identifier |
@@ -1001,9 +998,6 @@ Triggered when a deposit has been rejected during processing by Airwallex or the
   </div>
 </div>
 
-
-
-
 ## Payout Transfer Funded
 
 Triggered when funds for a payout transfer have been successfully allocated and are ready for processing.
@@ -1032,7 +1026,7 @@ Triggered when funds for a payout transfer have been successfully allocated and 
     | version | string | API version |
 
     <h3>Common Headers</h3>
-    
+
     | Header | Description |
     |--------|-------------|
     | X-Request-ID | Unique request identifier |

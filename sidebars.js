@@ -7,7 +7,7 @@ const sidebars = {
       items: [
         {
           type: "category",
-          label: "Account",
+          label: "Global Account",
           items: [
             {
               type: "doc",
@@ -32,7 +32,7 @@ const sidebars = {
   accounts: [
     {
       type: "category",
-      label: "Accounts",
+      label: "Global Accounts",
       collapsed: false,
       items: [
         {
@@ -271,33 +271,97 @@ const sidebars = {
               label: "Overview",
             },
             {
-              type: "link",
-              href: "/docs/api-reference/webhook#get-create-beneficiary-schema",
-              label: "🟢 GET Get-Create-Beneficiary-Schema",
+              type: "category",
+              label: "Account Status",
+              items: [
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#account-submitted",
+                  label: "Account Submitted",
+                },
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#account-active",
+                  label: "Account Active",
+                },
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#account-suspended",
+                  label: "Account Suspended",
+                },
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#account-action-required",
+                  label: "Account Action Required",
+                },
+              ],
             },
             {
-              type: "link",
-              href: "/docs/api-reference/webhook#create-beneficiary",
-              label: "🟡 POST Create Beneficiary",
+              type: "category",
+              label: "Global Account",
+              items: [
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#global-account-new",
+                  label: "Global Account New",
+                },
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#balance-collection",
+                  label: "Balance Collection",
+                },
+              ],
             },
             {
-              type: "link",
-              href: "/docs/api-reference/webhook#validate-create-beneficiary",
-              label: "🟡 POST Validate Create Beneficiary",
+              type: "category",
+              label: "Conversion",
+              items: [
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#conversion-scheduled",
+                  label: "Conversion Scheduled",
+                },
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#conversion-settled",
+                  label: "Conversion Settled",
+                },
+              ],
             },
             {
-              type: "link",
-              href: "/docs/api-reference/webhook#validate-create-beneficiary",
-              label: "🟡 POST Validate Create Beneficiary",
+              type: "category",
+              label: "Deposits",
+              items: [
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#deposit-settled",
+                  label: "Deposit Settled",
+                },
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#deposit-rejected",
+                  label: "Deposit Rejected",
+                },
+              ],
             },
-            
+            {
+              type: "category",
+              label: "Transfer",
+              items: [
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#payout-transfer-funding-scheduled",
+                  label: "Payout Transfer Funding Scheduled",
+                },
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#payout-transfer-funded",
+                  label: "Payout Transfer Funded",
+                },
+              ],
+            },
           ],
         },
-
-
-
-
-
       ],
     },
   ],
