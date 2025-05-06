@@ -17,7 +17,8 @@ This API allows you to create a new account for a user in the system.
   <TabItem value="endpoint" label="Endpoint" default>
 
 ```
-POST {{baseUrl}}/zoqq/api/v1/accounts
+POST {{baseUrl}}/zoqq/api/v1/account
+
 ```
 
   </TabItem>
@@ -26,10 +27,9 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint creates a new account for the authenticated user. 
-    The request requires account details including account type, currency, 
-    and other relevant information. Upon successful creation, the response 
-    includes the newly created account details.</p>
+    <p>Creates a new global account with specified currency and transfer capabilities. 
+    The account will be associated with the authenticated user and can support 
+    multiple transfer methods including ACH, FEDWIRE, and SWIFT.</p>
     
     <h3>Request Headers</h3>
     
@@ -46,29 +46,30 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | account_type | string | Yes | Type of account (CHECKING, SAVINGS, etc.) |
-    | currency | string | Yes | Currency code (USD, EUR, etc.) |
-    | label | string | No | Optional account label |
-    | country_code | string | Yes | ISO country code |
-    | institution_id | string | Yes | ID of the financial institution |
-    | metadata | object | No | Additional account metadata |
+    | type | string | Yes | Account type ("global_account", "virtual_account") |
+    | country | string | Yes | ISO country code (e.g., "US") |
+    | currency | string | Yes | Currency code (e.g., "USD") |
+    | label | string | No | Human-readable account label |
+    | required_features | array | Yes | Array of required transfer capabilities |
+    | required_features[].currency | string | Yes | Currency for the feature |
+    | required_features[].transfer_method | string | Yes | "LOCAL" or "SWIFT" |
+    
     
     <h3>Response Parameters</h3>
     
     | Parameter | Type | Description |
     |-----------|------|-------------|
-    | code | number | Response code (200 for success) |
-    | status | string | Status of the response (success/error) |
-    | message | string | Additional information about the response |
-    | data | object | Created account object |
-    | data.id | string | Unique identifier for the account (UUID) |
-    | data.status | string | Account status (PENDING, ACTIVE, etc.) |
-    | data.account_number | string | Generated account number |
-    | data.label | string | Account label if provided |
-    | data.account_type | string | Type of account |
-    | data.country_code | string | ISO country code |
-    | data.institution | object | Information about the financial institution |
-    | data.created_at | string | Timestamp of account creation |
+    | code | integer | HTTP status code |
+    | status | string | "success" or "error" |
+    | message | string | Result description |
+    | data | array | Created account(s) |
+    | data[].id | string | Account UUID |
+    | data[].status | string | "INACTIVE", "ACTIVE", etc. |
+    | data[].account_number | string | Account identifier |
+    | data[].account_type | string | Type of account |
+    | data[].swift_code | string | SWIFT/BIC code |
+    | data[].supported_features | array | Available transfer methods |
+    
   </div>
   
   <div className="api-docs-right">
@@ -79,20 +80,29 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
     
     ```bash
     curl --request POST \
-      --url {{baseUrl}}/zoqq/api/v1/accounts \
-      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
-      --header 'x-program-id: {{BasedOnRequirement}}' \
-      --header 'x-request-id: {{IdempotencyKey}}' \
-      --header 'x-user-id: {{Useridentificationkey}}' \
-      --header 'Content-Type: application/json' \
-      --header 'Authorization: Bearer {{YOUR_TOKEN}}' \
-      --data '{
-        "account_type": "CHECKING",
+  --url {{baseUrl}}/zoqq/api/v1/account \
+  --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
+  --header 'x-program-id: {{ProgramID}}' \
+  --header 'x-request-id: {{IdempotencyKey}}' \
+  --header 'x-user-id: {{UserID}}' \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer {{AccessToken}}' \
+  --data '{
+    "type": "global_account",
+    "country": "US",
+    "currency": "USD",
+    "label": "Satyakee17",
+    "required_features": [
+      {
         "currency": "USD",
-        "label": "Primary Checking",
-        "country_code": "US",
-        "institution_id": "inst_12345"
-      }'
+        "transfer_method": "LOCAL"
+      },
+      {
+        "currency": "USD",
+        "transfer_method": "SWIFT"
+      }
+    ]
+  }'
     ```
     
       </TabItem>
@@ -102,106 +112,178 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
     import requests
     import json
     
-    url = "{{baseUrl}}/zoqq/api/v1/accounts"
+    url = "{{baseUrl}}/zoqq/api/v1/account"
     
     payload = {
-        "account_type": "CHECKING",
-        "currency": "USD",
-        "label": "Primary Checking",
-        "country_code": "US",
-        "institution_id": "inst_12345"
-    }
-    
-    headers = {
-        "x-api-key": "{{Shared Xapikey By Zoqq}}",
-        "x-program-id": "{{BasedOnRequirement}}",
-        "x-request-id": "{{IdempotencyKey}}",
-        "x-user-id": "{{Useridentificationkey}}",
-        "Content-Type": "application/json",
-        "Authorization": "Bearer {{YOUR_TOKEN}}"
-    }
-    
-    response = requests.post(url, headers=headers, data=json.dumps(payload))
-    print(response.json())
+    "type": "global_account",
+    "country": "US",
+    "currency": "USD",
+    "label": "Satyakee17",
+    "required_features": [
+        {"currency": "USD", "transfer_method": "LOCAL"},
+        {"currency": "USD", "transfer_method": "SWIFT"}
+    ]
+}
+headers = {
+    "x-api-key": "{{Shared Xapikey By Zoqq}}",
+    "x-program-id": "{{ProgramID}}",
+    "x-request-id": "{{IdempotencyKey}}",
+    "x-user-id": "{{UserID}}",
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{AccessToken}}"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+print(response.json())
     ```
     
       </TabItem>
       <TabItem value="java" label="Java">
     
     ```java
-    HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create("{{baseUrl}}/zoqq/api/v1/accounts"))
-        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
-        .header("x-program-id", "{{BasedOnRequirement}}")
-        .header("x-request-id", "{{IdempotencyKey}}")
-        .header("x-user-id", "{{Useridentificationkey}}")
-        .header("Content-Type", "application/json")
-        .header("Authorization", "Bearer {{YOUR_TOKEN}}")
-        .method("POST", HttpRequest.BodyPublishers.ofString("{\"account_type\":\"CHECKING\",\"currency\":\"USD\",\"label\":\"Primary Checking\",\"country_code\":\"US\",\"institution_id\":\"inst_12345\"}"))
-        .build();
-    HttpResponse<String> response = HttpClient.newHttpClient()
-        .send(request, HttpResponse.BodyHandlers.ofString());
-    System.out.println(response.body());
+  import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+public class CreateAccount {
+    public static void main(String[] args) throws Exception {
+        String jsonBody = """
+            {
+                "type": "global_account",
+                "country": "US",
+                "currency": "USD",
+                "label": "Satyakee17",
+                "required_features": [
+                    {
+                        "currency": "USD",
+                        "transfer_method": "LOCAL"
+                    },
+                    {
+                        "currency": "USD",
+                        "transfer_method": "SWIFT"
+                    }
+                ]
+            }
+            """;
+
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("{{baseUrl}}/zoqq/api/v1/account"))
+            .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
+            .header("x-program-id", "{{ProgramID}}")
+            .header("x-request-id", "{{IdempotencyKey}}")
+            .header("x-user-id", "{{UserID}}")
+            .header("Content-Type", "application/json")
+            .header("Authorization", "Bearer {{AccessToken}}")
+            .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
+            .build();
+
+        HttpResponse<String> response = HttpClient.newHttpClient()
+            .send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
     ```
     
       </TabItem>
       <TabItem value="php" label="php">
     
     ```php
-    <?php
-    $curl = curl_init();
-    
-    $data = [
-      "account_type" => "CHECKING",
-      "currency" => "USD",
-      "label" => "Primary Checking",
-      "country_code" => "US",
-      "institution_id" => "inst_12345"
-    ];
-    
-    curl_setopt_array($curl, [
-      CURLOPT_URL => "{{baseUrl}}/zoqq/api/v1/accounts",
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_CUSTOMREQUEST => "POST",
-      CURLOPT_POSTFIELDS => json_encode($data),
-      CURLOPT_HTTPHEADER => [
-        "x-api-key: {{Shared Xapikey By Zoqq}}",
-        "x-program-id: {{BasedOnRequirement}}",
-        "x-request-id: {{IdempotencyKey}}",
-        "x-user-id: {{Useridentificationkey}}",
-        "Content-Type: application/json",
-        "Authorization: Bearer {{YOUR_TOKEN}}"
-      ],
-    ]);
-    
-    $response = curl_exec($curl);
-    curl_close($curl);
-    
-    echo $response;
-    ?>
+<?php
+$url = '{{baseUrl}}/zoqq/api/v1/account';
+$data = [
+    'type' => 'global_account',
+    'country' => 'US',
+    'currency' => 'USD',
+    'label' => 'Satyakee17',
+    'required_features' => [
+        [
+            'currency' => 'USD',
+            'transfer_method' => 'LOCAL'
+        ],
+        [
+            'currency' => 'USD',
+            'transfer_method' => 'SWIFT'
+        ]
+    ]
+];
+
+$headers = [
+    'x-api-key: {{Shared Xapikey By Zoqq}}',
+    'x-program-id: {{ProgramID}}',
+    'x-request-id: {{IdempotencyKey}}',
+    'x-user-id: {{UserID}}',
+    'Content-Type: application/json',
+    'Authorization: Bearer {{AccessToken}}'
+];
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
+
     ```
     
       </TabItem>
       <TabItem value="csharp" label="C#">
     
     ```csharp
-    var client = new RestClient("{{baseUrl}}/zoqq/api/v1/accounts");
-    var request = new RestRequest(Method.POST);
-    request.AddHeader("x-api-key", "{{Shared Xapikey By Zoqq}}");
-    request.AddHeader("x-program-id", "{{BasedOnRequirement}}");
-    request.AddHeader("x-request-id", "{{IdempotencyKey}}");
-    request.AddHeader("x-user-id", "{{Useridentificationkey}}");
-    request.AddHeader("Content-Type", "application/json");
-    request.AddHeader("Authorization", "Bearer {{YOUR_TOKEN}}");
-    request.AddJsonBody(new {
-        account_type = "CHECKING",
-        currency = "USD",
-        label = "Primary Checking",
-        country_code = "US",
-        institution_id = "inst_12345"
-    });
-    IRestResponse response = client.Execute(request);
-    Console.WriteLine(response.Content);
+    using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main()
+    {
+        var client = new HttpClient();
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Post,
+            RequestUri = new Uri("{{baseUrl}}/zoqq/api/v1/account"),
+            Headers = 
+            {
+                { "x-api-key", "{{Shared Xapikey By Zoqq}}" },
+                { "x-program-id", "{{ProgramID}}" },
+                { "x-request-id", "{{IdempotencyKey}}" },
+                { "x-user-id", "{{UserID}}" },
+                { "Authorization", "Bearer {{AccessToken}}" }
+            },
+            Content = new StringContent(
+                @"{
+                    ""type"": ""global_account"",
+                    ""country"": ""US"",
+                    ""currency"": ""USD"",
+                    ""label"": ""Satyakee17"",
+                    ""required_features"": [
+                        {
+                            ""currency"": ""USD"",
+                            ""transfer_method"": ""LOCAL""
+                        },
+                        {
+                            ""currency"": ""USD"",
+                            ""transfer_method"": ""SWIFT""
+                        }
+                    ]
+                }",
+                Encoding.UTF8,
+                "application/json")
+        };
+
+        var response = await client.SendAsync(request);
+        Console.WriteLine(await response.Content.ReadAsStringAsync());
+    }
+}
     ```
     
       </TabItem>
@@ -214,25 +296,65 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
     
     ```json
     {
-      "code": 200,
-      "status": "success",
-      "message": "Account created successfully",
-      "data": {
-        "id": "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6",
-        "status": "PENDING",
-        "account_number": "9876543210",
-        "label": "Primary Checking",
-        "account_type": "CHECKING",
-        "country_code": "US",
-        "institution": {
-          "id": "inst_12345",
-          "name": "Community Federal Savings Bank",
-          "logo_url": "https://example.com/logo.png"
-        },
-        "created_at": "2023-06-15T10:30:00Z",
-        "currency": "USD"
-      }
-    }
+    "status": "success",
+    "message": "global_account created successfully",
+    "code": 200,
+    "data": [
+        {
+            "id": "0f7a67a5-1804-4708-a1f2-c0c1c8aa2c4b",
+            "status": "INACTIVE",
+            "account_number": "-",
+            "label": "Satyakee17",
+            "account_type": "Checking",
+            "country_code": "US",
+            "institution": {
+                "address": "89-16 Jamaica Ave",
+                "city": "Woodhaven, NY",
+                "name": "Community Federal Savings Bank",
+                "zip_code": "11421"
+            },
+            "supported_features": [
+                {
+                    "currency": "USD",
+                    "local_clearing_system": "ACH",
+                    "transfer_method": "LOCAL",
+                    "type": "DEPOSIT",
+                    "routing_codes": [
+                        {
+                            "type": "ach",
+                            "value": "026073150"
+                        }
+                    ]
+                },
+                {
+                    "currency": "USD",
+                    "local_clearing_system": "FEDWIRE",
+                    "transfer_method": "LOCAL",
+                    "type": "DEPOSIT",
+                    "routing_codes": [
+                        {
+                            "type": "fedwire",
+                            "value": "026073008"
+                        }
+                    ]
+                },
+                {
+                    "currency": "USD",
+                    "local_clearing_system": null,
+                    "transfer_method": "SWIFT",
+                    "type": "DEPOSIT",
+                    "routing_codes": [
+                        {
+                            "type": "swift",
+                            "value": "CMFGUS33"
+                        }
+                    ]
+                }
+            ],
+            "swift_code": "CMFGUS33"
+        }
+    ]
+}
     ```
     
       </TabItem>
@@ -240,16 +362,10 @@ POST {{baseUrl}}/zoqq/api/v1/accounts
     
     ```json
     {
-      "code": 400,
-      "status": "error",
-      "message": "Invalid request parameters",
-      "errors": [
-        {
-          "field": "currency",
-          "message": "Currency code is required"
-        }
-      ]
-    }
+    "code": 400,
+    "status": "error",
+    "message": "Something went wrong"
+}
     ```
     
       </TabItem>
@@ -266,7 +382,7 @@ This API allows you to retrieve all accounts associated with a user in the syste
   <TabItem value="endpoint" label="Endpoint" default>
 
 ```
-GET {{baseUrl}}/zoqq/api/v1/accounts
+GET {{baseUrl}}/zoqq/api/v1/account
 ```
 
   </TabItem>
@@ -275,36 +391,42 @@ GET {{baseUrl}}/zoqq/api/v1/accounts
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint returns a list of all accounts associated with the authenticated user. 
-    The response includes detailed information about each account, including account status, 
-    account number, institution details, and supported features.</p>
+    <p>Returns a list of all accounts (both active and inactive) for the authenticated user, including account details, institution information, and supported transfer features</p>
     
     <h3>Request Headers</h3>
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
-    | x-program-id | string | Yes | Program identifier based on requirement |
-    | x-request-id | string | Yes | Idempotency key for request tracking |
-    | x-user-id | string | Yes | User identification key |
+    | x-api-key | string | Yes | Shared API key provided by Zoqq |
+    | x-program-id | string | Yes | Program identifier |
+    | x-request-id | string | Yes | Idempotency key (UUID recommended) |
+    | x-user-id | string | Yes | Unique user identifier |
     | Authorization | string | No | Bearer token (Optional) |
+
+    <h3>Query Parameters</h3>
+    
+    | Parameter | Type | Required | Description |
+    |-----------|------|----------|-------------|
+    | id | string | No | Filter by specific account ID |
+    | currency | string | No | Filter by currency (e.g., "USD") |
+    | status | string | No | Filter by status ("ACTIVE", "INACTIVE") |
+
+
     
     <h3>Response Parameters</h3>
     
     | Parameter | Type | Description |
     |-----------|------|-------------|
-    | code | number | Response code (200 for success) |
-    | status | string | Status of the response (success/error) |
-    | message | string | Additional information about the response |
-    | data | array | Array of account objects |
-    | data[].id | string | Unique identifier for the account (UUID) |
-    | data[].status | string | Account status (ACTIVE, INACTIVE, etc.) |
-    | data[].account_number | string | Account number |
-    | data[].label | string | Optional account label |
-    | data[].account_type | string | Type of account (Checking, Savings, etc.) |
-    | data[].country_code | string | ISO country code |
-    | data[].institution | object | Information about the financial institution |
-    | data[].supported_features | array | List of supported payment features |
+    | code | integer | HTTP status code |
+    | status | string | "success" or "error" |
+    | message | string | Result description |
+    | data | array | List of account objects |
+    | data[].id | string | Account UUID |
+    | data[].status | string | Account status |
+    | data[].account_number | string | Bank account number |
+    | data[].account_type | string | Type of account |
+    | data[].institution | object | Bank institution details |
+    | data[].supported_features | array | Available transfer methods |
   </div>
   
   <div className="api-docs-right">
@@ -315,12 +437,12 @@ GET {{baseUrl}}/zoqq/api/v1/accounts
     
     ```bash
     curl --request GET \
-      --url {{baseUrl}}/zoqq/api/v1/accounts \
-      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
-      --header 'x-program-id: {{BasedOnRequirement}}' \
-      --header 'x-request-id: {{IdempotencyKey}}' \
-      --header 'x-user-id: {{Useridentificationkey}}' \
-      --header 'Authorization: Bearer {{YOUR_TOKEN}}'
+  --url '{{baseUrl}}/zoqq/api/v1/account?status=ACTIVE' \
+  --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
+  --header 'x-program-id: {{ProgramID}}' \
+  --header 'x-request-id: {{IdempotencyKey}}' \
+  --header 'x-user-id: {{UserID}}' \
+  --header 'Authorization: Bearer {{AccessToken}}'
     ```
     
       </TabItem>
@@ -329,14 +451,14 @@ GET {{baseUrl}}/zoqq/api/v1/accounts
     ```python
     import requests
     
-    url = "{{baseUrl}}/zoqq/api/v1/accounts"
+    url = "{{baseUrl}}/zoqq/api/v1/account?status=ACTIVE"
     
     headers = {
         "x-api-key": "{{Shared Xapikey By Zoqq}}",
-        "x-program-id": "{{BasedOnRequirement}}",
+        "x-program-id: {{ProgramID}}",
         "x-request-id": "{{IdempotencyKey}}",
-        "x-user-id": "{{Useridentificationkey}}",
-        "Authorization": "Bearer {{YOUR_TOKEN}}"
+        "x-user-id: {{UserID}}",
+        "Authorization: Bearer {{AccessToken}}"
     }
     
     response = requests.get(url, headers=headers)
@@ -347,60 +469,88 @@ GET {{baseUrl}}/zoqq/api/v1/accounts
       <TabItem value="java" label="Java">
     
     ```java
-    HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create("{{baseUrl}}/zoqq/api/v1/accounts"))
-        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
-        .header("x-program-id", "{{BasedOnRequirement}}")
-        .header("x-request-id", "{{IdempotencyKey}}")
-        .header("x-user-id", "{{Useridentificationkey}}")
-        .header("Authorization", "Bearer {{YOUR_TOKEN}}")
-        .method("GET", HttpRequest.BodyPublishers.noBody())
-        .build();
-    HttpResponse<String> response = HttpClient.newHttpClient()
-        .send(request, HttpResponse.BodyHandlers.ofString());
-    System.out.println(response.body());
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+public class GetAccount {
+    public static void main(String[] args) throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("{{baseUrl}}/zoqq/api/v1/account?status=ACTIVE"))
+            .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
+            .header("x-program-id", "{{ProgramID}}")
+            .header("x-request-id", "{{IdempotencyKey}}")
+            .header("x-user-id", "{{UserID}}")
+            .header("Authorization", "Bearer {{AccessToken}}")
+            .GET()
+            .build();
+
+        HttpResponse<String> response = HttpClient.newHttpClient()
+            .send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
     ```
     
       </TabItem>
       <TabItem value="php" label="php">
     
     ```php
-    <?php
-    $curl = curl_init();
-    
-    curl_setopt_array($curl, [
-      CURLOPT_URL => "{{baseUrl}}/zoqq/api/v1/accounts",
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_CUSTOMREQUEST => "GET",
-      CURLOPT_HTTPHEADER => [
-        "x-api-key: {{Shared Xapikey By Zoqq}}",
-        "x-program-id: {{BasedOnRequirement}}",
-        "x-request-id: {{IdempotencyKey}}",
-        "x-user-id: {{Useridentificationkey}}",
-        "Authorization: Bearer {{YOUR_TOKEN}}"
-      ],
-    ]);
-    
-    $response = curl_exec($curl);
-    curl_close($curl);
-    
-    echo $response;
-    ?>
+<?php
+$url = '{{baseUrl}}/zoqq/api/v1/account?status=ACTIVE';
+$headers = [
+    'x-api-key: {{Shared Xapikey By Zoqq}}',
+    'x-program-id: {{ProgramID}}',
+    'x-request-id: {{IdempotencyKey}}',
+    'x-user-id: {{UserID}}',
+    'Authorization: Bearer {{AccessToken}}'
+];
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
     ```
     
       </TabItem>
       <TabItem value="csharp" label="C#">
     
     ```csharp
-    var client = new RestClient("{{baseUrl}}/zoqq/api/v1/accounts");
-    var request = new RestRequest(Method.GET);
-    request.AddHeader("x-api-key", "{{Shared Xapikey By Zoqq}}");
-    request.AddHeader("x-program-id", "{{BasedOnRequirement}}");
-    request.AddHeader("x-request-id", "{{IdempotencyKey}}");
-    request.AddHeader("x-user-id", "{{Useridentificationkey}}");
-    request.AddHeader("Authorization", "Bearer {{YOUR_TOKEN}}");
-    IRestResponse response = client.Execute(request);
-    Console.WriteLine(response.Content);
+   using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main()
+    {
+        var client = new HttpClient();
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri("{{baseUrl}}/zoqq/api/v1/account?status=ACTIVE"),
+            Headers = 
+            {
+                { "x-api-key", "{{Shared Xapikey By Zoqq}}" },
+                { "x-program-id", "{{ProgramID}}" },
+                { "x-request-id", "{{IdempotencyKey}}" },
+                { "x-user-id", "{{UserID}}" },
+                { "Authorization", "Bearer {{AccessToken}}" }
+            }
+        };
+
+        var response = await client.SendAsync(request);
+        Console.WriteLine(await response.Content.ReadAsStringAsync());
+    }
+}
     ```
     
       </TabItem>
@@ -413,63 +563,63 @@ GET {{baseUrl}}/zoqq/api/v1/accounts
     
     ```json
     {
-      "code": 200,
-      "status": "success",
-      "message": "",
-      "data": [
+    "code": 200,
+    "status": "success",
+    "message": "",
+    "data": [
         {
-          "id": "85c7a2e6-7c4f-4abc-9e15-d4f3b5b8c382",
-          "status": "ACTIVE",
-          "account_number": "8483855800",
-          "label": "",
-          "account_type": "Checking",
-          "country_code": "US",
-          "institution": {
-            "address": "89-16 Jamaica Ave",
-            "city": "Woodhaven, NY",
-            "name": "Community Federal Savings Bank",
-            "zip_code": "11421"
-          },
-          "supported_features": [
-            {
-              "currency": "USD",
-              "local_clearing_system": "ACH",
-              "routing_codes": [
-                {
-                  "type": "ach",
-                  "value": "026073150"
-                }
-              ],
-              "transfer_method": "LOCAL",
-              "type": "DEPOSIT"
+            "id": "0f7a67a5-1804-4708-a1f2-c0c1c8aa2c4b",
+            "status": "ACTIVE",
+            "account_number": "8483855800",
+            "label": "",
+            "account_type": "Checking",
+            "country_code": "US",
+            "institution": {
+                "address": "89-16 Jamaica Ave",
+                "city": "Woodhaven, NY",
+                "name": "Community Federal Savings Bank",
+                "zip_code": "11421"
             },
-            {
-              "currency": "USD",
-              "local_clearing_system": "FEDWIRE",
-              "routing_codes": [
+            "supported_features": [
                 {
-                  "type": "fedwire",
-                  "value": "026073008"
-                }
-              ],
-              "transfer_method": "LOCAL",
-              "type": "DEPOSIT"
-            },
-            {
-              "currency": "USD",
-              "routing_codes": [
+                    "currency": "USD",
+                    "local_clearing_system": "ACH",
+                    "routing_codes": [
+                        {
+                            "type": "ach",
+                            "value": "026073150"
+                        }
+                    ],
+                    "transfer_method": "LOCAL",
+                    "type": "DEPOSIT"
+                },
                 {
-                  "type": "swift",
-                  "value": "CMFGUS33"
+                    "currency": "USD",
+                    "local_clearing_system": "FEDWIRE",
+                    "routing_codes": [
+                        {
+                            "type": "fedwire",
+                            "value": "026073008"
+                        }
+                    ],
+                    "transfer_method": "LOCAL",
+                    "type": "DEPOSIT"
+                },
+                {
+                    "currency": "USD",
+                    "routing_codes": [
+                        {
+                            "type": "swift",
+                            "value": "CMFGUS33"
+                        }
+                    ],
+                    "transfer_method": "SWIFT",
+                    "type": "DEPOSIT"
                 }
-              ],
-              "transfer_method": "SWIFT",
-              "type": "DEPOSIT"
-            }
-          ]
+            ]
         }
-      ]
-    }
+    ]
+}
     ```
     
       </TabItem>
@@ -477,10 +627,10 @@ GET {{baseUrl}}/zoqq/api/v1/accounts
     
     ```json
     {
-      "code": 400,
-      "status": "Error",
-      "message": "Something went wrong"
-    }
+    "code": 400,
+    "status": "error",
+    "message": "Get Account failed!"
+}
     ```
     
       </TabItem>
@@ -495,7 +645,7 @@ This API allows you to retrieve the available, pending, and reserved balances fo
 <Tabs>
   <TabItem value="endpoint" label="Endpoint" default>
 ```
-GET {{baseUrl}}/zoqq/api/v1/accounts/balance
+GET {{baseUrl}}/zoqq/api/v1/account/balance
 ```
 
   </TabItem>
@@ -511,32 +661,25 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/balance
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
-    | x-program-id | string | Yes | Program identifier based on requirement |
-    | x-request-id | string | Yes | Idempotency key for request tracking |
-    | x-user-id | string | Yes | User identification key |
+    | x-api-key | string | Yes | Shared API key provided by Zoqq |
+    | x-program-id | string | Yes | Program identifier |
+    | x-request-id | string | Yes | Idempotency key (UUID recommended) |
+    | x-user-id | string | Yes | Unique user identifier |
     | Authorization | string | No | Bearer token (Optional) |
     
-    <h3>Query Parameters</h3>
-    
-    | Parameter | Type | Required | Description |
-    |-----------|------|----------|-------------|
-    | currency | string | No | Filter results by specific currency (e.g. USD, SGD) |
-    | as_of | string | No | Timestamp to get historical balance (ISO 8601 format) |
     
     <h3>Response Parameters</h3>
     
     | Parameter | Type | Description |
     |-----------|------|-------------|
-    | code | number | Response code (200 for success) |
-    | status | string | Status of the response (success/error) |
-    | message | string | Additional information about the response |
-    | data | array | Array of balance objects by currency |
-    | data[].currency | string | Currency code (e.g. "USD", "SGD") |
-    | data[].available_balance | number | Available balance amount |
-    | data[].pending_amount | number | Amount in pending transactions |
-    | data[].reserved_amount | number | Amount reserved for holds/authorizations |
-    | data[].updated_at | string | Timestamp of last balance update |
+    | code | integer | HTTP status code |
+    | status | string | "success" or "error" |
+    | message | string | Result description |
+    | data | array | List of balance objects by currency |
+    | data[].currency | string | ISO currency code (e.g., "USD", "SGD") |
+    | data[].available_balance | number | Immediately usable funds |
+    | data[].pending_amount | number | Funds in pending transactions |
+    | data[].reserved_amount | number | Funds held for reservations |
   </div>
   
   <div className="api-docs-right">
@@ -547,12 +690,12 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/balance
     
     ```bash
     curl --request GET \
-      --url '{{baseUrl}}/zoqq/api/v1/accounts/balance?currency=SGD' \
-      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
-      --header 'x-program-id: {{BasedOnRequirement}}' \
-      --header 'x-request-id: {{IdempotencyKey}}' \
-      --header 'x-user-id: {{Useridentificationkey}}' \
-      --header 'Authorization: Bearer {{YOUR_TOKEN}}'
+  --url '{{baseUrl}}/zoqq/api/v1/account/balance' \
+  --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
+  --header 'x-program-id: {{ProgramID}}' \
+  --header 'x-request-id: {{IdempotencyKey}}' \
+  --header 'x-user-id: {{UserID}}' \
+  --header 'Authorization: Bearer {{AccessToken}}'
     ```
     
       </TabItem>
@@ -562,15 +705,15 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/balance
     import requests
     import json
     
-    url = "{{baseUrl}}/zoqq/api/v1/accounts/balance"
+    url = "{{baseUrl}}/zoqq/api/v1/account/balance"
     params = {"currency": "SGD"}
     
     headers = {
         "x-api-key": "{{Shared Xapikey By Zoqq}}",
-        "x-program-id": "{{BasedOnRequirement}}",
+        "x-program-id: {{ProgramID}}",
         "x-request-id": "{{IdempotencyKey}}",
-        "x-user-id": "{{Useridentificationkey}}",
-        "Authorization": "Bearer {{YOUR_TOKEN}}"
+        "x-user-id: {{UserID}}",
+        "Authorization: Bearer {{AccessToken}}"
     }
     
     response = requests.get(url, headers=headers, params=params)
@@ -581,60 +724,88 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/balance
       <TabItem value="java" label="Java">
     
     ```java
-    HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create("{{baseUrl}}/zoqq/api/v1/accounts/balance?currency=SGD"))
-        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
-        .header("x-program-id", "{{BasedOnRequirement}}")
-        .header("x-request-id", "{{IdempotencyKey}}")
-        .header("x-user-id", "{{Useridentificationkey}}")
-        .header("Authorization", "Bearer {{YOUR_TOKEN}}")
-        .method("GET", HttpRequest.BodyPublishers.noBody())
-        .build();
-    HttpResponse<String> response = HttpClient.newHttpClient()
-        .send(request, HttpResponse.BodyHandlers.ofString());
-    System.out.println(response.body());
+    import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+public class GetBalance {
+    public static void main(String[] args) throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("{{baseUrl}}/zoqq/api/v1/account/balance"))
+            .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
+            .header("x-program-id", "{{ProgramID}}")
+            .header("x-request-id", "{{IdempotencyKey}}")
+            .header("x-user-id", "{{UserID}}")
+            .header("Authorization", "Bearer {{AccessToken}}")
+            .GET()
+            .build();
+
+        HttpResponse<String> response = HttpClient.newHttpClient()
+            .send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
     ```
     
       </TabItem>
       <TabItem value="php" label="php">
     
     ```php
-    <?php
-    $curl = curl_init();
-    
-    curl_setopt_array($curl, [
-      CURLOPT_URL => "{{baseUrl}}/zoqq/api/v1/accounts/balance?currency=SGD",
-      CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_CUSTOMREQUEST => "GET",
-      CURLOPT_HTTPHEADER => [
-        "x-api-key: {{Shared Xapikey By Zoqq}}",
-        "x-program-id: {{BasedOnRequirement}}",
-        "x-request-id: {{IdempotencyKey}}",
-        "x-user-id: {{Useridentificationkey}}",
-        "Authorization: Bearer {{YOUR_TOKEN}}"
-      ],
-    ]);
-    
-    $response = curl_exec($curl);
-    curl_close($curl);
-    
-    echo $response;
-    ?>
+<?php
+$url = '{{baseUrl}}/zoqq/api/v1/account/balance';
+$headers = [
+    'x-api-key: {{Shared Xapikey By Zoqq}}',
+    'x-program-id: {{ProgramID}}',
+    'x-request-id: {{IdempotencyKey}}',
+    'x-user-id: {{UserID}}',
+    'Authorization: Bearer {{AccessToken}}'
+];
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
     ```
     
       </TabItem>
       <TabItem value="csharp" label="C#">
     
     ```csharp
-    var client = new RestClient("{{baseUrl}}/zoqq/api/v1/accounts/balance?currency=SGD");
-    var request = new RestRequest(Method.GET);
-    request.AddHeader("x-api-key", "{{Shared Xapikey By Zoqq}}");
-    request.AddHeader("x-program-id", "{{BasedOnRequirement}}");
-    request.AddHeader("x-request-id", "{{IdempotencyKey}}");
-    request.AddHeader("x-user-id", "{{Useridentificationkey}}");
-    request.AddHeader("Authorization", "Bearer {{YOUR_TOKEN}}");
-    IRestResponse response = client.Execute(request);
-    Console.WriteLine(response.Content);
+   using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main()
+    {
+        var client = new HttpClient();
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri("{{baseUrl}}/zoqq/api/v1/account/balance"),
+            Headers = 
+            {
+                { "x-api-key", "{{Shared Xapikey By Zoqq}}" },
+                { "x-program-id", "{{ProgramID}}" },
+                { "x-request-id", "{{IdempotencyKey}}" },
+                { "x-user-id", "{{UserID}}" },
+                { "Authorization", "Bearer {{AccessToken}}" }
+            }
+        };
+
+        var response = await client.SendAsync(request);
+        Console.WriteLine(await response.Content.ReadAsStringAsync());
+    }
+}
     ```
     
       </TabItem>
@@ -647,26 +818,24 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/balance
     
     ```json
     {
-      "code": 200,
-      "status": "success",
-      "message": "",
-      "data": [
+    "code": 200,
+    "status": "success",
+    "message": "",
+    "data": [
         {
-          "currency": "SGD",
-          "available_balance": 42.72,
-          "pending_amount": 0,
-          "reserved_amount": 12,
-          "updated_at": "2023-06-15T10:30:00Z"
+            "currency": "SGD",
+            "available_balance": 42.72,
+            "pending_amount": 0,
+            "reserved_amount": 12
         },
         {
-          "currency": "USD",
-          "available_balance": 22.72,
-          "pending_amount": 5,
-          "reserved_amount": 10,
-          "updated_at": "2023-06-15T10:30:00Z"
+            "currency": "USD",
+            "available_balance": 22.72,
+            "pending_amount": 5,
+            "reserved_amount": 10
         }
-      ]
-    }
+    ]
+}
     ```
     
       </TabItem>
@@ -674,10 +843,10 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/balance
     
     ```json
     {
-      "code": 400,
-      "status": "error",
-      "message": "Invalid currency parameter"
-    }
+    "code": 400,
+    "status": "error",
+    "message": "Get balance failed!"
+}
     ```
     
       </TabItem>
@@ -688,12 +857,12 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/balance
 
 ## Get Account Transactions
 
-This API retrieves a list of transactions for the authenticated user's account with filtering capabilities.
+This API returns paginated transaction history with filters for date range and transaction status. Includes detailed information about each transaction including amount, currency, and status..
 
 <Tabs>
   <TabItem value="endpoint" label="Endpoint" default>
 ```
-GET {{baseUrl}}/zoqq/api/v1/accounts/transactions
+GET {{baseUrl}}/zoqq/api/v1/account/transactions
 ```
 
   </TabItem>
@@ -709,38 +878,39 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/transactions
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
+    | x-api-key | string | Yes | Shared API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
-    | x-request-id | string | Yes | Idempotency key |
-    | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | x-request-id | string | Yes | Idempotency key (UUID recommended) |
+    | x-user-id | string | Yes | Unique user identifier |
+    | Authorization | string | No | Bearer token (Optional) |
     
     <h3>Query Parameters</h3>
     
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
-    | page | integer | No | Page number (default: 1) |
-    | size | integer | No | Items per page (default: 20, max: 100) |
-    | from_date | string | No | Start date (YYYY-MM-DD) |
-    | to_date | string | No | End date (YYYY-MM-DD) |
-    | type | string | No | Transaction type filter |
-    | status | string | No | Transaction status filter |
-    | currency | string | No | Currency code filter |
+    | page | integer | No | Page number for pagination (default: 1) |
+    | size | integer | No | Number of items per page (default: 20) |
+    | from_date | string | No | Start date filter (ISO 8601 format) |
+    | to_date | string | No | End date filter (ISO 8601 format) |
+    | currency | string | No | Filter by currency code (e.g., "USD") |
+    | status | string | No | Filter by status ("SETTLED", "PENDING", etc.) |
+
     
     <h3>Response Parameters</h3>
     
     | Parameter | Type | Description |
     |-----------|------|-------------|
-    | code | integer | Response status code |
-    | status | string | Response status |
-    | message | string | Additional message |
-    | data | object | Transaction data |
-    | data.transactions | array | Array of transaction objects |
-    | data.pagination | object | Pagination information |
-    | data.pagination.total_items | integer | Total transactions available |
-    | data.pagination.total_pages | integer | Total pages available |
-    | data.pagination.current_page | integer | Current page number |
-    | data.pagination.items_per_page | integer | Items per page |
+    | code | integer | HTTP status code |
+    | status | string | "success" or "error" |
+    | message | string | Result description |
+    | data | array | List of transaction objects |
+    | data[].id | string | Unique transaction identifier |
+    | data[].amount | number | Transaction amount |
+    | data[].currency | string | Currency code |
+    | data[].type | string | "CREDIT" or "DEBIT" |
+    | data[].status | string | Transaction status |
+    | data[].create_time | string | ISO 8601 timestamp |
+    | data[].description | string | Transaction description |
   </div>
   
   <div className="api-docs-right">
@@ -751,12 +921,12 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/transactions
     
     ```bash
     curl --request GET \
-      --url '{{baseUrl}}/zoqq/api/v1/accounts/transactions?page=1&size=20&from_date=2023-01-01&to_date=2023-12-31' \
-      --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
-      --header 'x-program-id: {{BasedOnRequirement}}' \
-      --header 'x-request-id: {{IdempotencyKey}}' \
-      --header 'x-user-id: {{Useridentificationkey}}' \
-      --header 'Authorization: Bearer {{YOUR_TOKEN}}'
+  --url '{{baseUrl}}/zoqq/api/v1/account/transactions?page=1&size=10&from_date=2025-01-01&to_date=2025-04-30' \
+  --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
+  --header 'x-program-id: {{ProgramID}}' \
+  --header 'x-request-id: {{IdempotencyKey}}' \
+  --header 'x-user-id: {{UserID}}' \
+  --header 'Authorization: Bearer {{AccessToken}}'
     ```
     
       </TabItem>
@@ -765,7 +935,7 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/transactions
     ```python
     import requests
     
-    url = "{{baseUrl}}/zoqq/api/v1/accounts/transactions"
+    url = "{{baseUrl}}/zoqq/api/v1/account/transactions"
     params = {
         "page": 1,
         "size": 20,
@@ -789,22 +959,98 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/transactions
       <TabItem value="java" label="Java">
     
     ```java
-    HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create("{{baseUrl}}/zoqq/api/v1/accounts/transactions?page=1&size=20&from_date=2023-01-01&to_date=2023-12-31"))
-        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
-        .header("x-program-id", "{{BasedOnRequirement}}")
-        .header("x-request-id", "{{IdempotencyKey}}")
-        .header("x-user-id", "{{Useridentificationkey}}")
-        .header("Authorization", "Bearer {{YOUR_TOKEN}}")
-        .method("GET", HttpRequest.BodyPublishers.noBody())
-        .build();
-    HttpResponse<String> response = HttpClient.newHttpClient()
-        .send(request, HttpResponse.BodyHandlers.ofString());
-    System.out.println(response.body());
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+public class GetTransactions {
+    public static void main(String[] args) throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("{{baseUrl}}/zoqq/api/v1/account/transactions?page=1&size=10"))
+            .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
+            .header("x-program-id", "{{ProgramID}}")
+            .header("x-request-id", "{{IdempotencyKey}}")
+            .header("x-user-id", "{{UserID}}")
+            .header("Authorization", "Bearer {{AccessToken}}")
+            .GET()
+            .build();
+
+        HttpResponse<String> response = HttpClient.newHttpClient()
+            .send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.body());
+    }
+}
+    ```
+    
+      </TabItem>
+
+
+<TabItem value="php" label="php">
+    
+    ```php
+    <?php
+$url = '{{baseUrl}}/zoqq/api/v1/account/transactions?page=1&size=10';
+$headers = [
+    'x-api-key: {{Shared Xapikey By Zoqq}}',
+    'x-program-id: {{ProgramID}}',
+    'x-request-id: {{IdempotencyKey}}',
+    'x-user-id: {{UserID}}',
+    'Authorization: Bearer {{AccessToken}}'
+];
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+?>
+
+    ```
+    
+      </TabItem>
+
+        <TabItem value="csharp" label="C#">
+    
+    ```csharp
+    using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main()
+    {
+        var client = new HttpClient();
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri("{{baseUrl}}/zoqq/api/v1/account/transactions?page=1&size=10"),
+            Headers = 
+            {
+                { "x-api-key", "{{Shared Xapikey By Zoqq}}" },
+                { "x-program-id", "{{ProgramID}}" },
+                { "x-request-id", "{{IdempotencyKey}}" },
+                { "x-user-id", "{{UserID}}" },
+                { "Authorization", "Bearer {{AccessToken}}" }
+            }
+        };
+
+        var response = await client.SendAsync(request);
+        Console.WriteLine(await response.Content.ReadAsStringAsync());
+    }
+}   
     ```
     
       </TabItem>
     </Tabs>
+
+ 
     
     <h3>Response Example</h3>
     
@@ -812,32 +1058,22 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/transactions
       <TabItem value="200" label="200: Success" default>
     
     ```json
-    {
-      "code": 200,
-      "status": "success",
-      "message": "",
-      "data": {
-        "transactions": [
-          {
-            "id": "txn_123456789",
-            "amount": 100.50,
+ {
+    "status": "success",
+    "message": "global_accounts transactions details",
+    "code": 200,
+    "data": [
+        {
+            "amount": 1000.0,
+            "create_time": "2025-04-09T10:12:37+0000",
+            "description": "Test from Postman",
             "currency": "USD",
+            "id": "a9e5d92e-b83e-42e4-84e9-73318782ce21",
             "type": "CREDIT",
-            "status": "COMPLETED",
-            "description": "Funds transfer",
-            "created_at": "2023-06-15T10:30:00Z",
-            "updated_at": "2023-06-15T10:30:00Z",
-            "reference_id": "ref_987654321"
-          }
-        ],
-        "pagination": {
-          "total_items": 125,
-          "total_pages": 7,
-          "current_page": 1,
-          "items_per_page": 20
+            "status": "SETTLED"
         }
-      }
-    }
+    ]
+}
     ```
     
       </TabItem>
@@ -845,10 +1081,10 @@ GET {{baseUrl}}/zoqq/api/v1/accounts/transactions
     
     ```json
     {
-      "code": 400,
-      "status": "Error",
-      "message": "Something went wrong"
-    }
+    "code": 400,
+    "status": "error",
+    "message": "Get Account Transaction failed!"
+}
     ```
     
       </TabItem>
