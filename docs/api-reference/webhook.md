@@ -7,12 +7,199 @@ hide_table_of_contents: true
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Zoqq Webhook Events
 
+# Zoqq Webhook API Documentation
 Integrating the webhook service enables end users to receive notifications and updates regarding their account activity, transactions, security alerts, and other pertinent information. This integration ensures that users are promptly informed about important events related to their accounts.
 
-This document outlines the structure of webhook events sent by Zoqq. All events contain a consistent structure with a top-level `id`, `name`, `account_id`, `data`, `created_at`, and `version`.
+<!-- 
+## Table of Contents
+1. [Authentication & Headers](#-authentication--headers)
+2. [Webhook Management](#-webhook-management)
+   - [Get All Webhooks](#-get-all-webhooks)
+   - [Subscribe Webhook](#-subscribe-webhook)
+   - [Update Webhook](#-update-webhook)
+   - [Delete Webhook](#-delete-webhook)
+3. [Event Types](#-event-types)
+   - [Account Status](#1-account-status)
+   - [Global Accounts](#2-global-accounts)
+   - [Conversions](#3-conversions)
+   - [Deposits](#4-deposits)
+   - [Transfers](#5-transfers) -->
 
+## 🔐 Authentication & Headers
+
+All webhook requests require the following headers:
+
+
+| Header           | Type   | Description                                 |
+|------------------|--------|---------------------------------------------|
+| `x-api-key`       | string | Shared API key provided by Zoqq             |
+| `x-program-id`    | string | Program identifier based on requirement     |
+| `x-request-id`    | string | Idempotency key for safe retries            |
+| `x-user-id`       | string | Unique user identification key              |
+| `Authorization`   | string | `Bearer <token>` – Optional as of now       |
+
+---
+## 🔄 Webhook Management
+
+### 📥 Get All Webhooks
+```
+GET {{baseUrl}}/zoqq/api/v1/webhook/getallwebhook
+```
+
+### 🔹 Description
+Returns a list of all webhooks associated with a program.
+
+### ✅ Response Example
+
+```json
+[
+  {
+    "event_name": "OPENLOOP_DECLINED_CARD_BLOCKED",
+    "program_code": "SMMAAS0",
+    "event_description": null
+  },
+  {
+    "event_name": "OPENLOOP_DECLINED_CARD_PENDING_ACTIVATION",
+    "program_code": "SMMAAS0",
+    "event_description": null
+  }
+]
+```
+## 📨 Subscribe Webhook 
+``` 
+POST{{baseUrl}}/zoqq/api/v1/webhook/subscribe
+```
+
+### 🔹 Description  
+Subscribe to a webhook for a specific event.
+
+### 📝 Request Body
+
+| Field             | Type    | Required | Description                            |
+|------------------|---------|----------|----------------------------------------|
+| `event_name`      | string  | ✅ Yes   | The event to subscribe to              |
+| `subscription_type`| string | ✅ Yes   | Subscription type (`w` for webhook)    |
+| `agent_code`      | string  | ✅ Yes   | Main agent identifier                  |
+| `subagent_code`   | string  | ✅ Yes   | Sub-agent identifier                   |
+| `program_code`    | string  | ✅ Yes   | Program code provided by Zoqq          |
+| `company_code`    | string  | ✅ Yes   | Your company’s unique identifier       |
+| `created_by`      | string  | ✅ Yes   | Name of creator                        |
+| `webhook_url`     | string  | ✅ Yes   | Target URL to send event payloads      |
+
+### ✅ Request Example
+
+```json
+{
+  "event_name": "PREAUTH_TIMEOUT_DECLINE",
+  "subscription_type": "w",
+  "agent_code": "MCA000",
+  "subagent_code": "01",
+  "program_code": "SMMAAS0",
+  "company_code": "STYLP19062023",
+  "created_by": "Pabitra",
+  "webhook_url": "https://webhook.site/33cb37f3-8a35-48ef-90ca-31d789fcfd17"
+}
+```
+ <h3>Response Example</h3>
+    
+    ```json
+    {
+      {
+  "message": "Webhook successfully subscribed",
+  "status": "SUCCESS"
+}
+
+    }
+    ```
+
+## ♻️ Update Webhook 
+``` 
+PUT{{baseUrl}}/zoqq/api/v1/webhook/update
+```
+
+### 🔹 Description  
+Update an existing webhook configuration.
+
+### 📝 Request Body
+
+| Field         | Type   | Required | Description                                 |
+|---------------|--------|----------|---------------------------------------------|
+| `event_name`  | string | ✅ Yes   | The event whose subscription is updated     |
+| `webhook_url` | string | ✅ Yes   | New target URL                              |
+| `modified_by` | string | ✅ Yes   | User updating the webhook                   |
+
+
+### ✅ Request Example
+
+```json
+{
+  {
+  "event_name": "PREAUTH_TIMEOUT_DECLINE",
+  "webhook_url": "https://webhook.site/new-updated-url",
+  "modified_by": "Preeti"
+}
+
+}
+```
+<h3>Response Example</h3>
+    
+    ```json
+    {
+      {
+  "message": "Webhook successfully updated",
+  "status": "SUCCESS"
+}
+
+
+    }
+    ```
+
+
+
+    ## ❌ Delete Webhook  
+    ```
+DELETE {{baseUrl}}/zoqq/api/v1/webhook/delete
+```
+
+### 🔹 Description  
+Delete an existing webhook subscription.
+
+### 📝 Request Body
+
+| Field         | Type   | Required | Description                     |
+|---------------|--------|----------|---------------------------------|
+| `event_name`  | string | ✅ Yes   | The event webhook to delete     |
+| `deleted_by`  | string | ✅ Yes   | User deleting the webhook       |
+
+### ✅ Request Example
+
+```json
+{
+  {
+  "event_name": "PREAUTH_TIMEOUT_DECLINE",
+  "deleted_by": "Preeti"
+}
+
+
+
+}
+```
+<h3>Response Example</h3>
+    
+    ```json
+    {
+      {
+  "message": "Webhook successfully deleted",
+  "status": "SUCCESS"
+}
+
+
+
+    }
+    ```
+
+###📨 Event Types
 ## 1. Account Status
 
 ## Account Submitted
