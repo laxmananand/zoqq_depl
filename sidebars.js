@@ -302,6 +302,49 @@ const sidebars = {
             },
             {
               type: "category",
+              label: "Authentication & Headers",
+              items: [
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#-authentication--headers",
+                  label: "Authentication"
+                },
+              ]
+            },
+            {
+              type: "category",
+              label: "Webhook Management",
+              items: [
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#-webhook-management",
+                  label: "Get All Webhooks"
+                },
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#-subscribe-webhook",
+                  label: "Subscribe Webhook"
+                },
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#%EF%B8%8F-update-webhook",
+                  label: "Update Webhook"
+                },
+                {
+                  type: "link",
+                  href: "/docs/api-reference/webhook#-delete-webhook",
+                  label: "Delete Webhook Webhook"
+                },
+
+              
+              ]
+
+              
+            },
+
+
+            {
+              type: "category",
               label: "Account Status",
               items: [
                 {
