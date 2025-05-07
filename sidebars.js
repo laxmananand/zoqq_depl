@@ -155,6 +155,11 @@ const sidebars = {
               href: "/docs/api-reference/accounts#get-account-transactions",
               label: "🟢 GET Get Account Transactions",
             },
+            {
+              type: "link",
+              href: "/docs/api-reference/accounts#get-balance-history",
+              label: "🟢 GET Get Balance History",
+            },
           ],
         },
         {

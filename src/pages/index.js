@@ -79,11 +79,15 @@ export default function Home() {
                 icon: "🌐",
               },
             ].map((item, index) => (
-              <div className="col col--6 margin-bottom--lg" key={index}>
+              <div 
+                className="col col--4 margin-bottom--lg" 
+                key={index}
+                style={{ display: "flex", justifyContent: "center" }}
+              >
                 <Link
                   to={item.link}
                   className={styles.cardLink}
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: "none", width: "100%", maxWidth: "360px" }}
                 >
                   <div
                     className="card shadow--md"
