@@ -26,6 +26,26 @@ const sidebars = {
             },
           ],
         },
+        {
+          type: "link",
+          href: "/docs/getting-docs/onboarding",
+          label: "Onboarding",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/payment",
+          label: "payment",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/foreign",
+          label: "Foreign Exchange",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/payout",
+          label: "Payout",
+        },
       ],
     },
   ],

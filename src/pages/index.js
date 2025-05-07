@@ -64,13 +64,13 @@ export default function Home() {
                 link: "/docs/api-reference/cards",
                 icon: "💳",
               },
-              {
-                title: "Crypto On-Ramp / Off-Ramp",
-                description:
-                  "Enable fiat-to-crypto and crypto-to-fiat swaps with zero fees, deep liquidity, and stable pricing.",
-                link: "/docs/api-reference/foreignExchange",
-                icon: "₿",
-              },
+              // {
+              //   title: "Crypto On-Ramp / Off-Ramp",
+              //   description:
+              //     "Enable fiat-to-crypto and crypto-to-fiat swaps with zero fees, deep liquidity, and stable pricing.",
+              //   link: "/docs/api-reference/foreignExchange",
+              //   icon: "₿",
+              // },
               {
                 title: "FX & Global Payouts",
                 description:
