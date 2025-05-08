@@ -20,7 +20,7 @@ This guide walks you through the essential steps to integrate Zoqq APIs quickly 
 
 ---
 
-## 🔑 Step 2: Retrieve Your API Keys
+##  Step 2: Retrieve Your API Keys
 
 1. Navigate to **Developer Settings → API Keys**
 2. Copy your:
