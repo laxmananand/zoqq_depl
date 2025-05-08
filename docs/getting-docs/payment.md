@@ -1,4 +1,4 @@
----
+<!-- ---
 id: payment
 title: payment
 hide_table_of_contents: true
@@ -105,4 +105,4 @@ Programmatically make cost-effective, fast, and secure global payouts.
 
 #### Issuing
 
-Issue and manage multi-currency cards at scale with reduced international transaction and FX fees.
+Issue and manage multi-currency cards at scale with reduced international transaction and FX fees. -->

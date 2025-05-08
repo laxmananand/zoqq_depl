@@ -6,35 +6,19 @@ const sidebars = {
       collapsed: false,
       items: [
         {
-          type: "category",
+          type: "doc",
+          id: "getting-started",
+          label: "Overview",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/account",
           label: "Global Account",
-          items: [
-            {
-              type: "doc",
-              id: "getting-started",
-              label: "Overview",
-            },
-            {
-              type: "link",
-              href: "getting-started#accounts",
-              label: "Account",
-            },
-            {
-              type: "link",
-              href: "/docs/getting-docs/account",
-              label: "Supported Regions & Currencies",
-            },
-          ],
         },
         {
           type: "link",
           href: "/docs/getting-docs/onboarding",
           label: "Onboarding",
-        },
-        {
-          type: "link",
-          href: "/docs/getting-docs/payment",
-          label: "payment",
         },
         {
           type: "link",
@@ -67,8 +51,181 @@ const sidebars = {
         },
         {
           type: "link",
+          href: "/docs/getting-docs/account#supported-regions-and-currencies",
+          label: "Supported Regions & Currencies",
+        },
+        {
+          type: "link",
           href: "/docs/getting-docs/account#notes",
           label: "Notes",
+        },
+      ],
+    },
+  ],
+  foreignExchange: [
+    {
+      type: "category",
+      label: "Foreign Exchange",
+      collapsed: false,
+      items: [
+        {
+          type: "doc",
+          id: "getting-docs/foreign",
+          label: "Overview",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/foreign#how-transactional-fx-works",
+          label: "How Transactional FX works",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/foreign#supported-regions-and-currencies",
+          label: "Supported Regions and Currencies",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/foreign#funding-and-settlement-models",
+          label: "Funding and settlement models",
+        },
+      ],
+    },
+  ],
+  payout: [
+    {
+      type: "category",
+      label: "Payout",
+      collapsed: false,
+      items: [
+        {
+          type: "doc",
+          id: "getting-docs/payout",
+          label: "Overview",
+        },
+        {
+          type: "category",
+          label: "How Zoqq Payouts work",
+          items: [
+            {
+              type: "link",
+              href: "/docs/getting-docs/payout#how-zoqq-payouts-work",
+              label: "Overview",
+            },
+            {
+              type: "link",
+              href: "/docs/getting-docs/payout#currency-precision",
+              label: "Currency Precision",
+            },
+          ],
+        },
+        {
+          type: "category",
+          label: "Payout network",
+          items: [
+            {
+              type: "link",
+              href: "/docs/getting-docs/payout#payout-network",
+              label: "Overview",
+            },
+            {
+              type: "link",
+              href: "/docs/getting-docs/payout#local-payout-coverage",
+              label: "Local payout coverage",
+            },
+            {
+              type: "link",
+              href: "/docs/getting-docs/payout#swift-payout-coverage",
+              label: "SWIFT payout coverage",
+            },
+
+          ],
+        },
+
+      ],
+    },
+  ],
+  onboarding: [
+    {
+      type: "category",
+      label: "Onboarding",
+      collapsed: false,
+      items: [
+        {
+          type: "doc",
+          id: "getting-docs/onboarding",
+          label: "Overview",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/onboarding#how-connected-accounts-work",
+          label: "How connected accounts work",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/onboarding#supported-regions",
+          label: "Supported regions",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/onboarding#onboard-connected-accounts",
+          label: "Onboard connected accounts",
+        },
+        {
+          type: "category",
+          label: "KYC and onboarding",
+          items: [
+            {
+              type: "link",
+              href: "/docs/getting-docs/onboarding#kyc-and-onboarding",
+              label: "Overview",
+            },
+            {
+              type: "link",
+              href: "/docs/getting-docs/onboarding#embedded-kyc-component",
+              label: "Embedded KYC component",
+            },
+            {
+              type: "link",
+              href: "/docs/getting-docs/onboarding#hosted-onboarding",
+              label: "Hosted Onboarding",
+            },
+            {
+              type: "category",
+              label: "Native API",
+              items: [
+                {
+                  type: "link",
+                  href: "/docs/getting-docs/onboarding#business-kyc-requirements",
+                  label: "Business KYC requirements",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/onboarding#handle-kyc-rfi",
+          label: "Handle KYC RFI",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/onboarding#kyb-and-onboarding",
+          label: "KYB and onboarding",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/onboarding#handle-payment-enablement-rfi",
+          label: "Handle Payment Enablement RFI",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/onboarding#handle-transaction-rfi",
+          label: "Handle Transaction RFI",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/onboarding#onboard-multiple-connected-accounts",
+          label: "Onboard multiple connected accounts",
         },
       ],
     },
@@ -290,7 +447,6 @@ const sidebars = {
             },
           ],
         },
-
         {
           type: "category",
           label: "Webhook",
@@ -335,14 +491,8 @@ const sidebars = {
                   href: "/docs/api-reference/webhook#-delete-webhook",
                   label: "Delete Webhook Webhook"
                 },
-
-              
               ]
-
-              
             },
-
-
             {
               type: "category",
               label: "Account Status",
@@ -438,6 +588,8 @@ const sidebars = {
       ],
     },
   ],
+
+
   changelog: [
     {
       type: "category",
