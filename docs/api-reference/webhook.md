@@ -558,7 +558,7 @@ Triggered when a deposit is received via Global Account, pending settlement to w
         "process_status": "NEW",
         "settlement_info": {
           "beneficiary_account_number": "88520209770",
-          "beneficiary_name": "Airwallex (Singapore) Pte Ltd",
+          "beneficiary_name": "Zoqq (Singapore) Pte Ltd",
           "payer_name": "JS"
         }
       },
@@ -945,7 +945,7 @@ Triggered when a deposit has been successfully processed and settled to the wall
 
 ## Deposit Rejected
 
-Triggered when a deposit has been rejected during processing by Airwallex or the clearing system.
+Triggered when a deposit has been rejected during processing by Zoqq or the clearing system.
 
 <div className="api-docs-container">
   <div className="api-docs-left">

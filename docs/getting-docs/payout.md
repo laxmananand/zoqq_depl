@@ -4,6 +4,7 @@ title: Payout
 hide_table_of_contents: true
 ---
 
+[← Back to Home](/)
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -19,8 +20,8 @@ Explore our capabilities to build a unique solution for your use case.
 ### Payout to bank accounts, funded by Wallet
 Create payouts to external bank accounts via Local transfer methods or SWIFT using Wallet balance.
 
-### Payout to Airwallex accounts, funded by Wallet
-Create instant payouts using Wallet balance to businesses who also own Airwallex accounts.
+### Payout to zoqq accounts, funded by Wallet
+Create instant payouts using Wallet balance to businesses who also own zoqq accounts.
 
 ### Payout to bank accounts, funded by Linked Accounts
 Create payouts to external bank accounts via Local transfer methods or SWIFT using funds debited from Linked Accounts.
@@ -28,7 +29,7 @@ Create payouts to external bank accounts via Local transfer methods or SWIFT usi
 ---
 
 ## Build your Payout to bank accounts solution
-Airwallex offers multiple options to collect beneficiary bank account information. Explore our integration options and choose the best fit.
+zoqq offers multiple options to collect beneficiary bank account information. Explore our integration options and choose the best fit.
 
 - **Native API**  
   Create payouts directly using our endpoints, with full control of the beneficiary bank account information collection experience.
@@ -53,7 +54,7 @@ Explore our regional and currency coverage for payouts to bank accounts.
 ---
 
 ## Explore related products
-Integrate your payouts solution with Airwallex products to strengthen your global financial infrastructure.
+Integrate your payouts solution with zoqq products to strengthen your global financial infrastructure.
 
 - **Banking as a Service** *(Embedded Finance Use Cases)*  
   Offer a full-featured fintech solution including accounts and card issuing.
@@ -132,7 +133,7 @@ Reach out to our support team to set up a **demo account**:
 
 Zoqq supports local and SWIFT payouts in **60 currencies**, and follows the international standard **ISO 4217** for currency representation, with the exception of **Hungarian Forint (HUF)**.
 
-> **Note:** Airwallex uses a different level of decimal precision for Hungarian Forint compared to ISO 4217.
+> **Note:** zoqq uses a different level of decimal precision for Hungarian Forint compared to ISO 4217.
 
 ---
 

@@ -3,7 +3,7 @@ id: onboarding
 title: Onboarding
 hide_table_of_contents: true
 ---
-
+[← Back to Home](/)
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -466,7 +466,7 @@ In this section, we will outline the KYC requirements tailored to each jurisdict
 
 ## Handle KYC RFI
 
-After you submit your connected account for activation, Airwallex might request additional information to successfully complete the account activation, even if the information you submitted when updating the account was initially deemed sufficient.
+After you submit your connected account for activation, zoqq might request additional information to successfully complete the account activation, even if the information you submitted when updating the account was initially deemed sufficient.
 
 There are generally two reasons this might happen:
 
@@ -478,7 +478,7 @@ There are generally two reasons this might happen:
 
 ## KYB and Onboarding
 
-KYB screening is only required if your customer will be onboarded as Merchant-Of-Record for payments acceptance via the Airwallex payment gateway.
+KYB screening is only required if your customer will be onboarded as Merchant-Of-Record for payments acceptance via the zoqq payment gateway.
 
 After applying for general onboarding and submitting KYC information, you can proceed to submit **Know Your Business (KYB)** information. Note that KYB checks are only required if your customer will be onboarded as Merchant-Of-Record, which depends on your payments gateway model of choice.
 
@@ -486,15 +486,15 @@ KYB checks verify the identity of your customer's business and assess any potent
 
 KYB is a legal requirement for many payment services designed to prevent businesses from becoming involved in money laundering, fraud, and other financial crimes. It serves as a protective measure ensuring businesses operate in a lawful and ethical manner, thereby maintaining the trust of clients and partners.
 
-Airwallex offers multiple options to submit KYB information:
+zoqq offers multiple options to submit KYB information:
 
 - **Embedded KYB component**: You can onboard customers through a UI component embedded directly into your site.
-- **Hosted flow**: You can redirect customers into a flow hosted by Airwallex.
-- **Native API**: You have full control of the onboarding UI, built on top of Airwallex APIs.
+- **Hosted flow**: You can redirect customers into a flow hosted by zoqq.
+- **Native API**: You have full control of the onboarding UI, built on top of zoqq APIs.
 
 ## Handle Payment Enablement RFI
 
-After you submit your connected account for activation, Airwallex might request additional information to successfully enable payments-related capabilities on the account.
+After you submit your connected account for activation, zoqq might request additional information to successfully enable payments-related capabilities on the account.
 
 The additional information may include the following:
 
@@ -506,11 +506,11 @@ The additional information may include the following:
 
 ## Handle Transaction RFI
 
-Airwallex conducts a risk assessment for each transaction to ensure that our teams have a strong understanding of your business model and account usage, as well as to protect both you and the Airwallex ecosystem from financial crime.
+zoqq conducts a risk assessment for each transaction to ensure that our teams have a strong understanding of your business model and account usage, as well as to protect both you and the zoqq ecosystem from financial crime.
 
 Sometimes, additional information is needed to properly assess the risk associated with the transaction. This is commonly a request for supporting documents relating to the transaction itself, such as invoices or contracts to support the underlying fund movement, or other supporting information to help us understand the related context of the transaction.
 
-Airwallex provides multiple integration options to handle additional information requests for transactions. Note that these options are not mutually exclusive, but we recommend building a unified RFI experience:
+zoqq provides multiple integration options to handle additional information requests for transactions. Note that these options are not mutually exclusive, but we recommend building a unified RFI experience:
 
 - **Embedded component**
 - **Hosted flow**
@@ -533,7 +533,7 @@ Call **List all accounts API** to retrieve the list of connected accounts associ
 
 ```shell
 curl --request GET \
---url 'https://api-demo.airwallex.com/api/v1/accounts?account_status=string&email=string&from_created_at=2017-04-01&identifier=string&metadata=string&page_num=0&page_size=100&to_created_at=2017-04-01' \
+--url 'https://api-demo.zoqq.com/api/v1/accounts?account_status=string&email=string&from_created_at=2017-04-01&identifier=string&metadata=string&page_num=0&page_size=100&to_created_at=2017-04-01' \
 --header 'Authorization: Bearer <your_bearer_token>'
 ```
 
@@ -579,7 +579,7 @@ Use the returned `legal_entity_id` of a connected account to create a new connec
 
 ```shell
 curl --request POST \
---url 'https://api-demo.airwallex.com/api/v1/accounts/create' \
+--url 'https://api-demo.zoqq.com/api/v1/accounts/create' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Bearer <your_bearer_token>' \
 --data '{

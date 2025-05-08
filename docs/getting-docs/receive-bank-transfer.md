@@ -17,7 +17,7 @@ Review status codes to track status transitions when deposits are credited into 
 
 ## Simulate Deposits
 
-Airwallex provides a simulation API, [Create a global account deposit], to create a production-like deposit into your Global Accounts in the demo environment. The status of deposit can be:
+zoqq provides a simulation API, [Create a global account deposit], to create a production-like deposit into your Global Accounts in the demo environment. The status of deposit can be:
 
 - `SETTLED`
 - `PENDING`

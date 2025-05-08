@@ -65,7 +65,7 @@ POST {{baseUrl}}/zoqq/api/v1/user
           --header 'x-request-id: {{IdempotencyKey}}' \
           --header 'Authorization: Bearer {{YOUR_TOKEN}}' \
           --data '{
-            "emailId": "testairWallex10@yopmail.com",
+            "emailId": "testzoqq10@yopmail.com",
             "amount": "10",
             "currency": "USD",
             "productReference": "ACCEPT_ONLINE_PAYMENTS",
@@ -122,7 +122,7 @@ POST {{baseUrl}}/zoqq/api/v1/user
         url = "{{baseUrl}}/zoqq/api/v1/user"
 
         payload = {
-            "emailId": "testairWallex10@yopmail.com",
+            "emailId": "testzoqq10@yopmail.com",
             "amount": "10",
             "currency": "USD",
             "productReference": "ACCEPT_ONLINE_PAYMENTS",
@@ -190,7 +190,7 @@ POST {{baseUrl}}/zoqq/api/v1/user
         $url = '{{baseUrl}}/zoqq/api/v1/user';
         
         $data = [
-            'emailId' => 'testairWallex10@yopmail.com',
+            'emailId' => 'testzoqq10@yopmail.com',
             'amount' => '10',
             'currency' => 'USD',
             'productReference' => 'ACCEPT_ONLINE_PAYMENTS',
@@ -283,7 +283,7 @@ POST {{baseUrl}}/zoqq/api/v1/user
                     },
                     Content = new StringContent(
                         "{" +
-                        "\"emailId\":\"testairWallex10@yopmail.com\"," +
+                        "\"emailId\":\"testzoqq10@yopmail.com\"," +
                         "\"amount\":\"10\"," +
                         "\"currency\":\"USD\"," +
                         "\"productReference\":\"ACCEPT_ONLINE_PAYMENTS\"," +
@@ -611,7 +611,7 @@ This API retrieves user details from the system.
           "attachments": {
             "identity_files": []
           },
-          "email": "testairWallex7@yopmail.com",
+          "email": "testzoqq7@yopmail.com",
           "mobile": "912514678"
         },
         "status": "CREATED",

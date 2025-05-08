@@ -3,6 +3,7 @@ id: foreign
 title: Foreign
 hide_table_of_contents: true
 ---
+[← Back to Home](/)
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -38,7 +39,7 @@ Transact in nearly 1000+ currency pairs across 60+ trade currencies
 
 ## Explore related products
 
-Integrate your FX solution with Airwallex products to strengthen your global financial infrastructure.
+Integrate your FX solution with zoqq products to strengthen your global financial infrastructure.
 
 ### Embedded Finance Use Cases
 
@@ -63,23 +64,23 @@ Programmatically make cost-effective, fast and secure global payouts
 
 ### How Transactional FX Works
 
-Airwallex’s Transactional Foreign Exchange (FX) capabilities provide a wide-ranging set of solutions to allow your business to access FX prices and transaction services that best meet your unique needs.
+zoqq’s Transactional Foreign Exchange (FX) capabilities provide a wide-ranging set of solutions to allow your business to access FX prices and transaction services that best meet your unique needs.
 
-Each business is unique, and the challenges of converting one currency to another will also vary from business to business. Airwallex's FX solution to these challenges is to offer great flexibility in how you obtain prices from us, how you execute transactions with us, and how you can manage any inherent FX risk your business is exposed to.
+Each business is unique, and the challenges of converting one currency to another will also vary from business to business. zoqq's FX solution to these challenges is to offer great flexibility in how you obtain prices from us, how you execute transactions with us, and how you can manage any inherent FX risk your business is exposed to.
 
 ## Key Features
 
 - **Highly available FX pricing and conversion services** — 24 hours a day, 365 days a year  
 - **Highly competitive pricing** — we work hard to offer the best available pricing to all our customers  
 - **Access to a wide range of currencies** — including currencies that are traditionally hard to deal in  
-- **Choice of FX products, Rates, and Quotes** — available via Airwallex API  
+- **Choice of FX products, Rates, and Quotes** — available via zoqq API  
 - **Quick and easy integration** — regardless of your product choice (Rates or Quotes), you can be up and transacting quickly upon successful account registration  
-- **Seamless integration** — with the wider Airwallex range of features
+- **Seamless integration** — with the wider zoqq range of features
 
 
 ### Supported Regions and Currencies
 
-Airwallex currently has the capability to transact in nearly **1,000 currency pairs across 64 currencies** — a capability that is constantly improving. Some of the pairs are freely traded, meaning we are able to price and execute on both sides of the trade, whereas pairs that contain a currency with additional constraints are considered **exotic currency pairs**.
+zoqq currently has the capability to transact in nearly **1,000 currency pairs across 64 currencies** — a capability that is constantly improving. Some of the pairs are freely traded, meaning we are able to price and execute on both sides of the trade, whereas pairs that contain a currency with additional constraints are considered **exotic currency pairs**.
 
 You can use the **supported currencies** endpoint to get a list of currencies you can buy or sell.
 
@@ -155,23 +156,23 @@ Buy and sell amounts are rounded to the nearest unit based on a currency's decim
 
 ### Funding and Settlement Models
 
-Depending on the jurisdiction in which you operate, and the types of accounts you have with us, your Airwallex account will be assigned to either a **pre-funding** or a **post-funding** workflow.
+Depending on the jurisdiction in which you operate, and the types of accounts you have with us, your zoqq account will be assigned to either a **pre-funding** or a **post-funding** workflow.
 
-Your funding mode will dictate the timing of when you fund Airwallex and when Airwallex will settle your conversions. If you are unsure of which funding mode you have been assigned, please contact your customer support representative, who would be happy to assist.
+Your funding mode will dictate the timing of when you fund zoqq and when zoqq will settle your conversions. If you are unsure of which funding mode you have been assigned, please contact your customer support representative, who would be happy to assist.
 
 ## Pre-funding Workflow
 
-Prior to booking any conversion or payout, clients assigned to pre-funding mode must first top-up their Airwallex Wallet. The funds required for a conversion or payout are deducted from the relevant wallet balance and cannot exceed your available funds in the currency you are converting or paying out from.
+Prior to booking any conversion or payout, clients assigned to pre-funding mode must first top-up their zoqq Wallet. The funds required for a conversion or payout are deducted from the relevant wallet balance and cannot exceed your available funds in the currency you are converting or paying out from.
 
 ## Post-funding Workflow
 
-Clients assigned to post-funding mode are permitted to book conversions and payouts without sufficient funds available in their wallet. These accounts will have a limit assigned to them, which will be the upper limit of unfunded transactions you can have open with Airwallex at any one time.
+Clients assigned to post-funding mode are permitted to book conversions and payouts without sufficient funds available in their wallet. These accounts will have a limit assigned to them, which will be the upper limit of unfunded transactions you can have open with zoqq at any one time.
 
 For same-day conversions, we will fallback to your available balance in the sell currency if you have insufficient open position limit for the conversion.
 
 ## Settlement Timing
 
-When booking a conversion or payout with Airwallex, you will have the option to select the desired date for each transaction to settle. This “conversion date”, along with your funding mode, will determine when funds will be settled to and from your wallet.
+When booking a conversion or payout with zoqq, you will have the option to select the desired date for each transaction to settle. This “conversion date”, along with your funding mode, will determine when funds will be settled to and from your wallet.
 
 If you do not select a date, you will be assigned a **default date**:
 
@@ -187,7 +188,7 @@ If you do not select a date, you will be assigned a **default date**:
 | Same-day     | Immediately deducted         | Immediately funded           | Immediately deducted          | Immediately funded           |
 | Future-dated | Immediately deducted         | Funded at 9am on conversion date | Deducted at 9am on conversion date | Funded upon deduction         |
 
-For clients in post-funding mode, if the wallet balance is insufficient on the conversion date, the Airwallex team will notify clients regarding the overdue balance. This may incur a **fee** to cover the cost of processing the overdue transaction.
+For clients in post-funding mode, if the wallet balance is insufficient on the conversion date, the zoqq team will notify clients regarding the overdue balance. This may incur a **fee** to cover the cost of processing the overdue transaction.
 
 We will settle conversions on a **first-in, first-out** basis based on:
 1. The earliest `conversion_date` with sufficient balance
@@ -195,9 +196,9 @@ We will settle conversions on a **first-in, first-out** basis based on:
 
 We will retry settlement every **30 minutes** as a batch.
 
-## Time Zones by Airwallex Location
+## Time Zones by zoqq Location
 
-The Airwallex location that you are onboarded with will determine your account time zone. We use the **IANA Time Zone Database (TZDB)**. Each Airwallex location is assigned the following time zones:
+The zoqq location that you are onboarded with will determine your account time zone. We use the **IANA Time Zone Database (TZDB)**. Each zoqq location is assigned the following time zones:
 
 | AWX Entity | Time Zone           | UTC (STD/DST) |
 |------------|---------------------|---------------|
