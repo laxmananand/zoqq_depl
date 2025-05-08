@@ -7,6 +7,7 @@ module.exports = {
   url: "https://docs.zoqq.com",
   baseUrl: "/",
   favicon: "https://www.zoqq.com/favicon.png",
+  onBrokenLinks: 'warn',
 
   themeConfig: {
     navbar: {
