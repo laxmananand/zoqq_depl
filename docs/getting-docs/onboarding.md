@@ -3,7 +3,7 @@ id: onboarding
 title: Onboarding
 hide_table_of_contents: true
 ---
-[← Back to Home](/)
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

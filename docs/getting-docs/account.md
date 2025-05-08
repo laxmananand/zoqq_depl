@@ -4,7 +4,7 @@ sidebar_label: Overview
 sidebar_position: 1
 hide_table_of_contents: true
 ---
-[← Back to Home](/)
+
 
 ## Accounts
 

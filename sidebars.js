@@ -275,7 +275,7 @@ const sidebars = {
   accounts: [
     {
       type: "html",
-      value: '<a href="/" class="back-button">← Back to Home</a>',
+      value: '<a href="/docs/getting-started" class="back-button">← Back to Guides</a>',
       defaultStyle: true,
     },
     {
@@ -310,7 +310,7 @@ const sidebars = {
   foreignExchange: [
     {
       type: "html",
-      value: '<a href="/" class="back-button">← Back to Home</a>',
+      value: '<a href="/docs/getting-started" class="back-button">← Back to Guides</a>',
       defaultStyle: true,
     },
     {
@@ -345,7 +345,7 @@ const sidebars = {
   payout: [
     {
       type: "html",
-      value: '<a href="/" class="back-button">← Back to Home</a>',
+      value: '<a href="/docs/getting-started" class="back-button">← Back to Guides</a>',
       defaultStyle: true,
     },
     {
@@ -402,7 +402,7 @@ const sidebars = {
   onboarding: [
     {
       type: "html",
-      value: '<a href="/" class="back-button">← Back to Home</a>',
+      value: '<a href="/docs/getting-started" class="back-button">← Back to Guides</a>',
       defaultStyle: true,
     },
     {
@@ -494,7 +494,7 @@ const sidebars = {
   issuing: [
     {
       type: "html",
-      value: '<a href="/" class="back-button">← Back to Home</a>',
+      value: '<a href="/docs/getting-started" class="back-button">← Back to Guides</a>',
       defaultStyle: true,
     },
     {
