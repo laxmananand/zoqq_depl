@@ -866,7 +866,7 @@ const sidebars = {
             },
             {
               type: "link",
-              href: "/docs/api-reference/payout#get-create-payout",
+              href: "/docs/api-reference/payout#create-payout",
               label: "🟡 POST  Create Payout",
             },
           ],
