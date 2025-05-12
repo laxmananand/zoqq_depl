@@ -7,7 +7,7 @@ hide_table_of_contents: true
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## Get Create Beneficiary Schema
+<!-- ## Get Create Beneficiary Schema
 
 This API retrieves the required schema for creating a beneficiary based on transfer corridor parameters.
 
@@ -33,7 +33,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token () |
     
     <h3>Query Parameters</h3>
     
@@ -176,7 +176,169 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     </Tabs>
 
   </div>
-</div>
+</div> -->
+
+<!-- ## Create Payout
+
+Programmatically make cost-effective, fast and secure payouts across the globe.
+ 
+<Tabs>
+  <TabItem value="endpoint" label="Endpoint" default>
+```
+POST - {{baseUrl}}/zoqq/api/v1/transfer/
+```
+
+  </TabItem>
+</Tabs>
+
+<div className="api-docs-container">
+  <div className="api-docs-left">
+    <h3>Description</h3>
+    <p>Initiate a payout transfer to a beneficiary account. The request requires specific headers and a JSON payload with transfer details.</p>
+    
+    <h3>Request Headers</h3>
+    
+    | Parameter | Type | Required | Description |
+    |-----------|------|----------|-------------|
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
+    | x-program-id | string | Yes | Program identifier |
+    | x-request-id | string | Yes | Idempotency key (prevents duplicate transfers) |
+    | x-user-id | string | Yes | User identification key |
+    | Authorization | string | No | Bearer token () |
+    | Content-Type | string | Yes | Must be application/json |
+    
+    <h3>Request Body Parameters</h3>
+    
+    | Parameter | Type | Required | Description |
+    |-----------|------|----------|-------------|
+    | beneficiary_id | string | Yes | ID of pre-registered beneficiary |
+    | amount | number | Yes | Transfer amount |
+    | currency | string | Yes | 3-letter ISO currency code |
+    | reference | string | Yes | Client reference ID |
+    | notes | string | No | Additional transfer notes |
+
+    <h4>Example Request Body:</h4>
+    ```json
+    {
+      "beneficiary_id": "ben_123456789",
+      "amount": 100.50,
+      "currency": "USD",
+      "reference": "ORDER_12345",
+      "notes": "Invoice payment for May"
+    }
+    ```
+
+  </div>
+  
+  <div className="api-docs-right">
+    <h3>Request Examples</h3>
+    
+    <Tabs>
+      <TabItem value="curl" label="cURL" default>
+        ```bash
+        curl -X POST \
+          "{{baseUrl}}/zoqq/api/v1/transfer/" \
+          -H "x-api-key: {{Shared Xapikey By ZOqq}}" \
+          -H "x-program-id: {{BasedOnRequirement}}" \
+          -H "x-request-id: {{IdempotencyKey}}" \
+          -H "x-user-id: {{Useridentificationkey}}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "beneficiary_id": "ben_123456789",
+            "amount": 100.50,
+            "currency": "USD",
+            "reference": "ORDER_12345"
+          }'
+        ```
+      </TabItem>
+      
+      <TabItem value="python" label="Python">
+        ```python
+        import requests
+
+        url = "{{baseUrl}}/zoqq/api/v1/transfer/"
+        headers = {
+            "x-api-key": "{{Shared Xapikey By ZOqq}}",
+            "x-program-id": "{{BasedOnRequirement}}",
+            "x-request-id": "{{IdempotencyKey}}",
+            "x-user-id": "{{Useridentificationkey}}",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "beneficiary_id": "ben_123456789",
+            "amount": 100.50,
+            "currency": "USD",
+            "reference": "ORDER_12345"
+        }
+
+        response = requests.post(url, headers=headers, json=payload)
+        print(response.json())
+        ```
+      </TabItem>
+      
+      <TabItem value="nodejs" label="Node.js">
+        ```javascript
+        const axios = require('axios');
+
+        const config = {
+          url: '{{baseUrl}}/zoqq/api/v1/transfer/',
+          method: 'post',
+          headers: {
+            'x-api-key': '{{Shared Xapikey By ZOqq}}',
+            'x-program-id': '{{BasedOnRequirement}}',
+            'x-request-id': '{{IdempotencyKey}}',
+            'x-user-id': '{{Useridentificationkey}}',
+            'Content-Type': 'application/json'
+          },
+          data: {
+            beneficiary_id: 'ben_123456789',
+            amount: 100.50,
+            currency: 'USD',
+            reference: 'ORDER_12345'
+          }
+        };
+
+        axios(config)
+          .then(response => console.log(response.data))
+          .catch(error => console.error(error));
+        ```
+      </TabItem>
+      
+      <TabItem value="php" label="php">
+        ```php
+        <?php
+        $url = '{{baseUrl}}/zoqq/api/v1/transfer/';
+        $headers = [
+            'x-api-key: {{Shared Xapikey By ZOqq}}',
+            'x-program-id: {{BasedOnRequirement}}',
+            'x-request-id: {{IdempotencyKey}}',
+            'x-user-id: {{Useridentificationkey}}',
+            'Content-Type: application/json'
+        ];
+        $data = [
+            'beneficiary_id' => 'ben_123456789',
+            'amount' => 100.50,
+            'currency' => 'USD',
+            'reference' => 'ORDER_12345'
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        echo $response;
+        ?>
+        ```
+      </TabItem>
+    </Tabs>
+  </div>
+</div> -->
+
 
 ## Create Beneficiary
 
@@ -204,7 +366,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
     
     <h3>Request Body</h3>
@@ -374,7 +536,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/validatebeneficiary
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
     
     <h3>Request Body</h3>
@@ -537,7 +699,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token () |
     | Content-Type | string | Yes | Must be application/json |
     
     <h3>Request Parameters</h3>
@@ -691,7 +853,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token () |
     
     <h3>Query Parameters</h3>
     
@@ -835,7 +997,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiarylist
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token () |
     
     <h3>Query Parameters</h3>
     
@@ -968,5 +1130,167 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiarylist
      
     </Tabs>
 
+  </div>
+</div>
+
+
+## Create Payout
+
+Programmatically make cost-effective, fast and secure payouts across the globe.
+ 
+<Tabs>
+  <TabItem value="endpoint" label="Endpoint" default>
+```
+POST - {{baseUrl}}/zoqq/api/v1/transfer/
+```
+
+  </TabItem>
+</Tabs>
+
+<div className="api-docs-container">
+  <div className="api-docs-left">
+    <h3>Description</h3>
+    <p>Initiate a payout transfer to a beneficiary account. The request requires specific headers and a JSON payload with transfer details.</p>
+    
+    <h3>Request Headers</h3>
+    
+    | Parameter | Type | Required | Description |
+    |-----------|------|----------|-------------|
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
+    | x-program-id | string | Yes | Program identifier |
+    | x-request-id | string | Yes | Idempotency key (prevents duplicate transfers) |
+    | x-user-id | string | Yes | User identification key |
+    | Authorization | string | No | Bearer token () |
+    | Content-Type | string | Yes | Must be application/json |
+    
+    <h3>Request Body Parameters</h3>
+    
+    | Parameter | Type | Required | Description |
+    |-----------|------|----------|-------------|
+    | beneficiary_id | string | Yes | ID of pre-registered beneficiary |
+    | amount | number | Yes | Transfer amount |
+    | currency | string | Yes | 3-letter ISO currency code |
+    | reference | string | Yes | Client reference ID |
+    | notes | string | No | Additional transfer notes |
+
+    <h4>Example Request Body:</h4>
+    ```json
+    {
+      "beneficiary_id": "ben_123456789",
+      "amount": 100.50,
+      "currency": "USD",
+      "reference": "ORDER_12345",
+      "notes": "Invoice payment for May"
+    }
+    ```
+
+  </div>
+  
+  <div className="api-docs-right">
+    <h3>Request Examples</h3>
+    
+    <Tabs>
+      <TabItem value="curl" label="cURL" default>
+        ```bash
+        curl -X POST \
+          "{{baseUrl}}/zoqq/api/v1/transfer/" \
+          -H "x-api-key: {{Shared Xapikey By ZOqq}}" \
+          -H "x-program-id: {{BasedOnRequirement}}" \
+          -H "x-request-id: {{IdempotencyKey}}" \
+          -H "x-user-id: {{Useridentificationkey}}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "beneficiary_id": "ben_123456789",
+            "amount": 100.50,
+            "currency": "USD",
+            "reference": "ORDER_12345"
+          }'
+        ```
+      </TabItem>
+      
+      <TabItem value="python" label="Python">
+        ```python
+        import requests
+
+        url = "{{baseUrl}}/zoqq/api/v1/transfer/"
+        headers = {
+            "x-api-key": "{{Shared Xapikey By ZOqq}}",
+            "x-program-id": "{{BasedOnRequirement}}",
+            "x-request-id": "{{IdempotencyKey}}",
+            "x-user-id": "{{Useridentificationkey}}",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "beneficiary_id": "ben_123456789",
+            "amount": 100.50,
+            "currency": "USD",
+            "reference": "ORDER_12345"
+        }
+
+        response = requests.post(url, headers=headers, json=payload)
+        print(response.json())
+        ```
+      </TabItem>
+      
+      <TabItem value="nodejs" label="Node.js">
+        ```javascript
+        const axios = require('axios');
+
+        const config = {
+          url: '{{baseUrl}}/zoqq/api/v1/transfer/',
+          method: 'post',
+          headers: {
+            'x-api-key': '{{Shared Xapikey By ZOqq}}',
+            'x-program-id': '{{BasedOnRequirement}}',
+            'x-request-id': '{{IdempotencyKey}}',
+            'x-user-id': '{{Useridentificationkey}}',
+            'Content-Type': 'application/json'
+          },
+          data: {
+            beneficiary_id: 'ben_123456789',
+            amount: 100.50,
+            currency: 'USD',
+            reference: 'ORDER_12345'
+          }
+        };
+
+        axios(config)
+          .then(response => console.log(response.data))
+          .catch(error => console.error(error));
+        ```
+      </TabItem>
+      
+      <TabItem value="php" label="php">
+        ```php
+        <?php
+        $url = '{{baseUrl}}/zoqq/api/v1/transfer/';
+        $headers = [
+            'x-api-key: {{Shared Xapikey By ZOqq}}',
+            'x-program-id: {{BasedOnRequirement}}',
+            'x-request-id: {{IdempotencyKey}}',
+            'x-user-id: {{Useridentificationkey}}',
+            'Content-Type: application/json'
+        ];
+        $data = [
+            'beneficiary_id' => 'ben_123456789',
+            'amount' => 100.50,
+            'currency' => 'USD',
+            'reference' => 'ORDER_12345'
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        echo $response;
+        ?>
+        ```
+      </TabItem>
+    </Tabs>
   </div>
 </div>

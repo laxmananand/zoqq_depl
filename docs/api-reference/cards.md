@@ -10,9 +10,7 @@ hide_table_of_contents: true
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Cards API Documentation.
-This API creates a new cardholder in the system.
-
+You can create virtual cards associated with your organization. These cards can be single-use or multi-use and can be restricted by merchant category code, currency, and transaction amount.
 ## Create Cardholder
 
 <Tabs>
@@ -28,8 +26,14 @@ POST {{baseUrl}}/zoqq/api/v1/cardholder
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint creates a new cardholder with the provided details including personal information,
-    address, and identification documents. The cardholder can be an individual or business entity.</p>
+  <p>
+  Cardholders are authorized representatives of your business. Two types of cardholders are permitted: <strong>Individual</strong> and <strong>Delegate</strong>.<br /><br />
+  <strong>INDIVIDUAL:</strong> A cardholder who is a named representative of your business. They can be issued either personalized or non-personalized cards.<br />
+  <strong>DELEGATE:</strong> A cardholder assigned only to non-personalized cards. They act as authorized users on behalf of your business. Cards issued to delegate cardholders will be associated with the name of your business.<br /><br />
+  Creating a cardholder requires passing a name screening process, which involves submitting basic information about the cardholder.<br />
+  This endpoint allows you to create a new cardholder by providing details such as personal information, address, and identification documents. The cardholder can be either an individual or a business entity.
+</p>
+
 
     <h3>Request Headers</h3>
 
@@ -39,23 +43,41 @@ POST {{baseUrl}}/zoqq/api/v1/cardholder
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Request Body Parameters</h3>
 
-    | Parameter | Type | Required | Description |
-    |-----------|------|----------|-------------|
-    | type | string | Yes | Type of cardholder (INDIVIDUAL or BUSINESS) |
-    | email | string | Yes | Cardholder's email address |
-    | mobile_number | string | Yes | Cardholder's mobile number |
-    | individual | object | Yes* | Required for INDIVIDUAL type |
-    | individual.name | object | Yes | First and last name |
-    | individual.date_of_birth | string | Yes | YYYY-MM-DD format |
-    | individual.address | object | Yes | Physical address |
-    | individual.identification | object | Yes | ID document details |
-    | individual.express_consent_obtained | string | Yes | "yes" or "no" |
-    | postal_address | object | No | Mailing address (if different) |
+  
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| type | string | Yes | Type of cardholder (must be "INDIVIDUAL" or "DELEGATE") |
+| email | string | Yes | Cardholder's email address (must be valid format) |
+| mobile_number | string | No | Cardholder's mobile number |
+| individual | object | Yes | Required individual details |
+| individual.name | object | Yes | First and last name |
+| individual.name.first_name | string | Yes | First name |
+| individual.name.last_name | string | Yes | Last name |
+| individual.date_of_birth | string | Yes | Date of birth (format not specified) |
+| individual.address | object | Yes | Physical address |
+| individual.address.city | string | Yes | City |
+| individual.address.country | string | Yes | Country |
+| individual.address.line1 | string | Yes | Address line 1 |
+| individual.address.state | string | Yes | State |
+| individual.address.postcode | string | Yes | Postal code |
+| individual.identification | object | No | ID document details |
+| individual.identification.country | string | No | ID issuing country |
+| individual.identification.expiry_date | string | No | ID expiry date |
+| individual.identification.number | string | No | May be a license number or passport number |
+| individual.identification.type | string | No | ID type |
+| individual.express_consent_obtained | string | No | Defaults to "YES" |
+| postal_address | object | No | Mailing address (if different) |
+| postal_address.city | string | Yes if present | City |
+| postal_address.country | string | Yes if present | Country |
+| postal_address.line1 | string | Yes if present | Address line 1 |
+| postal_address.state | string | Yes if present | State |
+| postal_address.postcode | string | Yes if present | Postal code |
+| created_by | string | Yes | Creator identifier |
 
   </div>
 
@@ -343,7 +365,7 @@ POST {{baseUrl}}/zoqq/api/v1/card
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint creates a new physical or virtual card with specified authorization controls and program details.</p>
+    <p>The card object represents the resource associated with a card issued by Zoqq. It contains details such as the linked account, embossed name (for physical cards), shipping method and information (for physical cards), and card-based spend controls (e.g., transaction limits, blocked merchant category codes, etc.). The card object also specifies the intended user (e.g., clients, customers, or employees), the form factor (physical or virtual), and the usage type (single-use or multi-use).</p>
 
     <h3>Request Headers</h3>
 
@@ -353,7 +375,7 @@ POST {{baseUrl}}/zoqq/api/v1/card
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Request Body Parameters</h3>
@@ -653,7 +675,7 @@ This API retrieves a list of all cards associated with the authenticated user.
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token |
 
     <h3>Query Parameters</h3>
 
@@ -866,7 +888,7 @@ POST {{baseUrl}}/zoqq/api/v1/card/activate
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint activates a card that is in inactive status, making it available for transactions.</p>
+    <p>This endpoint activates a card that is in inactive status, making it available for transactions.Activate a physical card for card payment authorizations.</p>
 
     <h3>Request Headers</h3>
 
@@ -876,7 +898,7 @@ POST {{baseUrl}}/zoqq/api/v1/card/activate
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Request Body Parameters</h3>
@@ -1074,7 +1096,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/card
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint updates card properties including transaction limits, authorization controls, and card status.</p>
+    <p>This endpoint updates card properties including transaction limits, authorization controls, and card status.Updates card details by setting the values of the included parameters. Parameters that are not included will be left unchanged.</p>
 
     <h3>Request Headers</h3>
 
@@ -1084,7 +1106,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/card
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Request Body Parameters</h3>
@@ -1321,16 +1343,14 @@ PATCH {{baseUrl}}/zoqq/api/v1/card
 </div>
 
 
-## Update Card Holder
+## Update a cardholder
 
 This API updates card holder details including address and contact information.
 
 <Tabs>
   <TabItem value="endpoint" label="Endpoint" default>
 ````
-
 PATCH {{baseUrl}}/zoqq/api/v1/cardHolder
-
 ````
 
 
@@ -1340,7 +1360,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/cardHolder
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint updates card holder information including physical address, postal address, and contact details.</p>
+    <p>This endpoint updates card holder information including physical address, postal address, and contact details.Update a cardholder with selected information. All fields are optional, and only those provided will be updated. If a composite object, e.g. name is provided, then all of its child fields must be provided and valid. Updating the cardholder may re-trigger the name screening process.</p>
 
     <h3>Request Headers</h3>
 
@@ -1350,7 +1370,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/cardHolder
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Request Body Parameters</h3>
@@ -1608,7 +1628,8 @@ PATCH {{baseUrl}}/zoqq/api/v1/cardHolder
 
 ## Get Card Limit
 
-This API retrieves the current transaction limits for a specific card.
+This API retrieves the current transaction limits and other relevant details for a specific card.
+
 
 <Tabs>
   <TabItem value="endpoint" label="Endpoint" default>
@@ -1635,7 +1656,7 @@ GET {{baseUrl}}/zoqq/api/v1/card/limit
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token |
 
     <h3>Query Parameters</h3>
 
@@ -1843,7 +1864,7 @@ GET {{baseUrl}}/zoqq/api/v1/card/transaction
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Request Body Parameters</h3>
@@ -2127,7 +2148,7 @@ GET {{baseUrl}}/zoqq/api/v1/card/detail
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token  |
 
     <h3>Query Parameters</h3>
 

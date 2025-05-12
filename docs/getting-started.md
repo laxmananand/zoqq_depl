@@ -16,19 +16,18 @@ This guide walks you through the essential steps to integrate Zoqq APIs quickly 
 ## ✅ Step 1: Create a Zoqq Account
 
 - Go to [https://zoqq.com](https://zoqq.com)
-- Sign up and log in to access your **Developer Dashboard**
+<!-- - Sign up and log in to access your **Developer Dashboard** -->
 
 ---
 
 ##  Step 2: Retrieve Your API Keys
 
-1. Navigate to **Developer Settings → API Keys**
-2. Copy your:
+<!-- 1. Navigate to **Developer Settings → API Keys** -->
+<!-- 2. Copy your:
    - `x-api-key`
    - `x-program-id`
-   - `x-user-id`
-3. Secure your keys — never expose them in frontend code
-
+   - `x-user-id` -->
+- Collect and secure your keys — never expose them in frontend code. The API secret will be sent to the user's email address by us.
 ---
 
 ## ⚙️ Step 3: Make Your First API Call
@@ -36,12 +35,11 @@ This guide walks you through the essential steps to integrate Zoqq APIs quickly 
 Use the following sample to make your first authenticated API request:
 
 ```bash
-curl -X GET https://api.zoqq.com/zoqq/api/v1/accounts \
-  -H "x-api-key: YOUR_API_KEY" \
-  -H "x-program-id: YOUR_PROGRAM_ID" \
-  -H "x-user-id: YOUR_USER_ID" \
-  -H "x-request-id: UNIQUE_REQUEST_ID" \
-  -H "Authorization: Bearer YOUR_SECRET_KEY"
+curl -X POST https://api.zoqq.com/api/v1/authentication/login \
+        --header 'x-request-id:UUID'\
+        --header 'x-client-id: pTJcVvqQQdOLr0lJ6153YA' \
+        --header 'x-api-key: b6b7c021759c9a036afa4890346b699f666274f680bf64353a93f00acaccabccc544759b96c8548e38006e760d774d06' \
+        --data ''
 🧠 Tip: Use a unique x-request-id for each request to ensure idempotency.
 ```
 
@@ -49,24 +47,24 @@ curl -X GET https://api.zoqq.com/zoqq/api/v1/accounts \
 
 Zoqq provides a sandbox for safe and isolated testing.
 
-Base URL: https://api.sandbox.stylopay.com
+Base URL: https://api.zoqq.com
 
 Use sandbox-specific API keys from your dashboard
 
 No real transactions are processed
 
 
-<h2>🚀 Getting Started with Accounts API</h2>
+<h2>🚀 Getting Started with Onboarding API</h2>
 
-<pre>
-  <code className="language-bash">{`# sample shell command`}</code>
-</pre>
+
 
 ## 📎 Next Steps
-
+- 👉 [Create a User](api-reference/onboarding.md#create-user)
 - 👉 [Create an Account](api-reference/accounts.md#create-account)
 - 👉 [Get Account Balance](api-reference/accounts.md#get-balance)
 - 👉 [Create a Beneficiary](api-reference/payout.md#create-beneficiary)
+- 👉 [Create a Payout](api-reference/payout.md#create-payout)
+- 👉 [Create a Card](api-reference/cards.md#create-card)
 - 👉 [Full API Reference](api-reference/authentication.md)
 
 Need help? Contact our developer support at support@zoqq.com

@@ -243,15 +243,16 @@ const sidebars = {
           id: "getting-started",
           label: "Overview",
         },
-        {
-          type: "link",
-          href: "/docs/getting-docs/account",
-          label: "Global Account",
-        },
+        
         {
           type: "link",
           href: "/docs/getting-docs/onboarding",
           label: "Onboarding",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/account",
+          label: "Global Account",
         },
         {
           type: "link",
@@ -439,11 +440,7 @@ const sidebars = {
               href: "/docs/getting-docs/onboarding#kyc-and-onboarding",
               label: "Overview",
             },
-            {
-              type: "link",
-              href: "/docs/getting-docs/onboarding#embedded-kyc-component",
-              label: "Embedded KYC component",
-            },
+            
             {
               type: "link",
               href: "/docs/getting-docs/onboarding#hosted-onboarding",
@@ -685,7 +682,7 @@ const sidebars = {
             {
               type: "link",
               href: "/docs/api-reference/onboarding#get-user",
-              label: "🟢 GET Get User",
+              label: "🟢 GET  User",
             },
             {
               type: "link",
@@ -696,6 +693,16 @@ const sidebars = {
               type: "link",
               href: "/docs/api-reference/onboarding#account-activation",
               label: "🟢 GET Account Activation",
+            },
+            {
+              type: "link",
+              href: "/docs/api-reference/onboarding#retrieve-an-rfi",
+              label: "🟢 GET Retrieve an RFI",
+            },
+            {
+              type: "link",
+              href: "/docs/api-reference/onboarding#respond-an-rfi",
+              label: "🟡 POST Respond an RFI",
             },
           ],
         },
@@ -716,22 +723,22 @@ const sidebars = {
             {
               type: "link",
               href: "/docs/api-reference/accounts#get-account",
-              label: "🟢 GET Get Account",
+              label: "🟢 GET  Account",
             },
             {
               type: "link",
               href: "/docs/api-reference/accounts#get-balance",
-              label: "🟢 GET Get Balance",
+              label: "🟢 GET  Balance",
             },
             {
               type: "link",
               href: "/docs/api-reference/accounts#get-account-transactions",
-              label: "🟢 GET Get Account Transactions",
+              label: "🟢 GET  Account Transactions",
             },
             {
               type: "link",
               href: "/docs/api-reference/accounts#get-balance-history",
-              label: "🟢 GET Get Balance History",
+              label: "🟢 GET  Balance History",
             },
           ],
         },
@@ -757,7 +764,7 @@ const sidebars = {
             {
               type: "link",
               href: "/docs/api-reference/cards#get-all-cards",
-              label: "🟢 GET Get All Cards",
+              label: "🟢 GET  All Cards",
             },
             {
               type: "link",
@@ -771,23 +778,23 @@ const sidebars = {
             },
             {
               type: "link",
-              href: "/docs/api-reference/cards#update-card-holder",
-              label: "🟣 PATCH Update Card Holder",
+              href: "/docs/api-reference/cards#update-a-cardholder",
+              label: "🟣 PATCH Update a cardholder",
             },
             {
               type: "link",
               href: "/docs/api-reference/cards#get-card-limit",
-              label: "🟢 GET Get Card Limit",
+              label: "🟢 GET  Card Limit",
             },
             {
               type: "link",
               href: "/docs/api-reference/cards#get-card-transactions",
-              label: "🟢 GET Get Card Transactions",
+              label: "🟢 GET  Card Transactions",
             },
             {
               type: "link",
               href: "/docs/api-reference/cards#get-card-details",
-              label: "🟢 GET Get Card Details",
+              label: "🟢 GET  Card Details",
             },
           ],
         },
@@ -818,7 +825,7 @@ const sidebars = {
             {
               type: "link",
               href: "/docs/api-reference/foreignExchange#get-conversion",
-              label: "🟢 GET Get Conversion",
+              label: "🟢 GET  Conversion",
             },
           ],
         },
@@ -831,11 +838,7 @@ const sidebars = {
               id: "api-reference/payout",
               label: "Overview",
             },
-            {
-              type: "link",
-              href: "/docs/api-reference/payout#get-create-beneficiary-schema",
-              label: "🟢 GET Get-Create-Beneficiary-Schema",
-            },
+            
             {
               type: "link",
               href: "/docs/api-reference/payout#create-beneficiary",
@@ -854,12 +857,17 @@ const sidebars = {
             {
               type: "link",
               href: "/docs/api-reference/payout#get-beneficiary-by-id",
-              label: "🟢 GET Get Beneficiary by ID",
+              label: "🟢 GET  Beneficiary by ID",
             },
             {
               type: "link",
               href: "/docs/api-reference/payout#get-beneficiary-list",
-              label: "🟢 GET Get Beneficiary List",
+              label: "🟢 GET  Beneficiary List",
+            },
+            {
+              type: "link",
+              href: "/docs/api-reference/payout#get-create-payout",
+              label: "🟡 POST  Create Payout",
             },
           ],
         },
@@ -1004,6 +1012,8 @@ const sidebars = {
       ],
     },
   ],
+
+
 
 
   changelog: [

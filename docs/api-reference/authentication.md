@@ -32,8 +32,7 @@ This API authenticates and retrieves an access token for API operations.
     |-----------|------|----------|-------------|
     | x-client-id | string | Yes | Client identification key |
     | x-api-key | string | Yes | API secret key for authentication |
-    | scope | string | Yes | Permission scopes for the token |
-
+    
   </div>
 
   <div className="api-docs-right">
@@ -45,7 +44,6 @@ This API authenticates and retrieves an access token for API operations.
         curl --location --request POST '{{baseUrl}}/api/v1/authentication/login' \
         --header 'x-client-id: pTJcVvqQQdOLr0lJ6153YA' \
         --header 'x-api-key: b6b7c021759c9a036afa4890346b699f666274f680bf64353a93f00acaccabccc544759b96c8548e38006e760d774d06' \
-        --header 'scope: r:awx_action:balances_view r:awx_action:settings.account_details_view r:awx_action:global_accounts_view' \
         --data ''
         ```
       </TabItem>

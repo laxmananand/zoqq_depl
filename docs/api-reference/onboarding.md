@@ -1001,3 +1001,281 @@ This API activates a user account in the system.
 
   </div> 
 </div>
+
+## Retrieve an RFI
+
+This API retrieves details of an RFI using the given RFI ID.
+
+<Tabs>
+  <TabItem value="endpoint" label="Endpoint" default>
+```
+    GET  {{baseUrl}}/zoqq/api/v1/user/rfi
+     
+```
+  </TabItem>
+</Tabs>
+<div className="api-docs-container">
+  <div className="api-docs-left">
+    <h3>Description</h3>
+    <p>Retrieve details of a specific Request for Information (RFI) including active and answered requests, questions, and associated documents.</p>
+    
+    <h3>Request Headers</h3>
+    
+    | Parameter | Type | Required | Description |
+    |-----------|------|----------|-------------|
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
+    | x-program-id | string | Yes | Program identifier |
+    | x-request-id | string | Yes | Idempotency key |
+    | x-user-id | string | Yes | User identification key |
+    | Authorization | string | No | Bearer token (Nullable) |
+
+    <h3>Response Fields</h3>
+    
+    | Field | Type | Description |
+    |-------|------|-------------|
+    | account_id | string | Unique account identifier |
+    | active_request | object | Current pending RFI details |
+    | answered_requests | array | List of previously answered RFIs |
+    | status | string | RFI status (e.g., ACTION_REQUIRED) |
+    | type | string | RFI type (e.g., KYC) |
+    | created_at | string | ISO 8601 creation timestamp |
+    | updated_at | string | ISO 8601 last update timestamp |
+
+    <h4>Question Object Fields:</h4>
+    | Field | Type | Description |
+    |-------|------|-------------|
+    | id | string | Unique question identifier |
+    | key | string | Question type key (e.g., PROOF_OF_ADDRESS) |
+    | title | object | Localized question titles |
+    | description | object | Localized descriptions |
+    | answer | object | Provided answer details |
+    | attachments | array | List of attached files |
+    | comment | string | Additional comments |
+
+  </div>
+  
+  <div className="api-docs-right">
+    <h3>Request Example</h3>
+    
+    <Tabs>
+      <TabItem value="curl" label="cURL" default>
+        ```bash
+        curl -X GET \
+          "{{baseUrl}}/zoqq/api/v1/user/rfi" \
+          -H "x-api-key: {{Shared Xapikey By Zoqq}}" \
+          -H "x-program-id: {{BasedOnRequirement}}" \
+          -H "x-request-id: {{IdempotencyKey}}" \
+          -H "x-user-id: {{Useridentificationkey}}"
+        ```
+      </TabItem>
+      
+      <TabItem value="response" label="Response Example">
+        ```json
+        {
+          "account_id": "acct_e_2wbiZ3Mx-ynlX-7Qidbg",
+          "active_request": {
+            "created_at": "2023-04-12T07:29:36+0000",
+            "questions": [
+              {
+                "answer": {
+                  "address": {
+                    "address_line1": "200 Collins Street",
+                    "address_line2": "200 Collins Street",
+                    "country_code": "AU",
+                    "postcode": "3000",
+                    "state": "VIC",
+                    "suburb": "Melbourne"
+                  },
+                  "attachments": [
+                    {
+                      "file_id": "ZTEyOWJjZTItZGI5NS00NzI5LWI1YTQtZmQ2MmZlNDEwNzFlLHwsaG9uZ2tvbmcsfCzpvI7og5xDSS5wZGZfMTY4MzI1Nzg5OTUwOQ"
+                    }
+                  ],
+                  "identity_document": {
+                    "back_file_id": "N2EwYTllMTgtZmZjOS00ZDllLWI1MDQtMDMyZjAzZTRjZWE0LHwsLHwsQ05fQkxfbmV3LnBuZ18xNjgzNTUyNjg3Nzg3",
+                    "front_file_id": "N2EwYTllMTgtZmZjOS00ZDllLWI1MDQtMDMyZjAzZTRjZWE0LHwsLHwsQ05fQkxfbmV3LnBuZ18xNjgzNTUyNjg3Nzg3",
+                    "issuing_country": "AU",
+                    "number": "123456789",
+                    "type": "DRIVING_LICENSE"
+                  }
+                },
+                "id": "ba7bfb51-77bc-4991-b651-0969ece1d263",
+                "key": "PROOF_OF_ADDRESS",
+                "title": {
+                  "en": "Information confirmation",
+                  "zh": "信息确认"
+                }
+              }
+            ],
+            "updated_at": "2023-04-14T07:29:36+0000"
+          },
+          "status": "ACTION_REQUIRED",
+          "type": "KYC",
+          "updated_at": "2023-04-12T07:29:36+0000"
+        }
+        ```
+      </TabItem>
+      
+      <TabItem value="python" label="Python">
+        ```python
+        import requests
+        
+        headers = {
+            "x-api-key": "{{Shared Xapikey By Zoqq}}",
+            "x-program-id": "{{BasedOnRequirement}}",
+            "x-request-id": "{{IdempotencyKey}}",
+            "x-user-id": "{{Useridentificationkey}}"
+        }
+        
+        response = requests.get(
+            "{{baseUrl}}/zoqq/api/v1/user/rfi",
+            headers=headers
+        )
+        
+        print(response.json())
+        ```
+      </TabItem>
+    </Tabs>
+  </div>
+</div>
+
+
+##  Respond an RFI
+
+This API allows you to respond to an RFI request by providing the required answers.
+
+<Tabs>
+  <TabItem value="endpoint" label="Endpoint" default>
+```
+    POST  {{baseUrl}}/zoqq/api/v1/user/rfi
+     
+```
+  </TabItem>
+</Tabs>
+
+<div className="api-docs-container">
+  <div className="api-docs-left">
+    <h3>Description</h3>
+    <p>Submit responses to a Request for Information (RFI) with supporting documents and verification details.</p>
+    
+    <h3>Request Headers</h3>
+    
+    | Parameter | Type | Required | Description |
+    |-----------|------|----------|-------------|
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
+    | x-program-id | string | Yes | Program identifier |
+    | x-request-id | string | Yes | Idempotency key |
+    | x-user-id | string | Yes | User identification key |
+    | Authorization | string | No | Bearer token (Nullable) |
+    | Content-Type | string | Yes | Must be application/json |
+
+    <h3>Request Body Parameters</h3>
+    
+    | Field | Type | Required | Description |
+    |-------|------|----------|-------------|
+    | id | string | Yes | RFI question identifier |
+    | type | string | Yes | Response type (e.g., ADDRESS) |
+    | address_line1 | string | Conditional | Street address line 1 |
+    | address_line2 | string | No | Street address line 2 |
+    | country_code | string | Conditional | 2-letter country code |
+    | postcode | string | Conditional | Postal/ZIP code |
+    | state | string | Conditional | State/Province code |
+    | suburb | string | Conditional | City/Locality name |
+    | attachments | array | No | File IDs of supporting documents |
+
+    <h4>Supported Response Types:</h4>
+    - `ADDRESS`: For proof of address verification
+    - `DOCUMENT`: For identity document verification
+    - `TEXT`: For simple text responses
+  </div>
+  
+  <div className="api-docs-right">
+    <h3>Request Examples</h3>
+    
+    <Tabs>
+      <TabItem value="curl" label="cURL" default>
+        ```bash
+        curl -X POST \
+          "{{baseUrl}}/zoqq/api/v1/user/rfi" \
+          -H "x-api-key: {{Shared Xapikey By Zoqq}}" \
+          -H "x-program-id: {{BasedOnRequirement}}" \
+          -H "x-request-id: {{IdempotencyKey}}" \
+          -H "x-user-id: {{Useridentificationkey}}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "id": "de73d13b-cb60-4541-8fa6-4bc50c1cbe92",
+            "type": "ADDRESS",
+            "address_line1": "200 Collins Street",
+            "address_line2": "200 Collins Street",
+            "country_code": "AU",
+            "postcode": "3000",
+            "state": "VIC",
+            "suburb": "Melbourne"
+          }'
+        ```
+      </TabItem>
+      
+      <TabItem value="response" label="Response Example">
+        ```json
+        {
+          "status": "SUBMITTED",
+          "rfi_id": "de73d13b-cb60-4541-8fa6-4bc50c1cbe92",
+          "submitted_at": "2023-04-15T08:30:45Z",
+          "next_steps": "Verification may take 1-3 business days"
+        }
+        ```
+      </TabItem>
+      
+      <TabItem value="python" label="Python">
+        ```python
+        import requests
+
+        headers = {
+            "x-api-key": "{{Shared Xapikey By Zoqq}}",
+            "x-program-id": "{{BasedOnRequirement}}",
+            "x-request-id": "{{IdempotencyKey}}",
+            "x-user-id": "{{Useridentificationkey}}",
+            "Content-Type": "application/json"
+        }
+
+        payload = {
+            "id": "de73d13b-cb60-4541-8fa6-4bc50c1cbe92",
+            "type": "ADDRESS",
+            "address_line1": "200 Collins Street",
+            "address_line2": "200 Collins Street",
+            "country_code": "AU",
+            "postcode": "3000",
+            "state": "VIC",
+            "suburb": "Melbourne"
+        }
+
+        response = requests.post(
+            "{{baseUrl}}/zoqq/api/v1/user/rfi",
+            headers=headers,
+            json=payload
+        )
+
+        print(response.json())
+        ```
+      </TabItem>
+      
+      <TabItem value="advanced" label="With Attachments">
+        ```json
+        {
+          "id": "de73d13b-cb60-4541-8fa6-4bc50c1cbe92",
+          "type": "ADDRESS",
+          "address_line1": "200 Collins Street",
+          "country_code": "AU",
+          "postcode": "3000",
+          "attachments": [
+            {
+              "file_id": "ZTEyOWJjZTItZGI5NS00NzI5LWI1YTQtZmQ2MmZlNDEwNzFl",
+              "purpose": "PROOF_OF_ADDRESS"
+            }
+          ]
+        }
+        ```
+      </TabItem>
+    </Tabs>
+  </div>
+</div>

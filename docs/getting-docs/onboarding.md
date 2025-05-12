@@ -24,8 +24,8 @@ Successfully handle requests for information and activate accounts.
 ## KYC RFI
 Handle additional information requests on the account related to KYC.
 
-## Payment Enablement RFI
-Handle additional information requests related to payments acceptance capabilities.
+<!-- ## Payment Enablement RFI
+Handle additional information requests related to payments acceptance capabilities. -->
 
 ---
 
@@ -68,28 +68,7 @@ As a platform, you will be able to provide API instructions on behalf of the con
 - **Connected Account Transfers** to debit your platform wallet and move funds to the connected account’s wallet.  
 - **Charges** to debit the connected account’s wallet to move funds to your platform wallet.  
 
-To call APIs on behalf of the connected account, simply specify the connected account ID using the `x-on-behalf-of` header. See sample request below:
 
-### Sample Request (Shell)
-
-```bash
-curl -X POST \
-  'http://api-demo.zoqq.com/api/v1/conversions/create' \
-  -H 'Authorization: Bearer <your_bearer_token>' \
-  -H 'Content-Type: application/json' \
-  -H 'cache-control: no-cache' \
-  -H 'x-on-behalf-of: 133097196' \
-  -d '{
-    "buy_amount": "10000",
-    "buy_currency": "USD",
-    "client_data": "string",
-    "reason": "Settling invoices",
-    "request_id": "67f687fe-dcf4-4462-92fa-203353a01d9d96",
-    "sell_currency": "AUD",
-    "settlement_date": "2018-12-11",
-    "term_agreement": true
-  }'
-```
 
 ## Supported Regions
 
@@ -166,8 +145,6 @@ Zoqq requires the following compliance checks for your customer for successful o
 ## KYC and Onboarding
 
 Zoqq offers multiple options to onboard connected accounts and submit them for KYC:
-
-- **Embedded KYC component** (Zoqq-hosted iFrame)
 - **Hosted flow** (Zoqq-hosted full-page redirect)
 - **Accounts API**
 
@@ -176,21 +153,17 @@ Once a new account is created and connected to your platform, you can update acc
 This section describes these options at a high level, including tradeoffs and use cases for each.  
 > **Note:** These options are not mutually exclusive, but we recommend building a unified onboarding experience.
 
-| Feature               | Embedded KYC Component                          | Hosted Flow                                  | Accounts API                                          |
-|-----------------------|--------------------------------------------------|-----------------------------------------------|--------------------------------------------------------|
-| **Description**       | Onboard customers through a UI component embedded directly into your site | Redirect customers into a flow hosted by Zoqq | Fully control the onboarding UI, built on top of Zoqq APIs |
-| **Suitable for**      | Spending minimal tech effort. Leverage a pre-built UI that matches your brand. | Spending minimal tech effort. Redirect connected accounts to Zoqq-hosted page to get to market quickly. | A highly customized onboarding workflow. Requires more time and development resources. |
-| **KYC Information**   | Collects required KYC information from your end users | Collects required KYC information from your end users | Collect on your own interface |
-| **AML (Anti-money laundering)** | Supported                                     | Supported                                     | Supported                                                 |
-| **Sanctions Screening** | Supported                                     | Supported                                     | Supported                                                 |
-| **Identity Verification** | Real-time progressive verification             | Real-time progressive verification             | Verification after submitting to Zoqq in the back end     |
-| **Customization**     | Advanced theming to align with your design system | Basic theming                                | Full control over look and feel                            |
-| **Integration Effort**| Minimal coding                                  | Minimal coding                                | Most coding                                                |
+| Feature               | Hosted Flow                                  | Zoqq API                                          |
+|-----------------------|-----------------------------------------------|--------------------------------------------------------|
+| **Description**       | Redirect customers into a flow hosted by Zoqq | Fully control the onboarding UI, built on top of Zoqq APIs |
+| **Suitable for**      | Spending minimal tech effort. Redirect connected accounts to Zoqq-hosted page to get to market quickly. | A highly customized onboarding workflow. Requires more time and development resources. |
+| **KYC Information**   | Collects required KYC information from your end users | Collect on your own interface |
+| **AML (Anti-money laundering)** | Supported                                     | Supported                                                 |
+| **Sanctions Screening** | Supported                                     | Supported                                                 |
+| **Identity Verification** | Real-time progressive verification             | Verification after submitting to Zoqq in the back end     |
+| **Customization**     | Basic theming                                | Full control over look and feel                            |
+| **Integration Effort**| Minimal coding                                | Most coding                                                |
 
-
-## Embedded KYC Component
-
-The Embedded KYC component is a pre-built UI element that lets you onboard connected accounts globally with a single integration. Instead of building your own native onboarding flow, you can now deliver a conversion-optimized, frictionless onboarding experience that leverages Zoqq's own product improvements.
 
 ## Key Features
 
@@ -202,192 +175,6 @@ The Embedded KYC component is a pre-built UI element that lets you onboard conne
 
 This guide describes how to embed the KYC component into your page to start onboarding connected accounts.
 
-## How It Works
-
-The diagram below depicts the information flow in an Embedded KYC component integration.
-
-
-
-## Before You Begin
-
-1. Obtain your access token by authenticating to Zoqq using your unique Client ID and API key
-2. Contact your Zoqq Account Manager to enable onboarding using Embedded Components
-3. Explore [Zoqq.js reference](reference-link) to familiarize yourself with the Element methods
-4. Install and initialize [Zoqq.js](installation-link)
-5. Build and test your integration in a demo environment first
-
-## Step 1: Create a Connected Account for KYC
-
-Call "Create a connected account" by providing the required fields in the request. Note that the terms of data usage must be agreed to before proceeding.
-
-```shell
-curl --request POST \
-  --url 'https://api-demo.zoqq.com/api/v1/accounts/create' \
-  --header 'Content-Type: application/json' \
-  --header 'Authorization: Bearer <your_bearer_token>' \
-  --data-raw '{
-    "primary_contact":{
-      "email":"test@zoqq.com"
-    },
-    "account_details":{
-      "business_details":{
-         "business_name": "Example Company"
-      }
-    },
-    "customer_agreements": {
-      "agreed_to_terms_and_conditions": true,
-      "agreed_to_data_usage": true
-    }
-  }'
-  ```
-  ## Step 2: Initialize the SDK
-
-First, import the components-sdk and initialize the environment. For details, see [Initialization](#).
-
-### Set Up the Server for Authentication
-
-When the end user begins onboarding, get an authorization code on the server side:
-
-```javascript
-// Generate code_verifier
-const dec2hex = (dec: number) => {
-  return ('0' + dec.toString(16)).slice(-2);
-};
-
-const generateCodeVerifier = () => {
-  const length = Math.random() * (129-43) + 43;   
-  const array = new Uint32Array(length/2);
-  window.crypto.getRandomValues(array);
-  return Array.from(array, dec2hex).join('');
-};
-
-const codeVerifier = generateCodeVerifier();
-```
-
-## Code Challenge Generation
-
-```javascript
-import { Base64 } from 'js-base64';
-
-const sha256 = (plain: string) => {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(plain);
-  return window.crypto.subtle.digest('SHA-256', data);
-};
-
-const base64urlencode = (hashed: ArrayBuffer) => {
-  const bytes = new Uint8Array(hashed);
-  const base64encoded = Base64.fromUint8Array(bytes, true);
-  return base64encoded;
-};
-
-export const generateCodeChallengeFromVerifier = async (codeVerifier: string) => {
-  const hashed = await sha256(codeVerifier);
-  const base64encoded = base64urlencode(hashed);
-  return base64encoded;
-};
-
-const codeChallenge = await generateCodeChallengeFromVerifier(codeVerifier);
-
-```
-
-## Step 3: Add the Embedded Onboarding Component
-
-### Define the Onboarding Container
-Create an empty container div with a unique ID:
-
-```html
-<div id="kyc-container"></div>
-```
-Create the Embedded KYC Component
-Initialize the KYC element with your preferred options:
-
-```javascript
-const element = createElement('kyc', {
-  hideHeader: true,    // Hide the default header
-  hideNav: true        // Hide the navigation bar
-});```
-
-Mount the Element
-Attach the component to your container using either method:
-
-```javascript
-// Method 1: Mount by element ID
-element.mount('kyc-container');
-
-// Method 2: Mount using DOM element
-
-const containerElement = document.getElementById("kyc-container");
-element.mount(containerElement);```
-
-Handle the Ready Event
-Listen for when the component is fully loaded:
-
-javascript
-element.on('ready', (event) => {
-    if (event.kycStatus !== 'INIT') { 
-       switch (event.kycStatus) {
-         case 'SUBMITTED':
-           // Show submitted page UI
-           break;
-         case 'SUCCESS':
-           // Show success page UI
-           break;
-         case 'FAILURE':
-           // Show failure page UI
-           break;
-       }
-    } else {
-      // Remove loading spinner
-      setLoading(false);
-    }
-});
-
-```
-
-## Step 4: Handle the KYC Response
-
-### Event Listeners
-Add success and error handlers to manage the KYC outcome:
-
-```javascript
-// Success handler
-element.on('success', (event) => {
-  console.log('KYC Successful!', event);
-  // Handle successful verification:
-  // - Update UI
-  // - Proceed to next step
-  // - Store verification data
-});
-
-// Error handler
-element.on('error', (event) => {
-  console.error('KYC Failed:', event.error);
-  // Handle errors:
-  // - Show error message
-  // - Allow retry
-  // - Log details for support
-});```
-
-
-Error Handling Example
-
-```javascript
-element.on('error', (event) => {
-  switch(event.error.code) {
-    case 'UNAUTHORIZED':
-      showErrorMessage('Session expired - please refresh');
-      restartAuthFlow();
-      break;
-    case 'SUBMIT_FAILED':
-      showErrorMessage('Submission failed - please try again');
-      break;
-    default:
-      logErrorToServer(event.error);
-      showGenericError();
-  }
-});
-```
 
 
 ## Hosted Onboarding
@@ -402,7 +189,7 @@ Zoqq’s hosted form dynamically handles KYC data collection, customized by coun
 2. Redirect the user to the **Zoqq-hosted** form.
 3. Once completed, users are redirected to your return URL.
 
-> Try out the hosted onboarding flow in the [Zoqq demo environment](#).
+> Try out the hosted onboarding flow in the [Zoqq demo environment](https://awx-demo.vercel.app/).
 
 ---
 
@@ -525,97 +312,3 @@ As a platform, you have the ability to create multiple accounts for one existing
 
 Each account is equipped with its own wallet. Using multiple accounts for the same legal entity can be used to facilitate reconciliation as it enables each account to manage its segregated funds for various purposes — like inbound money transfers and treasury management — separately.
 
-## Step 1: Retrieve the legal entity
-
-Call **List all accounts API** to retrieve the list of connected accounts associated with your platform account.
-
-### Example request
-
-```shell
-curl --request GET \
---url 'https://api-demo.zoqq.com/api/v1/accounts?account_status=string&email=string&from_created_at=2017-04-01&identifier=string&metadata=string&page_num=0&page_size=100&to_created_at=2017-04-01' \
---header 'Authorization: Bearer <your_bearer_token>'
-```
-
-### Example response
-
-```json
-{
-    "has_more": false,
-    "items": [
-         {
-            "account_details": {...},
-                "business_details": {...},
-                "trustee_details": null,
-                "individual_details": null,
-                "legal_entity_id": "le_lSZ5eOunOT-Nvj54Oe7H2A",
-                "legal_entity_type": "BUSINESS",
-                "authorised_person_details": {...},
-                "legal_rep_details": {...},
-                "controlling_person_details": {...},
-                "beneficial_owners": [],
-                "director_details": []
-            },
-            "account_usage": {...},
-            "created_at": "2023-02-02T13:04:26+0000",
-            "customer_agreements": {...},
-            "id": "acct_o-etPE29MlaqjzhF4UTIRQ",
-            "nickname": "Deal Fund",
-            "primary_contact": {...},
-            "status": "ACTIVE",
-            "view_type": "EXCLUDED_PII"
-        },
-        .....
-        .....
-        .....
-}
-```
-
-## Step 2: Create a new connected account under the same legal entity
-
-Use the returned `legal_entity_id` of a connected account to create a new connected account under the same legal entity ID. By reusing the same legal entity and providing a different `identifier`, the account transitions to `ACTIVE` status without passing KYC.
-
-### Example request
-
-```shell
-curl --request POST \
---url 'https://api-demo.zoqq.com/api/v1/accounts/create' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer <your_bearer_token>' \
---data '{
-    "account_details": {
-        "legal_entity_id": "le_lSZ5eOunOT-Nvj54Oe7H2A"
-    },
-    "identifier": "Multiple accounts by API",
-    "primary_contact": {
-    }
-}'
-```
-
-### Example response
-
-```json
-{
-    "account_details": {...},
-        "business_details": {...},
-        "trustee_details": null,
-        "individual_details": null,
-        "legal_entity_id": "le_lSZ5eOunOT-Nvj54Oe7H2A",
-        "legal_entity_type": "BUSINESS",
-        "authorised_person_details": {...},
-        "legal_rep_details": {...},
-        "controlling_person_details": {...},
-        "beneficial_owners": [...],
-        "director_details": []
-    },
-    "account_usage": {..},
-    "created_at": "2023-06-05T14:50:02+0000",
-    "customer_agreements": {...},
-    "id": "acct_5ADNyETZMgK1SbBtDB28bw",
-    "identifier": "MASE by API",
-    "nickname": "OurCrowd Deals UI",
-    "primary_contact": {...},
-    "status": "ACTIVE",
-    "view_type": "COMPLETE"
-}
-```
