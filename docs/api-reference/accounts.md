@@ -882,6 +882,7 @@ GET {{baseUrl}}/zoqq/api/v1/account/transactions
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key (UUID recommended) |
     | x-user-id | string | Yes | Unique user identifier |
+    | x-account-id | string   | Yes      | Global account identifier |
     | Authorization | string | No | Bearer token (Optional) |
     
     <h3>Query Parameters</h3>
@@ -926,6 +927,7 @@ GET {{baseUrl}}/zoqq/api/v1/account/transactions
   --header 'x-program-id: {{ProgramID}}' \
   --header 'x-request-id: {{IdempotencyKey}}' \
   --header 'x-user-id: {{UserID}}' \
+  --header 'x-account-id:{{GlobalAccountId}}'\
   --header 'Authorization: Bearer {{AccessToken}}'
     ```
     
@@ -948,6 +950,7 @@ GET {{baseUrl}}/zoqq/api/v1/account/transactions
         "x-program-id": "{{BasedOnRequirement}}",
         "x-request-id": "{{IdempotencyKey}}",
         "x-user-id": "{{Useridentificationkey}}",
+        "x-account-id":"{{GlobalAccountId}}",
         "Authorization": "Bearer {{YOUR_TOKEN}}"
     }
     
@@ -972,6 +975,7 @@ public class GetTransactions {
             .header("x-program-id", "{{ProgramID}}")
             .header("x-request-id", "{{IdempotencyKey}}")
             .header("x-user-id", "{{UserID}}")
+            .header("x-account-id",{{GlobalAccountId}}")
             .header("Authorization", "Bearer {{AccessToken}}")
             .GET()
             .build();
@@ -997,6 +1001,7 @@ $headers = [
     'x-program-id: {{ProgramID}}',
     'x-request-id: {{IdempotencyKey}}',
     'x-user-id: {{UserID}}',
+    'x-account-id:{{GlobalAccountId}}',
     'Authorization: Bearer {{AccessToken}}'
 ];
 
@@ -1037,6 +1042,7 @@ class Program
                 { "x-program-id", "{{ProgramID}}" },
                 { "x-request-id", "{{IdempotencyKey}}" },
                 { "x-user-id", "{{UserID}}" },
+                {"x-account-id":"{{GlobalAccountId}}"},
                 { "Authorization", "Bearer {{AccessToken}}" }
             }
         };
