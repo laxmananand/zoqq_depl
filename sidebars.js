@@ -525,8 +525,126 @@ const sidebars = {
       ],
     },
   ],
+
+
+  receiveBankTransfer: [
+    {
+      type: "html",
+      value: '<a href="/docs/getting-docs/account" class="back-button">← Back to Global Accounts</a>',
+      defaultStyle: true,
+    },
+    {
+      type: "category",
+      label: "Receive Bank Transfer",
+      collapsed: false,
+      items: [
+        {
+          type: "doc",
+          id: "getting-docs/receiveBankTransfer",
+          label: "Overview",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/receiveBankTransfer#receive-deposits",
+          label: "Receive Deposits",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/receiveBankTransfer#simulate-deposits",
+          label: "Simulate Deposits",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/receiveBankTransfer#retrieve-deposits",
+          label: "Retrieve Deposits",
+
+        }
+      ],
+    },
+  ],
+
+  directDebits: [
+    {
+      type: "html",
+      value: '<a href="/docs/getting-docs/account" class="back-button">← Back to Global Accounts</a>',
+      defaultStyle: true,
+    },
+    {
+      type: "category",
+      label: "Direct Debits",
+      collapsed: false,
+      items: [
+        {
+          type: "doc",
+          id: "getting-docs/directDebits",
+          label: "Overview",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/directDebits#before-you-begin",
+          label: "Before You Begin",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/directDebits#retrieve-global-account-details",
+          label: "Retrieve Global Account Details",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/directDebits#manage-direct-debit-payout-mandates",
+          label: "Manage Direct Debit Mandates",
+        },
+        {
+          type: "link",
+          href: "/docs/getting-docs/directDebits#manage-direct-debit-payouts",
+          label: "Manage Direct Debit Payouts",
+        }
+      ],
+    },
+  ],
+
+  globalTreasury: [
+  {
+    type: "html",
+    value: '<a href="/docs/getting-docs/account" class="back-button">← Back Global Accounts</a>',
+    defaultStyle: true
+  },
+  {
+    type: "category",
+    label: "Global Treasury",
+    collapsed: false,
+    items: [
+      {
+        type: "doc",
+        id: "getting-docs/globalTreasury",
+        label: "Overview"
+      },
+      {
+        type: "link", 
+        href: "/docs/getting-docs/globalTreasury#key-features",
+        label: "Key Features"
+      },
+      {
+        type: "link",
+        href: "/docs/getting-docs/globalTreasury#receive-funds", 
+        label: "Receive Funds"
+      },
+      {
+        type: "link",
+        href: "/docs/getting-docs/globalTreasury#hold--convert-funds",
+        label: "Hold & Convert Funds"
+      },
+      {
+        type: "link",
+        href: "/docs/getting-docs/globalTreasury#process-payouts",
+        label: "Process Payouts" 
+      }
+    ]
+  }
+],
   
 
+  
 
   apiReference: [
     {

@@ -1,4 +1,6 @@
 ---
+id: receiveBankTransfer
+title: Receive Bank Transfer
 sidebar_position: 1
 hide_table_of_contents: true
 ---
@@ -27,4 +29,4 @@ See [Simulate deposits to your Global Account] for more information.
 
 ## Retrieve Deposits
 
-You can retrieve transaction details for deposits made to your Wallet via bank transfers. For more information, see [Retrieve your deposits].
+You can retrieve transaction details for deposits made to your Wallet via bank transfers. For more information, see [Retrieve your deposits](/docs/getting-docs/account#retrieve-deposits).

@@ -25,7 +25,7 @@ hide_table_of_contents: true
   }}
 >
   <a
-    href="/docs/getting-docs/receive-bank-transfer"
+    href="/docs/getting-docs/receiveBankTransfer"
     className="feature-box"
     style={{
       display: "block",
@@ -47,7 +47,7 @@ hide_table_of_contents: true
   </a>
 
 <a
-href="./direct-debits"
+href="./directDebits"
 className="feature-box"
 style={{
       display: "block",
@@ -86,7 +86,7 @@ style={{
   }}
 >
   <a
-    href="./global-treasury"
+    href="./globalTreasury"
     className="use-case-box"
     style={{
       display: "block",
@@ -1007,7 +1007,8 @@ curl --request POST --url 'https://api-demo.zoqq.com/api/v1/simulation/deposit/c
 
 The **Deposits API** enables you to retrieve transaction details for deposits received into the Wallet via bank transfers to Global Accounts and direct debits from Linked Accounts.
 
-If you are retrieving a bank transfer deposit, you can subscribe to Deposit webhook events to receive any deposit status transitions. See **Bank transfer deposit statuses** for more information.
+If you are retrieving a bank transfer deposit, you can subscribe to Deposit webhook events to receive any deposit status transitions.
+**Bank transfer deposit statuses** for more information.
 
 Depending on the Global Account financial institution & payment method, the availability of deposit details (eg. payer name, payer bank account number etc.) will vary.
 
