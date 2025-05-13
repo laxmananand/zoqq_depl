@@ -11,7 +11,7 @@ Learn how to authenticate with the Zoqq API.
 
 ## Authentication Login
 
-This API authenticates and retrieves an access token for API operations.
+This API authenticates and retrieves an access token for API operations.To get started, you must first obtain an access token, which is required to access all other API endpoints. Use your unique Client ID and X-API Key to call the Authentication API. Upon a successful request, you will receive a unique Auth Code that remains valid for approximately 30 minutes. During this period, you can make API calls using the token. Once the Auth Code expires, you will need to generate a new one to continue accessing the APIs.
 
 <Tabs>
   <TabItem value="endpoint" label="Endpoint" default>

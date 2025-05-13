@@ -28,8 +28,7 @@ POST {{baseUrl}}/zoqq/api/v1/account
   <div className="api-docs-left">
     <h3>Description</h3>
     <p>Creates a new global account with specified currency and transfer capabilities. 
-    The account will be associated with the authenticated user and can support 
-    multiple transfer methods including ACH, FEDWIRE, and SWIFT.</p>
+   This API enables the creation of a new account for a user within the system. It establishes a global account for the authenticated user in the specified currency and supports multiple transfer methods—such as Local and SWIFT—allowing for both domestic and international transactions.</p>
     
     <h3>Request Headers</h3>
     

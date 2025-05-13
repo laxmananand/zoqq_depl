@@ -23,8 +23,7 @@ Create payouts to external bank accounts via Local transfer methods or SWIFT usi
 ### Payout to zoqq accounts, funded by Wallet
 Create instant payouts using Wallet balance to businesses who also own zoqq accounts.
 
-### Payout to bank accounts, funded by Linked Accounts
-Create payouts to external bank accounts via Local transfer methods or SWIFT using funds debited from Linked Accounts.
+
 
 ---
 
@@ -95,16 +94,6 @@ You can also determine **when to release payouts**.
 
 ---
 
-## Save Development Time
-
-To simplify integration, use our embedded components:
-
-- 🧩 **Embedded Payout Component**  
-- 👥 **Embedded Beneficiary Component**
-
-These allow you to **collect and manage payout/beneficiary information** with minimal coding effort.
-
----
 
 ## Getting Started
 

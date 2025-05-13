@@ -380,20 +380,27 @@ POST {{baseUrl}}/zoqq/api/v1/card
 
     <h3>Request Body Parameters</h3>
 
-    | Parameter | Type | Required | Description |
-    |-----------|------|----------|-------------|
-    | card_issuance_action | string | Yes | Card issuance type (NEW, REPLACEMENT) |
-    | card_type | string | Yes | Card type (GPR_PHY, GPR_VIR) |
-    | card_holder_id | string | Yes | ID of the cardholder |
-    | issuance_mode | string | Backend | Issuance mode (NORMAL_DELIVERY_LOCAL) |
-    | program | object | Yes | Program details |
-    | program.purpose | string | Yes | COMMERCIAL or CONSUMER |
-    | program.type | string | Yes | DEBIT or CREDIT |
-    | program.sub_type | string | Yes | B2B_TRAVEL, etc. |
-    | authorization_controls | object | Yes | Transaction controls |
-    | authorization_controls.allowed_transaction_count | string | Yes | SINGLE or MULTIPLE |
-    | authorization_controls.transaction_limits | object | Yes | Transaction limit details |
-    | is_personalized | boolean | Yes | Whether card is personalized |
+| Parameter                                                  | Type     | Required | Description                                                                 |
+|------------------------------------------------------------|----------|----------|-----------------------------------------------------------------------------|
+| card_issuance_action                                       | string   | Yes      | Card issuance type (`NEW`, `REPLACEMENT`)                                  |
+| card_type                                                  | string   | Yes      | Card type (`GPR_PHY`, `GPR_VIR`)                                            |
+| card_holder_id                                             | string   | Yes      | ID of the cardholder                                                        |
+| issuance_mode                                              | string   | Yes      | `PHYSICAL` or `VIRTUAL`                                                     |
+| created_by                                                 | string   | Yes      | ID of the user who created the request                                     |
+| request_id                                                 | string   | Yes      | Unique ID for idempotency                                                   |
+| program                                                    | object   | Yes      | Program details                                                             |
+| program.purpose                                            | string   | Yes      | Purpose of the card (`COMMERCIAL`, `CONSUMER`)                              |
+| program.type                                               | string   | Yes      | Type of the card (`DEBIT`, `CREDIT`)                                       |
+| program.sub_type                                           | string   | Yes      | Card sub-type (`B2B_TRAVEL`, etc.)                                         |
+| authorization_controls                                     | object   | Yes      | Transaction control configurations                                          |
+| authorization_controls.allowed_transaction_count           | string   | Yes      | `SINGLE` or `MULTIPLE`                                                      |
+| authorization_controls.transaction_limits                  | object   | Yes      | Transaction limits configuration                                            |
+| authorization_controls.transaction_limits.currency         | string   | Yes      | Currency for the transaction limits (`USD`, etc.)                          |
+| authorization_controls.transaction_limits.limits           | array    | Yes      | List of limit objects                                                       |
+| authorization_controls.transaction_limits.limits[].amount  | integer  | Yes      | Transaction limit amount (> 0)                                              |
+| authorization_controls.transaction_limits.limits[].interval| string   | Yes      | Interval (`PER_TRANSACTION`, `DAILY`, `WEEKLY`, `MONTHLY`, `ALL_TIME`)     |
+| is_personalized                                            | boolean  | Yes      | Whether the card is personalized                                            |
+
 
   </div>
 
@@ -1111,13 +1118,18 @@ PATCH {{baseUrl}}/zoqq/api/v1/card
 
     <h3>Request Body Parameters</h3>
 
-    | Parameter | Type | Required | Description |
-    |-----------|------|----------|-------------|
-    | id | string | Yes | Card ID to update |
-    | authorization_controls | object | No | Transaction authorization settings |
-    | authorization_controls.allowed_transaction_count | string | No | SINGLE/MULTIPLE |
-    | authorization_controls.transaction_limits | object | No | Limit configuration |
-    | card_status | string | No | ACTIVE/INACTIVE/BLOCKED |
+    
+
+### Request Body Parameters
+
+| Parameter                          | Type              | Required         | Description                                                                 |
+|------------------------------------|-------------------|------------------|-----------------------------------------------------------------------------|
+| id                               | string            | Yes              | Card ID to update                                                           |
+| card_status                      | string            | No               | Card status — must be one of `ACTIVE`, `INACTIVE`, `CLOSED`                |
+| currency                         | string            | No               | Currency for the card (e.g., `USD`, `EUR`)                                  |
+| transaction_limits               | array of objects  | No               | List of transaction limits                                                  |
+| transaction_limits[].type        | string            | Yes (if present) | Type of limit — one of `PER_TRANSACTION`, `DAILY`, `WEEKLY`, `MONTHLY`, `ALL_TIME` |
+| transaction_limits[].value       | integer           | Yes (if present) | Numerical value of the limit                                                
 
   </div>
 
@@ -1138,20 +1150,15 @@ PATCH {{baseUrl}}/zoqq/api/v1/card
       --header 'Authorization: Bearer {{YOUR_TOKEN}}' \
       --data '{
         "id": "card_1234567890abcdef",
-        "authorization_controls": {
-          "allowed_transaction_count": "MULTIPLE",
-          "transaction_limits": {
-            "currency": "USD",
-            "limits": [
-              {
-                "amount": 20000,
-                "interval": "ALL_TIME"
-              }
-            ]
-          }
-        },
-        "card_status": "INACTIVE"
-      }'
+    "currency": "USD",
+    "transaction_limits": [
+      {
+        "type": "ALL_TIME",
+        "value": 20000
+      }
+    ],
+    "card_status": "INACTIVE"
+  }'
     ```
 
       </TabItem>
@@ -1165,20 +1172,15 @@ PATCH {{baseUrl}}/zoqq/api/v1/card
 
     payload = {
         "id": "card_1234567890abcdef",
-        "authorization_controls": {
-            "allowed_transaction_count": "MULTIPLE",
-            "transaction_limits": {
-                "currency": "USD",
-                "limits": [
-                    {
-                        "amount": 20000,
-                        "interval": "ALL_TIME"
-                    }
-                ]
-            }
-        },
-        "card_status": "INACTIVE"
-    }
+    "currency": "USD",
+    "transaction_limits": [
+      {
+        "type": "ALL_TIME",
+        "value": 20000
+      }
+    ],
+    "card_status": "INACTIVE"
+  }
 
     headers = {
         "x-api-key": "{{Shared Xapikey By Zoqq}}",
@@ -1197,19 +1199,46 @@ PATCH {{baseUrl}}/zoqq/api/v1/card
       <TabItem value="java" label="Java">
 
     ```java
-    HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create("{{baseUrl}}/zoqq/api/v1/card"))
-        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
-        .header("x-program-id", "{{BasedOnRequirement}}")
-        .header("x-request-id", "{{IdempotencyKey}}")
-        .header("x-user-id", "{{Useridentificationkey}}")
-        .header("Content-Type", "application/json")
-        .header("Authorization", "Bearer {{YOUR_TOKEN}}")
-        .method("PATCH", HttpRequest.BodyPublishers.ofString("{\"id\":\"card_1234567890abcdef\",\"authorization_controls\":{\"allowed_transaction_count\":\"MULTIPLE\",\"transaction_limits\":{\"currency\":\"USD\",\"limits\":[{\"amount\":20000,\"interval\":\"ALL_TIME\"}]}},\"card_status\":\"INACTIVE\"}"))
-        .build();
-    HttpResponse<String> response = HttpClient.newHttpClient()
-        .send(request, HttpResponse.BodyHandlers.ofString());
-    System.out.println(response.body());
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class UpdateCard {
+    public static void main(String[] args) throws Exception {
+        URL url = new URL("{{baseUrl}}/zoqq/api/v1/card");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("PATCH");
+        conn.setRequestProperty("x-api-key", "{{Shared Xapikey By Zoqq}}");
+        conn.setRequestProperty("x-program-id", "{{BasedOnRequirement}}");
+        conn.setRequestProperty("x-request-id", "{{IdempotencyKey}}");
+        conn.setRequestProperty("x-user-id", "{{Useridentificationkey}}");
+        conn.setRequestProperty("Authorization", "Bearer {{YOUR_TOKEN}}");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setDoOutput(true);
+
+        String jsonPayload = """
+        {
+          "id": "card_1234567890abcdef",
+          "currency": "USD",
+          "transaction_limits": [
+            {
+              "type": "ALL_TIME",
+              "value": 20000
+            }
+          ],
+          "card_status": "INACTIVE"
+        }
+        """;
+
+        try (OutputStream os = conn.getOutputStream()) {
+            os.write(jsonPayload.getBytes());
+        }
+
+        int responseCode = conn.getResponseCode();
+        System.out.println("Response Code: " + responseCode);
+    }
+}
+
     ```
 
       </TabItem>
@@ -1217,96 +1246,85 @@ PATCH {{baseUrl}}/zoqq/api/v1/card
       <TabItem value="php" label="php">
         ```php
         <?php
-        $url = '{{baseUrl}}/zoqq/api/v1/card';
-        
-        $data = [
-            'id' => 'card_1234567890abcdef',
-            'authorization_controls' => [
-                'allowed_transaction_count' => 'MULTIPLE',
-                'transaction_limits' => [
-                    'currency' => 'USD',
-                    'limits' => [
-                        [
-                            'amount' => 20000,
-                            'interval' => 'ALL_TIME'
-                        ]
-                    ]
-                ]
-            ],
-            'card_status' => 'INACTIVE'
-        ];
+$url = "{{baseUrl}}/zoqq/api/v1/card";
 
-        $headers = [
-            'x-api-key: {{Shared Xapikey By Zoqq}}',
-            'x-program-id: {{BasedOnRequirement}}',
-            'x-request-id: {{IdempotencyKey}}',
-            'x-user-id: {{Useridentificationkey}}',
-            'Content-Type: application/json',
-            'Authorization: Bearer {{YOUR_TOKEN}}'
-        ];
+$data = [
+    "id" => "card_1234567890abcdef",
+    "currency" => "USD",
+    "transaction_limits" => [
+        [
+            "type" => "ALL_TIME",
+            "value" => 20000
+        ]
+    ],
+    "card_status" => "INACTIVE"
+];
 
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        
-        $response = curl_exec($ch);
-        curl_close($ch);
-        
-        echo $response;
-        ?>
+$headers = [
+    "x-api-key: {{Shared Xapikey By Zoqq}}",
+    "x-program-id: {{BasedOnRequirement}}",
+    "x-request-id: {{IdempotencyKey}}",
+    "x-user-id: {{Useridentificationkey}}",
+    "Authorization: Bearer {{YOUR_TOKEN}}",
+    "Content-Type: application/json"
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PATCH");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+
         ```
       </TabItem>
       <TabItem value="csharp" label="C#">
         ```csharp
         using System;
-        using System.Net.Http;
-        using System.Text;
-        using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 
-        class Program
+class UpdateCard
+{
+    static async Task Main()
+    {
+        var client = new HttpClient();
+
+        var request = new HttpRequestMessage(new HttpMethod("PATCH"), "{{baseUrl}}/zoqq/api/v1/card");
+        request.Headers.Add("x-api-key", "{{Shared Xapikey By Zoqq}}");
+        request.Headers.Add("x-program-id", "{{BasedOnRequirement}}");
+        request.Headers.Add("x-request-id", "{{IdempotencyKey}}");
+        request.Headers.Add("x-user-id", "{{Useridentificationkey}}");
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", "{{YOUR_TOKEN}}");
+
+        var json = @"
         {
-            static async Task Main(string[] args)
-            {
-                var client = new HttpClient();
-                var request = new HttpRequestMessage
+            ""id"": ""card_1234567890abcdef"",
+            ""currency"": ""USD"",
+            ""transaction_limits"": [
                 {
-                    Method = new HttpMethod("PATCH"),
-                    RequestUri = new Uri("{{baseUrl}}/zoqq/api/v1/card"),
-                    Headers = 
-                    {
-                        { "x-api-key", "{{Shared Xapikey By Zoqq}}" },
-                        { "x-program-id", "{{BasedOnRequirement}}" },
-                        { "x-request-id", "{{IdempotencyKey}}" },
-                        { "x-user-id", "{{Useridentificationkey}}" },
-                        { "Authorization", "Bearer {{YOUR_TOKEN}}" }
-                    },
-                    Content = new StringContent(
-                        "{\"id\":\"card_1234567890abcdef\"," +
-                        "\"authorization_controls\":{" +
-                            "\"allowed_transaction_count\":\"MULTIPLE\"," +
-                            "\"transaction_limits\":{" +
-                                "\"currency\":\"USD\"," +
-                                "\"limits\":[{" +
-                                    "\"amount\":20000," +
-                                    "\"interval\":\"ALL_TIME\"" +
-                                "}]" +
-                            "}" +
-                        "}," +
-                        "\"card_status\":\"INACTIVE\"}",
-                        Encoding.UTF8,
-                        "application/json")
-                };
-
-                using (var response = await client.SendAsync(request))
-                {
-                    response.EnsureSuccessStatusCode();
-                    var body = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(body);
+                    ""type"": ""ALL_TIME"",
+                    ""value"": 20000
                 }
-            }
-        }
+            ],
+            ""card_status"": ""INACTIVE""
+        }";
+
+        request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var response = await client.SendAsync(request);
+        Console.WriteLine($"Response: {response.StatusCode}");
+        var responseBody = await response.Content.ReadAsStringAsync();
+        Console.WriteLine(responseBody);
+    }
+}
+
         ```
       </TabItem>
     </Tabs>

@@ -21,7 +21,7 @@ POST {{baseUrl}}/zoqq/api/v1/user
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint creates a new user account with comprehensive business, personal, and document information.</p>
+    <p>This endpoint creates a new user account with comprehensive business, personal, and document information.Create a new ZOQQ account for your users, merchants, subsidiaries, business partners, or clients. After providing all the necessary information, you can activate the account by submitting it through the 'Submit Account for Activation' endpoint.</p>
 
     <h3>Request Headers</h3>
 
@@ -31,26 +31,59 @@ POST {{baseUrl}}/zoqq/api/v1/user
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | Authorization | string | No | Bearer token (Nullable) |
+ 
+   <h3>Request Body Parameters</h3>
 
-    <h3>Request Body Parameters</h3>
+ | Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| emailId | string | Yes | User's email address |
+| amount | string | Yes | Initial amount |
+| currency | string | Yes | Currency code (e.g., USD) |
+| businessName | string | Yes | Registered business name |
+| businessStructure | string | Yes | Business structure type |
+| contactNumber | string | Yes | Business contact number |
+| identificationType | string | Yes | ID document type (e.g., Passport) |
+| Idnumber | string | Yes | Identification number |
+| issuingCountryCode | string | Yes | Country that issued the ID |
+| effectiveAt | string | Yes | ID document effective date (YYYY-MM-DD) |
+| expireAt | string | Yes | ID document expiry date (YYYY-MM-DD) |
+| firstName | string | Yes | User's first name |
+| middleName | string | No | User's middle name |
+| lastName | string | Yes | User's last name |
+| dateOfBirth | string | Yes | Date of birth (YYYY-MM-DD) |
+| nationality | string | Yes | Nationality of the user |
+| mobile | string | Yes | Mobile number |
+| roles | string | Yes | User role (e.g., BENEFICIAL_OWNER) |
+| legalEntityType | string | Yes | Legal type of the entity (e.g., BUSINESS) |
+| asTrustee | boolean | Yes | Whether the user is acting as a trustee |
+| agreedToTermsAndConditions | boolean | Yes | Whether the user has agreed to terms and conditions |
+| productReference | string | Yes | Product type (e.g., ACCEPT_ONLINE_PAYMENTS) |
+| type | string | Yes | Type of entity (e.g., business) |
+| number | string | Yes | Business registration number |
+| descriptionOfGoodsOrServices | string | Yes | Description of services or goods |
+| industryCategoryCode | string | Yes | Industry classification code |
+| operatingCountry | string | Yes | Country where business operates |
+| registrationAddressLine1 | string | Yes | Business registration address line 1 |
+| registrationAddressLine2 | string | No | Business registration address line 2 |
+| registrationCountryCode | string | Yes | Business registration country code |
+| registrationPostcode | string | Yes | Business registration postcode |
+| registrationState | string | Yes | Business registration state |
+| registrationSuburb | string | Yes | Business registration suburb |
+| residentialAddressLine1 | string | Yes | Residential address line 1 |
+| residentialCountryCode | string | Yes | Residential country code |
+| residentialPostcode | string | Yes | Residential postcode |
+| residentialState | string | Yes | Residential state |
+| residentialSuburb | string | Yes | Residential suburb |
+| fileId | string | Yes | Business document file ID |
+| tag | string | Yes | Tag for business document |
+| frontFileId | string | Yes | ID document front side file ID |
+| personDocumentsFileId | string | Yes | File ID for person documents |
+| personDocumentsTag | string | Yes | Tag for person documents |
+| liveSelfieFileId | string | Yes | Live selfie file ID | 
+ 
+</div>
 
-    | Parameter | Type | Required | Description |
-    |-----------|------|----------|-------------|
-    | emailId | string | Yes | User's email address |
-    | amount | string | Yes | Initial amount |
-    | currency | string | Yes | Currency code (e.g., USD) |
-    | businessName | string | Yes | Registered business name |
-    | businessStructure | string | Yes | Business structure type |
-    | contactNumber | string | Yes | Business contact number |
-    | identificationType | string | Yes | ID document type |
-    | firstName | string | Yes | User's first name |
-    | lastName | string | Yes | User's last name |
-    | dateOfBirth | string | Yes | Date of birth (YYYY-MM-DD) |
-    | mobile | string | Yes | Mobile number |
-    | [various address fields] | object | Yes | Business and residential addresses |
-    | [document fields] | object | Yes | Document references and metadata |
 
-  </div>
 
   <div className="api-docs-right">
     <h3>Request Example</h3>
