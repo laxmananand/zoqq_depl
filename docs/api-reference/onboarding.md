@@ -423,7 +423,8 @@ This API retrieves user details from the system.
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint retrieves the details of an existing user including business information, personal details, and account status.</p>
+    <p>This endpoint retrieves the details of an existing user including business information, personal details, and account status.Update existing customer details using the update user API endpoint. Any changes to the existing user’s address, user's personal details or phone number can be initiated using the PATCH HTTP method. These changes will not affect the existing user's id.
+All parameters used in create user can be updated, except Agent Code, subagent Code and email.</p>
 
     <h3>Request Headers</h3>
 
@@ -682,7 +683,7 @@ This API allows users to accept the terms and conditions.
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint allows users to accept the terms and conditions required by the platform.</p>
+    <p>This API retrieves the current version of the Terms & Conditions that the user must review and accept. It ensures that the user has agreed to the legal and compliance requirements before proceeding with account creation or accessing platform services. This is a mandatory step in the onboarding process.</p>
 
     <h3>Request Headers</h3>
 
@@ -866,7 +867,7 @@ This API activates a user account in the system.
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint activates a user account after verifying all required information.</p>
+    <p>This API retrieves the activation status of a user’s account. It checks whether all required onboarding steps have been completed and confirms if the account is fully activated and ready for use. This endpoint is typically used after submitting the account for activation.</p>
 
     <h3>Request Headers</h3>
 
@@ -1050,7 +1051,7 @@ This API retrieves details of an RFI using the given RFI ID.
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>Retrieve details of a specific Request for Information (RFI) including active and answered requests, questions, and associated documents.</p>
+    <p>This API allows you to retrieve the details of a Request for Information (RFI) linked to a specific account or user. RFIs are generated when additional data or documentation is required for compliance, verification, or due diligence purposes. The API response includes the RFI status, requested items, and any relevant instructions for completion.</p>
     
     <h3>Request Headers</h3>
     
@@ -1189,7 +1190,7 @@ This API allows you to respond to an RFI request by providing the required answe
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>Submit responses to a Request for Information (RFI) with supporting documents and verification details.</p>
+    <p>This API allows you to submit a response to an existing Request for Information (RFI). It is used to provide the required verification details along with any supporting documents requested during the compliance or onboarding process. A successful submission updates the RFI status and moves the review process forward.</p>
     
     <h3>Request Headers</h3>
     

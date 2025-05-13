@@ -1118,9 +1118,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/card
 
     <h3>Request Body Parameters</h3>
 
-    
-
-### Request Body Parameters
+  
 
 | Parameter                          | Type              | Required         | Description                                                                 |
 |------------------------------------|-------------------|------------------|-----------------------------------------------------------------------------|
