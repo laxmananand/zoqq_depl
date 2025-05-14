@@ -870,6 +870,11 @@ const sidebars = {
               href: "/docs/api-reference/payout#create-payout",
               label: "🟡 POST  Create Payout",
             },
+            {
+              type: "link",
+              href: "/docs/api-reference/payout#cancel-payout",
+              label: "🟣 PATCH Cancel Payout",
+            },
           ],
         },
         {

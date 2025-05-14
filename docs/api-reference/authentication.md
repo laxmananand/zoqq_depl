@@ -42,8 +42,8 @@ This API authenticates and retrieves an access token for API operations.To get s
       <TabItem value="curl" label="cURL" default>
         ```bash
         curl --location --request POST '{{baseUrl}}/api/v1/authentication/login' \
-        --header 'x-client-id: Shared By Stylopay' \
-        --header 'x-api-key: Shared By Stylopay' \
+        --header 'x-client-id: Shared By Zoqq' \
+        --header 'x-api-key: Shared By Zoqq' \
         --data ''
         ```
       </TabItem>

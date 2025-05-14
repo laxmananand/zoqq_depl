@@ -1297,7 +1297,7 @@ POST - {{baseUrl}}/zoqq/api/v1/transfer/
 
 
 
- # Cancel Payout 
+## Cancel Payout 
 
 This API allows cancellation of pending payout transactions.
 
@@ -1422,7 +1422,7 @@ This API allows cancellation of pending payout transactions.
         }
         ```
       </TabItem>
-      <TabItem value="php" label="PHP">
+      <TabItem value="php" label="php">
         ```php
         <?php
         $url = "{{baseUrl}}/zoqq/api/v1/transfer/cancelpayout";
