@@ -16,7 +16,7 @@ This API generates a quote for currency conversion or payout transactions.
 <Tabs>
   <TabItem value="endpoint" label="Endpoint" default>
 ```
-GET {{baseUrl}}/zoqq/api/v1/transfer/quote
+POST {{baseUrl}}/zoqq/api/v1/transfer/quote
 ```
 
   </TabItem>
@@ -599,3 +599,4 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/conversion
 
   </div>
 </div>
+

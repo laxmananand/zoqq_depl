@@ -97,7 +97,7 @@ POST {{baseUrl}}/zoqq/api/v1/user
           --header 'x-program-id: {{BasedOnRequirement}}' \
           --header 'x-request-id: {{IdempotencyKey}}' \
           --header 'Authorization: Bearer {{YOUR_TOKEN}}' \
-          --data '{
+          --data-raw '{
             "emailId": "testzoqq10@yopmail.com",
             "amount": "10",
             "currency": "USD",
@@ -1197,10 +1197,10 @@ This API allows you to respond to an RFI request by providing the required answe
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
     | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
-    | x-program-id | string | Yes | Program identifier |
+    | x-program-id | string | Yes | BasedOnRequirement |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Request Body Parameters</h3>

@@ -42,8 +42,8 @@ This API authenticates and retrieves an access token for API operations.To get s
       <TabItem value="curl" label="cURL" default>
         ```bash
         curl --location --request POST '{{baseUrl}}/api/v1/authentication/login' \
-        --header 'x-client-id: pTJcVvqQQdOLr0lJ6153YA' \
-        --header 'x-api-key: b6b7c021759c9a036afa4890346b699f666274f680bf64353a93f00acaccabccc544759b96c8548e38006e760d774d06' \
+        --header 'x-client-id: Shared By Stylopay' \
+        --header 'x-api-key: Shared By Stylopay' \
         --data ''
         ```
       </TabItem>
@@ -62,8 +62,8 @@ This API authenticates and retrieves an access token for API operations.To get s
                 conn.setRequestMethod("POST");
                 
                 // Set headers
-                conn.setRequestProperty("x-client-id", "pTJcVvqQQdOLr0lJ6153YA");
-                conn.setRequestProperty("x-api-key", "b6b7c021759c9a036afa4890346b699f666274f680bf64353a93f00acaccabccc544759b96c8548e38006e760d774d06");
+                conn.setRequestProperty("x-client-id", "Shared By Stylopay");
+                conn.setRequestProperty("x-api-key", "Shared By Stylopay");
                 conn.setRequestProperty("scope", "r:awx_action:balances_view r:awx_action:settings.account_details_view r:awx_action:global_accounts_view");
                 
                 // Send empty POST data
@@ -96,8 +96,8 @@ This API authenticates and retrieves an access token for API operations.To get s
         url = "{{baseUrl}}/api/v1/authentication/login"
 
         headers = {
-            "x-client-id": "pTJcVvqQQdOLr0lJ6153YA",
-            "x-api-key": "b6b7c021759c9a036afa4890346b699f666274f680bf64353a93f00acaccabccc544759b96c8548e38006e760d774d06",
+            "x-client-id": "Shared By Stylopay",
+            "x-api-key": "Shared By Stylopay",
             "scope": "r:awx_action:balances_view r:awx_action:settings.account_details_view r:awx_action:global_accounts_view"
         }
 
@@ -111,8 +111,8 @@ This API authenticates and retrieves an access token for API operations.To get s
         $url = '{{baseUrl}}/api/v1/authentication/login';
 
         $headers = array(
-            'x-client-id: pTJcVvqQQdOLr0lJ6153YA',
-            'x-api-key: b6b7c021759c9a036afa4890346b699f666274f680bf64353a93f00acaccabccc544759b96c8548e38006e760d774d06',
+            'x-client-id: Shared By Stylopay',
+            'x-api-key: Shared By Stylopay',
             'scope: r:awx_action:balances_view r:awx_action:settings.account_details_view r:awx_action:global_accounts_view'
         );
 
@@ -145,8 +145,8 @@ This API authenticates and retrieves an access token for API operations.To get s
                 request.Method = "POST";
                 
                 // Set headers
-                request.Headers["x-client-id"] = "pTJcVvqQQdOLr0lJ6153YA";
-                request.Headers["x-api-key"] = "b6b7c021759c9a036afa4890346b699f666274f680bf64353a93f00acaccabccc544759b96c8548e38006e760d774d06";
+                request.Headers["x-client-id"] = "Shared By Stylopay";
+                request.Headers["x-api-key"] = "Shared By Stylopay";
                 request.Headers["scope"] = "r:awx_action:balances_view r:awx_action:settings.account_details_view r:awx_action:global_accounts_view";
                 
                 // Send empty POST data

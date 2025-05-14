@@ -810,7 +810,7 @@ const sidebars = {
             {
               type: "link",
               href: "/docs/api-reference/foreignExchange#generate-quote",
-              label: "🟢 GET Generate Quote ",
+              label: "🟡 POST Generate Quote ",
             },
             {
               type: "link",
@@ -827,6 +827,7 @@ const sidebars = {
               href: "/docs/api-reference/foreignExchange#get-conversion",
               label: "🟢 GET  Conversion",
             },
+           
           ],
         },
         {

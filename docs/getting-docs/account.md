@@ -106,7 +106,7 @@ style={{
   </a>
 
 <a
-href="./banking-as-a-service"
+href="/docs/api-reference/accounts"
 className="use-case-box"
 style={{
       display: "block",
