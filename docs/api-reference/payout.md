@@ -24,9 +24,9 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
   <div className="api-docs-left">
     <h3>Description</h3>
     <p>This endpoint returns the dynamic schema required to create a beneficiary, based on the specified transfer corridor parameters. The schema fields will vary depending on the country, currency, and transfer method.</p>
-    
+
     <h3>Request Headers</h3>
-    
+
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
     | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
@@ -34,9 +34,9 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
     | Authorization | string | No | Bearer token () |
-    
+
     <h3>Query Parameters</h3>
-    
+
     | Parameter | Type | Required | Description | Values |
     |-----------|------|----------|-------------|--------|
     | account_currency | string | Yes | Beneficiary account currency | ISO currency code |
@@ -46,13 +46,13 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     | transfer_method | string | Yes | Transfer method | `LOCAL`, `SWIFT`, `WALLET` |
 
   </div>
-  
+
   <div className="api-docs-right">
     <h3>Request Example</h3>
-    
+
     <Tabs>
       <TabItem value="curl" label="cURL" default>
-    
+
     ```bash
     curl --request GET \
       --url '{{baseUrl}}/zoqq/api/v1/transfer/beneficiary?account_currency=USD&bank_country_code=US&entity_type=PERSONAL&local_clearing_system=ACH&transfer_method=LOCAL' \
@@ -62,10 +62,10 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
       --header 'x-user-id: {{Useridentificationkey}}' \
       --header 'Authorization: Bearer {{YOUR_TOKEN}}'
     ```
-    
+
       </TabItem>
       <TabItem value="python" label="Python">
-    
+
     ```python
     import requests
 
@@ -172,7 +172,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```
 
       </TabItem>
-     
+
     </Tabs>
 
   </div>
@@ -181,7 +181,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
 <!-- ## Create Payout
 
 Programmatically make cost-effective, fast and secure payouts across the globe.
- 
+
 <Tabs>
   <TabItem value="endpoint" label="Endpoint" default>
 ```
@@ -195,9 +195,9 @@ POST - {{baseUrl}}/zoqq/api/v1/transfer/
   <div className="api-docs-left">
     <h3>Description</h3>
     <p>Initiate a payout transfer to a beneficiary account. The request requires specific headers and a JSON payload with transfer details.</p>
-    
+
     <h3>Request Headers</h3>
-    
+
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
     | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
@@ -206,9 +206,9 @@ POST - {{baseUrl}}/zoqq/api/v1/transfer/
     | x-user-id | string | Yes | User identification key |
     | Authorization | string | No | Bearer token () |
     | Content-Type | string | Yes | Must be application/json |
-    
+
     <h3>Request Body Parameters</h3>
-    
+
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
     | beneficiary_id | string | Yes | ID of pre-registered beneficiary |
@@ -229,10 +229,10 @@ POST - {{baseUrl}}/zoqq/api/v1/transfer/
     ```
 
   </div>
-  
+
   <div className="api-docs-right">
     <h3>Request Examples</h3>
-    
+
     <Tabs>
       <TabItem value="curl" label="cURL" default>
         ```bash
@@ -251,7 +251,7 @@ POST - {{baseUrl}}/zoqq/api/v1/transfer/
           }'
         ```
       </TabItem>
-      
+
       <TabItem value="python" label="Python">
         ```python
         import requests
@@ -275,7 +275,7 @@ POST - {{baseUrl}}/zoqq/api/v1/transfer/
         print(response.json())
         ```
       </TabItem>
-      
+
       <TabItem value="nodejs" label="Node.js">
         ```javascript
         const axios = require('axios');
@@ -303,7 +303,7 @@ POST - {{baseUrl}}/zoqq/api/v1/transfer/
           .catch(error => console.error(error));
         ```
       </TabItem>
-      
+
       <TabItem value="php" label="php">
         ```php
         <?php
@@ -339,10 +339,11 @@ POST - {{baseUrl}}/zoqq/api/v1/transfer/
   </div>
 </div> -->
 
+Zoqq Payouts enables businesses to make faster, more cost-effective payouts across the globe by connecting to local clearing systems in over countries. With a single Zoqq account and/or one integration, you (and your customers) will be able to move funds globally via Zoqq’s payout network, which currently supports local and SWIFT payouts in countries/regions and over currencies.
 
 ## Create Beneficiary
 
-This API creates a new beneficiary for transfers based on the required schema.
+This endpoint is used to create a new beneficiary account, which is required for making transfers to that recipient. To ensure the request is properly formatted, the request body must follow the specific structure (schema) provided by the Get Beneficiary Schema endpoint. This ensures that all necessary details are included and correctly formatted for successful account creation.
 
 <Tabs>
   <TabItem value="endpoint" label="Endpoint" default>
@@ -356,10 +357,11 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint creates a new beneficiary account for making transfers. The request body should follow the schema returned by the Get Beneficiary Schema endpoint.</p>
-    
+    <p>This endpoint is used to create a new beneficiary account, which is essential for initiating transfers to that beneficiary. A beneficiary account typically includes important details such as the recipient’s name,  account , and other relevant data required to process a transfer.
+    To successfully create a beneficiary account, the request body must adhere to a specific format or structure. This structure, also known as the schema, can be retrieved using the Get Beneficiary Schema endpoint. It outlines all the required fields, data types, and any conditional logic or rules that must be followed. Using the correct schema ensures the data is valid and reduces the chances of errors during account creation or future transfers.</p>
+
     <h3>Request Headers</h3>
-    
+
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
     | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
@@ -368,9 +370,9 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     | x-user-id | string | Yes | User identification key |
     | Authorization | string | No | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
-    
+
     <h3>Request Body</h3>
-    
+
     <p>The request body structure varies based on the beneficiary type and corridor. Use the <code>GET /transfer/beneficiary</code> endpoint first to get the required schema for your specific parameters.</p>
 
     <h4>Example for US ACH Personal Account:</h4>
@@ -504,7 +506,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```
 
       </TabItem>
-     
+
     </Tabs>
 
   </div>
@@ -512,10 +514,12 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
 
 ## Validate Create Beneficiary
 
-This API validates beneficiary details before creation without actually creating the beneficiary.
+This API is designed to validate the beneficiary’s details before proceeding with the actual creation of the beneficiary account. It allows you to perform a pre-check to ensure that all the provided information—such as the recipient's name, account number, and other required fields—is accurate, complete, and formatted correctly according to the rules defined by the payment system or region.
 
+By using this validation API, you can identify and correct any issues or missing data in advance, helping to prevent errors or failures during the actual beneficiary creation process. It is a useful step in workflows where ensuring data accuracy is critical before committing to creating records in the system. Importantly, this API only checks the data—it does not create or store the beneficiary account.
 <Tabs>
-  <TabItem value="endpoint" label="Endpoint" default>
+<TabItem value="endpoint" label="Endpoint" default>
+
 ```
 POST {{baseUrl}}/zoqq/api/v1/transfer/validatebeneficiary
 ```
@@ -526,10 +530,11 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/validatebeneficiary
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint validates beneficiary account details according to the schema requirements for the specified transfer corridor. It performs all validation checks without persisting the beneficiary.</p>
-    
+    <p>This endpoint is used to validate beneficiary account details based on the specific requirements of the transfer corridor . It ensures that all the necessary information—such as the beneficiary’s name, account number,  and any country-specific fields—complies with the rules defined in the beneficiary schema for that corridor.
+    When you call this endpoint, it performs the same validation checks that would occur during actual beneficiary creation. </p>
+
     <h3>Request Headers</h3>
-    
+
     | Parameter | Type | Required | Description |
     |-----------|------|----------|-------------|
     | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
@@ -538,9 +543,9 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/validatebeneficiary
     | x-user-id | string | Yes | User identification key |
     | Authorization | string | No | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
-    
+
     <h3>Request Body</h3>
-    
+
     <p>The request body should match the structure returned by the <code>GET /transfer/beneficiary</code> schema endpoint for your specific corridor.</p>
 
     <h4>Example for US ACH Personal Account:</h4>
@@ -667,7 +672,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/validatebeneficiary
     ```
 
       </TabItem>
-      
+
     </Tabs>
 
   </div>
@@ -675,10 +680,10 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/validatebeneficiary
 
 ## Update Beneficiary
 
-This API updates specific fields of an existing beneficiary account.
-
+This API lets you update specific fields of an existing beneficiary account, such as name, bank details without recreating the entire account. You need to provide the beneficiary ID and only the fields you want to change. The API validates the updates based on the rules for the relevant transfer corridor, ensuring data accuracy while keeping the rest of the beneficiary information unchanged.
 <Tabs>
-  <TabItem value="endpoint" label="Endpoint" default>
+<TabItem value="endpoint" label="Endpoint" default>
+
 ```
 PATCH {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
 ```
@@ -689,7 +694,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint partially updates a beneficiary's information. Only include fields that need to be updated, following the same validation schema as beneficiary creation.</p>
+    <p>TThis endpoint allows partial updates to an existing beneficiary's information. You only need to include the fields you want to change, such as name, bank details, or address. The updates are validated using the same schema as beneficiary creation, ensuring they meet the requirements for the relevant transfer corridor. Unspecified fields remain unchanged.</p>
     
     <h3>Request Headers</h3>
     
@@ -821,7 +826,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```
 
       </TabItem>
-      
+
     </Tabs>
 
   </div>
@@ -843,7 +848,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint returns complete details for a single beneficiary, including account information, verification status, and supported payout methods.</p>
+    <p>This endpoint retrieves full details of a specific beneficiary, including their account info, verification status, and supported payout methods. You must provide the beneficiary ID and required headers for authentication and identification.</p>
     
     <h3>Request Headers</h3>
     
@@ -965,7 +970,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     ```
 
       </TabItem>
-      
+
     </Tabs>
 
   </div>
@@ -987,7 +992,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiarylist
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint returns a paginated list of all beneficiaries created by the user, including their status and supported payout methods.</p>
+    <p>This endpoint returns a paginated list of beneficiaries created by the user, along with their status and supported payout methods. You can filter results by status or currency and control pagination using limit and offset query parameters.</p>
     
     <h3>Request Headers</h3>
     
@@ -1127,17 +1132,16 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiarylist
     ```
 
       </TabItem>
-     
+
     </Tabs>
 
   </div>
 </div>
 
-
 ## Create Payout
 
 Programmatically make cost-effective, fast and secure payouts across the globe.
- 
+
 <Tabs>
   <TabItem value="endpoint" label="Endpoint" default>
 ```
@@ -1150,7 +1154,7 @@ POST - {{baseUrl}}/zoqq/api/v1/transfer/
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>Initiate a payout transfer to a beneficiary account. The request requires specific headers and a JSON payload with transfer details.</p>
+    <p>This endpoint initiates a payout transfer to a registered beneficiary account. To use it, you must include the required headers for authentication, program identification, and idempotency. The request body must be in JSON format and include key details such as the beneficiary_id, transfer amount, currency, and a client reference. Optional notes can also be included. The endpoint validates the input and processes the transfer based on the provided details.</p>
     
     <h3>Request Headers</h3>
     
@@ -1231,7 +1235,7 @@ POST - {{baseUrl}}/zoqq/api/v1/transfer/
         print(response.json())
         ```
       </TabItem>
-      
+
       <TabItem value="nodejs" label="Node.js">
         ```javascript
         const axios = require('axios');
@@ -1259,7 +1263,7 @@ POST - {{baseUrl}}/zoqq/api/v1/transfer/
           .catch(error => console.error(error));
         ```
       </TabItem>
-      
+
       <TabItem value="php" label="php">
         ```php
         <?php
@@ -1292,12 +1296,11 @@ POST - {{baseUrl}}/zoqq/api/v1/transfer/
         ```
       </TabItem>
     </Tabs>
+
   </div>
 </div>
 
-
-
-## Cancel Payout 
+## Cancel Payout
 
 This API allows cancellation of pending payout transactions.
 
@@ -1312,7 +1315,7 @@ This API allows cancellation of pending payout transactions.
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint cancels a pending payout transaction identified by either the payout ID or system reference number.</p>
+    <p>This endpoint cancels a pending payout transaction using either the payout ID or system reference number. Required headers ensure authentication and request tracking. The request body must include one of the two identifiers to locate and cancel the transaction. Only pending payouts can be canceled.</p>
 
     <h3>Request Headers</h3>
 
@@ -1339,6 +1342,7 @@ This API allows cancellation of pending payout transactions.
     | systemReferenceNumber | string | Conditional* | System reference number |
 
     <p><em>*Note: At least one of these fields must be provided</em></p>
+
   </div>
 
   <div className="api-docs-right">
@@ -1516,5 +1520,6 @@ This API allows cancellation of pending payout transactions.
         ```
       </TabItem>
     </Tabs>
+
   </div> 
 </div>
