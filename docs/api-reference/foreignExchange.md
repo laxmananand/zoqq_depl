@@ -25,7 +25,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/quote
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint provides real-time quotes for currency conversions or payouts, including exchange rates and expiration times.</p>
+    <p>Retrieve a foreign exchange (FX) quote for a currency conversion. The quote provides the indicative exchange rate and related fees that would apply for converting between two currencies at a specified amount. Used to preview the cost and rate of an FX conversion before creating a transaction.</p>
     
     <h3>Request Headers</h3>
     
@@ -179,7 +179,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/quotedetails
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint returns the full details of a specific quote including exchange rate, amounts, and expiration information.</p>
+    <p>Retrieve the full details of a previously generated FX quote using it’s unique quote ID. It is used to confirm quote details such as exchange rate, buy/sell currencies, and quote expiration before executing the conversion. This ensures that the quote is still valid and can be referenced in a conversion request.</p>
     
     <h3>Request Headers</h3>
     
@@ -319,7 +319,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/conversion
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint initiates a currency conversion transaction using a valid quote ID. The conversion will be processed according to the terms of the original quote.</p>
+    <p>Initiate a currency conversion between two wallets. This will debit one currency and credit another in your Zoqq account. It is used to perform actual FX transactions to convert wallet balances, optionally tied to a quote or payout. You can reference a previously obtained quote for a fixed rate, or proceed.</p>
     
     <h3>Request Headers</h3>
     
@@ -476,7 +476,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/conversion
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint returns the current status and full details of a currency conversion transaction.</p>
+    <p>Fetch details of a specific conversion using its conversion_id. Used to track or audit the status and details of a particular FX conversion transaction. This includes transaction status, rates, currencies involved, and settlement details.</p>
     
     <h3>Request Headers</h3>
     

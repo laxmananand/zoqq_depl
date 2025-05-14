@@ -10,8 +10,12 @@ hide_table_of_contents: true
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-You can create virtual cards associated with your organization. These cards can be single-use or multi-use and can be restricted by merchant category code, currency, and transaction amount.
+You can create virtual cards associated with your organization. These cards can be single-use or multi-use and can be restricted by merchant category code, currency, and transactioYn amount.
+
+base url = https://developer.sandbox.stylopay.com:8075
+
 ## Create Cardholder
+
 
 <Tabs>
   <TabItem value="endpoint" label="Endpoint" default>
@@ -22,6 +26,8 @@ POST {{baseUrl}}/zoqq/api/v1/cardholder
 
   </TabItem>
 </Tabs>
+
+
 
 <div className="api-docs-container">
   <div className="api-docs-left">
