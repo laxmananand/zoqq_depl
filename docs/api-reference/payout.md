@@ -1294,3 +1294,227 @@ POST - {{baseUrl}}/zoqq/api/v1/transfer/
     </Tabs>
   </div>
 </div>
+
+
+
+ # Cancel Payout 
+
+This API allows cancellation of pending payout transactions.
+
+<Tabs>
+  <TabItem value="endpoint" label="Endpoint" default>
+    ```
+    PATCH {{baseUrl}}/zoqq/api/{version}/transfer/cancelpayout
+    ```
+  </TabItem>
+</Tabs>
+
+<div className="api-docs-container">
+  <div className="api-docs-left">
+    <h3>Description</h3>
+    <p>This endpoint cancels a pending payout transaction identified by either the payout ID or system reference number.</p>
+
+    <h3>Request Headers</h3>
+
+    | Parameter | Type | Required | Description |
+    |-----------|------|----------|-------------|
+    | x-api-key | string | Yes | API key for authentication |
+    | x-program-id | string | Yes | Program identifier |
+    | x-request-id | string | Yes | Unique request identifier |
+    | x-user-id | string | No | User identification |
+    | Authorization | string | Yes | Bearer token for authentication |
+    | Content-Type | string | Yes | Must be application/json |
+
+    <h3>Path Parameters</h3>
+
+    | Parameter | Type | Required | Description |
+    |-----------|------|----------|-------------|
+    | version | string | Yes | API version number |
+
+    <h3>Request Body Parameters</h3>
+
+    | Parameter | Type | Required | Description |
+    |-----------|------|----------|-------------|
+    | id | string | Conditional* | Payout transaction ID |
+    | systemReferenceNumber | string | Conditional* | System reference number |
+
+    <p><em>*Note: At least one of these fields must be provided</em></p>
+  </div>
+
+  <div className="api-docs-right">
+    <h3>Request Example</h3>
+
+    <Tabs>
+      <TabItem value="curl" label="cURL" default>
+        ```bash
+        curl --request PATCH \
+          --url {{baseUrl}}/zoqq/api/v1/transfer/cancelpayout \
+          --header 'x-api-key: {{Shared Xapikey By Zoqq}}' \
+          --header 'x-program-id: {{BasedOnRequirement}}' \
+          --header 'x-request-id: {{IdempotencyKey}}' \
+          --header 'x-user-id: {{Useridentificationkey}}' \
+          --header 'Content-Type: application/json' \
+          --header 'Authorization: Bearer {{YOUR_TOKEN}}' \
+          --data '{
+            "id": "pyt_12345",
+            "systemReferenceNumber": "ref_67890"
+          }'
+        ```
+      </TabItem>
+      <TabItem value="python" label="Python">
+        ```python
+        import requests
+        import json
+
+        url = "{{baseUrl}}/zoqq/api/v1/transfer/cancelpayout"
+
+        payload = {
+            "id": "pyt_12345",
+            "systemReferenceNumber": "ref_67890"
+        }
+
+        headers = {
+            "x-api-key": "{{Shared Xapikey By Zoqq}}",
+            "x-program-id": "{{BasedOnRequirement}}",
+            "x-request-id": "{{IdempotencyKey}}",
+            "x-user-id": "{{Useridentificationkey}}",
+            "Content-Type": "application/json",
+            "Authorization": "Bearer {{YOUR_TOKEN}}"
+        }
+
+        response = requests.patch(url, headers=headers, data=json.dumps(payload))
+        print(response.json())
+        ```
+      </TabItem>
+      <TabItem value="java" label="Java">
+        ```java
+        import java.io.OutputStream;
+        import java.net.HttpURLConnection;
+        import java.net.URL;
+
+        public class CancelPayout {
+            public static void main(String[] args) throws Exception {
+                URL url = new URL("{{baseUrl}}/zoqq/api/v1/transfer/cancelpayout");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("PATCH");
+                conn.setRequestProperty("x-api-key", "{{Shared Xapikey By Zoqq}}");
+                conn.setRequestProperty("x-program-id", "{{BasedOnRequirement}}");
+                conn.setRequestProperty("x-request-id", "{{IdempotencyKey}}");
+                conn.setRequestProperty("x-user-id", "{{Useridentificationkey}}");
+                conn.setRequestProperty("Authorization", "Bearer {{YOUR_TOKEN}}");
+                conn.setRequestProperty("Content-Type", "application/json");
+                conn.setDoOutput(true);
+
+                String jsonPayload = """
+                {
+                  "id": "pyt_12345",
+                  "systemReferenceNumber": "ref_67890"
+                }
+                """;
+
+                try (OutputStream os = conn.getOutputStream()) {
+                    os.write(jsonPayload.getBytes());
+                }
+
+                int responseCode = conn.getResponseCode();
+                System.out.println("Response Code: " + responseCode);
+            }
+        }
+        ```
+      </TabItem>
+      <TabItem value="php" label="PHP">
+        ```php
+        <?php
+        $url = "{{baseUrl}}/zoqq/api/v1/transfer/cancelpayout";
+
+        $data = [
+            "id" => "pyt_12345",
+            "systemReferenceNumber" => "ref_67890"
+        ];
+
+        $headers = [
+            "x-api-key: {{Shared Xapikey By Zoqq}}",
+            "x-program-id: {{BasedOnRequirement}}",
+            "x-request-id: {{IdempotencyKey}}",
+            "x-user-id: {{Useridentificationkey}}",
+            "Authorization: Bearer {{YOUR_TOKEN}}",
+            "Content-Type: application/json"
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PATCH");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        echo $response;
+        ?>
+        ```
+      </TabItem>
+      <TabItem value="csharp" label="C#">
+        ```csharp
+        using System;
+        using System.Net.Http;
+        using System.Net.Http.Headers;
+        using System.Text;
+        using System.Threading.Tasks;
+
+        class CancelPayout
+        {
+            static async Task Main()
+            {
+                var client = new HttpClient();
+
+                var request = new HttpRequestMessage(new HttpMethod("PATCH"), "{{baseUrl}}/zoqq/api/v1/transfer/cancelpayout");
+                request.Headers.Add("x-api-key", "{{Shared Xapikey By Zoqq}}");
+                request.Headers.Add("x-program-id", "{{BasedOnRequirement}}");
+                request.Headers.Add("x-request-id", "{{IdempotencyKey}}");
+                request.Headers.Add("x-user-id", "{{Useridentificationkey}}");
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", "{{YOUR_TOKEN}}");
+
+                var json = @"
+                {
+                    ""id"": ""pyt_12345"",
+                    ""systemReferenceNumber"": ""ref_67890""
+                }";
+
+                request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await client.SendAsync(request);
+                Console.WriteLine($"Response: {response.StatusCode}");
+                var responseBody = await response.Content.ReadAsStringAsync();
+                Console.WriteLine(responseBody);
+            }
+        }
+        ```
+      </TabItem>
+    </Tabs>
+
+    <h3>Response Example</h3>
+
+    <Tabs>
+      <TabItem value="200" label="200: Success" default>
+        ```json
+        {
+          "code": 200,
+          "status": "success",
+          "message": "Payout cancelled successfully",
+          "data": {}
+        }
+        ```
+      </TabItem>
+      <TabItem value="400" label="400: Error">
+        ```json
+        {
+          "code": 400,
+          "status": "Error",
+          "message": "Payout cannot be cancelled as it's already processed"
+        }
+        ```
+      </TabItem>
+    </Tabs>
+  </div> 
+</div>

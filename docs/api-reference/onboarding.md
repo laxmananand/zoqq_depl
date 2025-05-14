@@ -37,8 +37,8 @@ POST {{baseUrl}}/zoqq/api/v1/user
  | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | emailId | string | Yes | User's email address |
-| amount | string | Yes | Initial amount |
-| currency | string | Yes | Currency code (e.g., USD) |
+| amount | string | Yes | amount(estimated_monthly_revenue) |
+| currency | string | Yes | Currency_estimated_monthly_revenue  |
 | businessName | string | Yes | Registered business name |
 | businessStructure | string | Yes | Business structure type |
 | contactNumber | string | Yes | Business contact number |
@@ -57,7 +57,7 @@ POST {{baseUrl}}/zoqq/api/v1/user
 | legalEntityType | string | Yes | Legal type of the entity (e.g., BUSINESS) |
 | asTrustee | boolean | Yes | Whether the user is acting as a trustee |
 | agreedToTermsAndConditions | boolean | Yes | Whether the user has agreed to terms and conditions |
-| productReference | string | Yes | Product type (e.g., ACCEPT_ONLINE_PAYMENTS) |
+| productReference | string | Yes | Possible enum values<ul><li>ACCEPT_ONLINE_PAYMENTS</li><li>COLLECT_MARKETPLACE_PROCEEDS</li><li>RECEIVE_TRANSFERS</li><li>GET_PAID</li><li>CONVERT_FUNDS</li><li>MAKE_TRANSFERS</li><li>CREATE_CARDS</li><li>MANAGE_EXPENSES</li><li>USE_AWX_API</li><li>TRANSFER_CNY_INBOUND</li></ul> |
 | type | string | Yes | Type of entity (e.g., business) |
 | number | string | Yes | Business registration number |
 | descriptionOfGoodsOrServices | string | Yes | Description of services or goods |
@@ -80,6 +80,9 @@ POST {{baseUrl}}/zoqq/api/v1/user
 | personDocumentsFileId | string | Yes | File ID for person documents |
 | personDocumentsTag | string | Yes | Tag for person documents |
 | liveSelfieFileId | string | Yes | Live selfie file ID | 
+| countryCode | string | Yes | ISO 2-letter country code (e.g., SG, IN, AU) | 
+
+
  
 </div>
 

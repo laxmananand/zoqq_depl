@@ -37,8 +37,8 @@ Use the following sample to make your first authenticated API request:
 ```bash
 curl -X POST https://api.zoqq.com/api/v1/authentication/login \
         --header 'x-request-id:UUID'\
-        --header 'x-client-id: pTJcVvqQQdOLr0lJ6153YA' \
-        --header 'x-api-key: b6b7c021759c9a036afa4890346b699f666274f680bf64353a93f00acaccabccc544759b96c8548e38006e760d774d06' \
+        --header 'x-client-id: Shared by Stylopay' \
+        --header 'x-api-key: Shared by Stylopay' \
         --data ''
 🧠 Tip: Use a unique x-request-id for each request to ensure idempotency.
 ```
