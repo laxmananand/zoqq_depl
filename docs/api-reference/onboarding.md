@@ -58,7 +58,7 @@ POST {{baseUrl}}/zoqq/api/v1/user
 | asTrustee | boolean | Yes | Whether the user is acting as a trustee |
 | agreedToTermsAndConditions | boolean | Yes | Whether the user has agreed to terms and conditions |
 | productReference | string | Yes | Possible enum values<ul><li>ACCEPT_ONLINE_PAYMENTS</li><li>COLLECT_MARKETPLACE_PROCEEDS</li><li>RECEIVE_TRANSFERS</li><li>GET_PAID</li><li>CONVERT_FUNDS</li><li>MAKE_TRANSFERS</li><li>CREATE_CARDS</li><li>MANAGE_EXPENSES</li><li>USE_AWX_API</li><li>TRANSFER_CNY_INBOUND</li></ul> |
-| type | string | Yes | Type of entity (e.g., business) |
+| type | string | Yes | Type of entity number (e.g., brn) |
 | number | string | Yes | Business registration number |
 | descriptionOfGoodsOrServices | string | Yes | Description of services or goods |
 | industryCategoryCode | string | Yes | Industry classification code |
@@ -75,12 +75,12 @@ POST {{baseUrl}}/zoqq/api/v1/user
 | residentialState | string | Yes | Residential state |
 | residentialSuburb | string | Yes | Residential suburb |
 | fileId | string | Yes | Business document file ID |
-| tag | string | Yes | Tag for business document |
+| tag | string | Yes | Tag for business document. Possible values:<br /><ul><li>ACRA_COMPANY_PROFILE_DOCUMENT</li><li>ANNUAL_REPORT</li><li>ANNUAL_RETURN</li><li>ARTICLES_OF_ASSOCIATION</li><li>ASIC_CURRENT_COMPANY_EXTRACT</li><li>ASSUMED_NAME_CERTIFICATE</li><li>BUSINESS_LICENSE</li><li>CERTIFICATE_OF_INCORPORATION</li><li>CERTIFICATION_REGISTRATION</li><li>COMPANY_CERTIFICATE</li><li>COMPANY_CONSTITUTION</li><li>COMPANY_PROFILE</li><li>CONFIRMATION_STATEMENT</li><li>DIRECTOR_LIST</li><li>LEGAL_NAME_AND_ADDRESS</li><li>OPERATING_AGREEMENT</li><li>PARTNERSHIP_AGREEMENT</li><li>REGISTRATION_CERTIFICATE</li><li>SHAREHOLDING_STRUCTURE_CHART</li><li>SUPPORTIVE_OTHER</li><li>TRUST_DEED</li><li>UNIT_HOLDER_REGISTER</li><li>UBO_SUPPORTIVE</li><li>THIRD_PARTY_SHAREHOLDING_DOCUMENT</li></ul> |
 | frontFileId | string | Yes | ID document front side file ID |
 | personDocumentsFileId | string | Yes | File ID for person documents |
 | personDocumentsTag | string | Yes | Tag for person documents |
 | liveSelfieFileId | string | Yes | Live selfie file ID | 
-| countryCode | string | Yes | ISO 2-letter country code (e.g., SG, IN, AU) | 
+| countryCode | string | Yes | Business Registered countryCode  ISO 2-letter country code (e.g., SG, IN, AU) | 
 
 
  

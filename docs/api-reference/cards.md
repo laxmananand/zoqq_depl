@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 You can create virtual cards associated with your organization. These cards can be single-use or multi-use and can be restricted by merchant category code, currency, and transactioYn amount.
 
-base url = https://developer.sandbox.stylopay.com:8075
+
 
 ## Create Cardholder
 
@@ -678,7 +678,7 @@ This API retrieves a list of all cards associated with the authenticated user.
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint returns a list of all cards (both physical and virtual) associated with the authenticated user, including card details and status information.</p>
+    <p>This endpoint returns a list of all cards (both physical and virtual) associated with the authenticated user. The response includes key card attributes such as card status, masked number, type, associated cardholder ID, and timestamps for creation and updates. Used to retrieve and display a user’s active or inactive cards for review, management, or filtering by type or status in customer portals, dashboards.</p>
 
     <h3>Request Headers</h3>
 
@@ -901,7 +901,7 @@ POST {{baseUrl}}/zoqq/api/v1/card/activate
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint activates a card that is in inactive status, making it available for transactions.Activate a physical card for card payment authorizations.</p>
+    <p>This endpoint activates a specific card (physical or virtual) associated with the user by updating its status to ACTIVE. Activation typically requires the card’s unique identifier and any necessary verification parameters, depending on the program’s setup. Used when a new card is issued and needs to be activated by the user before use. This is typically triggered via a user action in a web portal to begin using the card for transactions.</p>
 
     <h3>Request Headers</h3>
 
@@ -1109,7 +1109,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/card
 <div className="api-docs-container">
   <div className="api-docs-left">
     <h3>Description</h3>
-    <p>This endpoint updates card properties including transaction limits, authorization controls, and card status.Updates card details by setting the values of the included parameters. Parameters that are not included will be left unchanged.</p>
+    <p>This endpoint updates attributes of an existing card, such as its status (e.g., block, unblock), name on the card, or other modifiable fields, depending on the program’s permissions. Only specified fields are updated. Used to perform updates on a card post-issuance—for example, blocking a card due to suspicious activity, unblocking upon user request, or correcting cardholder details</p>
 
     <h3>Request Headers</h3>
 
