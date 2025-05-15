@@ -369,25 +369,15 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
     | Authorization | string | No | Bearer token  |
-    | Content-Type | string | Yes | Must be application/json |
+     
+     <h3>Request Body Parameters</h3>
 
-    <h3>Request Body</h3>
 
-    <p>The request body structure varies based on the beneficiary type and corridor. Use the <code>GET /transfer/beneficiary</code> endpoint first to get the required schema for your specific parameters.</p>
-
-    <h4>Example for US ACH Personal Account:</h4>
-    ```json
-    {
-      "account_number": "123456789",
-      "routing_number": "026073150",
-      "full_name": "John Doe",
-      "account_type": "CHECKING",
-      "bank_country_code": "US",
-      "account_currency": "USD",
-      "entity_type": "PERSONAL",
-      "transfer_method": "LOCAL"
-    }
-    ```
+    | Parameter | Type | Required | Description |
+    |-----------|------|----------|-------------|
+    | beneficiary_account_currency | string | Yes | Currency code of the beneficiary |
+    |beneficiary_account_number | string | Yes | Account number of the beneficiary |
+   
 
   </div>
   
@@ -407,14 +397,8 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
       --header 'Content-Type: application/json' \
       --header 'Authorization: Bearer {{YOUR_TOKEN}}' \
       --data '{
-        "account_number": "123456789",
-        "routing_number": "026073150",
-        "full_name": "John Doe",
-        "account_type": "CHECKING",
-        "bank_country_code": "US",
-        "account_currency": "USD",
-        "entity_type": "PERSONAL",
-        "transfer_method": "LOCAL"
+        "beneficiary_account_currency": "USD",
+        "beneficiary_account_number": "1234567890"
       }'
     ```
     
@@ -423,32 +407,27 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     
     ```python
     import requests
-    import json
+import json
 
-    url = "{{baseUrl}}/zoqq/api/v1/transfer/beneficiary"
+url = "{{baseUrl}}/zoqq/api/v1/transfer/beneficiary"
 
-    payload = {
-        "account_number": "123456789",
-        "routing_number": "026073150",
-        "full_name": "John Doe",
-        "account_type": "CHECKING",
-        "bank_country_code": "US",
-        "account_currency": "USD",
-        "entity_type": "PERSONAL",
-        "transfer_method": "LOCAL"
-    }
+payload = {
+    "beneficiary_account_currency": "USD",
+    "beneficiary_account_number": "1234567890"
+}
 
-    headers = {
-        "x-api-key": "{{Shared Xapikey By Zoqq}}",
-        "x-program-id": "{{BasedOnRequirement}}",
-        "x-request-id": "{{IdempotencyKey}}",
-        "x-user-id": "{{Useridentificationkey}}",
-        "Content-Type": "application/json",
-        "Authorization": "Bearer {{YOUR_TOKEN}}"
-    }
+headers = {
+    "x-api-key": "{{Shared Xapikey By Zoqq}}",
+    "x-program-id": "{{BasedOnRequirement}}",
+    "x-request-id": "{{IdempotencyKey}}",
+    "x-user-id": "{{Useridentificationkey}}",
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {{YOUR_TOKEN}}"
+}
 
-    response = requests.post(url, headers=headers, data=json.dumps(payload))
-    print(response.json())
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.json())
+
     ```
 
       </TabItem>
@@ -456,18 +435,21 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
 
     ```java
     HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create("{{baseUrl}}/zoqq/api/v1/transfer/beneficiary"))
-        .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
-        .header("x-program-id", "{{BasedOnRequirement}}")
-        .header("x-request-id", "{{IdempotencyKey}}")
-        .header("x-user-id", "{{Useridentificationkey}}")
-        .header("Content-Type", "application/json")
-        .header("Authorization", "Bearer {{YOUR_TOKEN}}")
-        .method("POST", HttpRequest.BodyPublishers.ofString("{\"account_number\":\"123456789\",\"routing_number\":\"026073150\",\"full_name\":\"John Doe\",\"account_type\":\"CHECKING\",\"bank_country_code\":\"US\",\"account_currency\":\"USD\",\"entity_type\":\"PERSONAL\",\"transfer_method\":\"LOCAL\"}"))
-        .build();
-    HttpResponse<String> response = HttpClient.newHttpClient()
-        .send(request, HttpResponse.BodyHandlers.ofString());
-    System.out.println(response.body());
+    .uri(URI.create("{{baseUrl}}/zoqq/api/v1/transfer/beneficiary"))
+    .header("x-api-key", "{{Shared Xapikey By Zoqq}}")
+    .header("x-program-id", "{{BasedOnRequirement}}")
+    .header("x-request-id", "{{IdempotencyKey}}")
+    .header("x-user-id", "{{Useridentificationkey}}")
+    .header("Content-Type", "application/json")
+    .header("Authorization", "Bearer {{YOUR_TOKEN}}")
+    .method("POST", HttpRequest.BodyPublishers.ofString("{\"beneficiary_account_currency\":\"USD\",\"beneficiary_account_number\":\"1234567890\"}"))
+    .build();
+
+HttpResponse<String> response = HttpClient.newHttpClient()
+    .send(request, HttpResponse.BodyHandlers.ofString());
+
+System.out.println(response.body());
+
     ```
 
       </TabItem>
@@ -485,11 +467,9 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
       "message": "",
       "data": {
         "id": "beneficiary_id",
-        "beneficiary_account_currency": "USD",
-        "beneficiary_account_number": "••••6789",
-        "bank_name": "Bank of America",
-        "status": "VERIFICATION_PENDING",
-        "created_at": "2023-06-16T05:22:14Z"
+      "beneficiary_account_currency": "USD",
+      "beneficiary_account_number": "1234567890"
+        
       }
     }
     ```
@@ -543,6 +523,9 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/validatebeneficiary
     | x-user-id | string | Yes | User identification key |
     | Authorization | string | No | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
+
+
+    
 
     <h3>Request Body</h3>
 

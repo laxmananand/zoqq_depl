@@ -275,7 +275,6 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/quotedetails
         "expiryTime": "2023-06-16T05:07:03Z",
         "sourceCurrencyCode": "USD",
         "destinationCurrencyCode": "SGD",
-        "quoteType": "payout",
         "conversionSchedule": "immediate",
         "lockPeriod": "5_mins",
         "rateCaptureTime": "2023-06-16T01:02:03Z",
@@ -329,7 +328,7 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/conversion
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | No | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
     
     <h3>Request Body Parameters</h3>
@@ -339,6 +338,10 @@ POST {{baseUrl}}/zoqq/api/v1/transfer/conversion
     | quote_id | string | Yes | Valid quote ID from Generate Quote |
     | source_amount | number | Conditional* | Amount to convert | 
     | destination_amount | number | Conditional* | Target amount |
+    | source_currency | string | Yes |The currency code being sent |
+    |destination_currency|string | Yes |The currency code being received |
+    | validAmount| boolean | Yes | Indicates whether the entered amount is valid for exchange (true/false)|
+
 
     *Either source_amount or destination_amount must match the original quote
 
@@ -467,7 +470,8 @@ This API retrieves the status and details of a specific currency conversion.
 <Tabs>
   <TabItem value="endpoint" label="Endpoint" default>
 ```
-GET {{baseUrl}}/zoqq/api/v1/transfer/conversion
+GET {{baseUrl}}/zoqq/api/v1/transfer/conversion/{{conversion_id}}
+
 ```
 
   </TabItem>
@@ -518,7 +522,7 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/conversion
     ```python
     import requests
 
-    url = "{{baseUrl}}/zoqq/api/v1/transfer/conversion"
+    url = "{{baseUrl}}/zoqq/api/v1/transfer/conversion/{{conversion_id}}"
     params = {
         "conversion_id": "conversion_4UTXo2tQnThdZGrMz6FdQR"
     }
@@ -563,23 +567,24 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/conversion
 
     ```json
     {
-      "code": 200,
-      "status": "success",
-      "message": "",
-      "data": {
-        "id": "conversion_4UTXo2tQnThdZGrMz6FdQR",
-        "status": "processing",
-        "conversion_time": "2023-06-16T05:22:14Z",
-        "source_currencycode": "USD",
-        "destination_currencycode": "SGD",
-        "source_amount": 100,
-        "destination_amount": 132.52,
-        "quote_id": "quote_6WRfj2CkYaRSuiPskK3kj3",
-        "net_exchangerate": 1.3251652,
-        "system_reference_number": "WFT9188961163",
-        "createdTime": "2023-06-16T05:22:14Z"
-      }
+  "code": 200,
+  "status": "success",
+  "message": "Conversion Details Fetched",
+  "data": 
+    {
+      "id": "13a154ca-4ca6-4f8b-9c30-eb09312f44ce",
+      "status": "SETTLED",
+      "conversionTime": "2025-04-23T08:05:52+0000",
+      "sourceCurrencycode": "USD",
+      "destinationCurrencycode": "SGD",
+      "sourceAmount": 100.0,
+      "destinationAmount": 131.73,
+      "quoteId": "cf9dbf97-a74f-3f77-8ced-913861b31336",
+      "netExchangerate": 1.317342,
+      "systemReferenceNumber": "C250423-V53OOTQ",
+      "createdTime": "2025-04-23T08:05:52+0000"
     }
+}
     ```
 
       </TabItem>
