@@ -4,8 +4,7 @@ title: Cards
 hide_table_of_contents: true
 ---
 
-<!-- Make sure there are no import statements here unless properly formatted -->
-<!-- For example, if you need imports, they should be at the very top: -->
+
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -49,7 +48,7 @@ POST {{baseUrl}}/zoqq/api/v1/cardholder
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token  |
+    | Authorization | string | Yes | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Request Body Parameters</h3>
@@ -688,7 +687,8 @@ This API retrieves a list of all cards associated with the authenticated user.
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token |
+    | Authorization | string | Yes | Bearer token |
+    | Content-Type | string | Yes | Must be application/json |
 
     <h3>Query Parameters</h3>
 
@@ -911,7 +911,7 @@ POST {{baseUrl}}/zoqq/api/v1/card/activate
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token  |
+    | Authorization | string | Yes | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Request Body Parameters</h3>
@@ -1119,7 +1119,7 @@ PATCH {{baseUrl}}/zoqq/api/v1/card
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token  |
+    | Authorization | string | Yes | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Request Body Parameters</h3>
@@ -1678,7 +1678,7 @@ GET {{baseUrl}}/zoqq/api/v1/card/limit
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token |
+    | Authorization | string | Yes | Bearer token |
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Query Parameters</h3>
@@ -1887,7 +1887,7 @@ GET {{baseUrl}}/zoqq/api/v1/card/transaction
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token  |
+    | Authorization | string | Yes | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Request Body Parameters</h3>
@@ -2171,7 +2171,7 @@ GET {{baseUrl}}/zoqq/api/v1/card/detail
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token  |
+    | Authorization | string | Yes | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Query Parameters</h3>

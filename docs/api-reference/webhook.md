@@ -30,14 +30,15 @@ Integrating the webhook service enables end users to receive notifications and u
 
 All webhook requests require the following headers:
 
-
-| Header           | Type   | Description                                 |
-|------------------|--------|---------------------------------------------|
-| `x-api-key`       | string | Shared API key provided by Zoqq             |
-| `x-program-id`    | string | Program identifier based on requirement     |
-| `x-request-id`    | string | Idempotency key for safe retries            |
-| `x-user-id`       | string | Unique user identification key              |
-| `Authorization`   | string | `Bearer <token>` – Optional as of now       |
+    <h3>Request Headers</h3>
+    | Parameter | Type | Required | Description |
+    |-----------|------|----------|-------------|
+    | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
+    | x-program-id | string | Yes | Program identifier |
+    | x-request-id | string | Yes | Idempotency key |
+    | x-user-id | string | Yes | User identification key |
+    | Authorization | string | Yes | Bearer token  |
+    | Content-Type | string | Yes | Must be application/json |
 
 ---
 ## 🔄 Webhook Management

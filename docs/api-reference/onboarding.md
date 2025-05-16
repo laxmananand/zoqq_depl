@@ -1208,7 +1208,7 @@ This API allows you to respond to an RFI request by providing the required answe
     | x-program-id | string | Yes | BasedOnRequirement |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token  |
+    | Authorization | string | Yes | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Request Body Parameters</h3>
