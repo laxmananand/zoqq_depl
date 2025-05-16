@@ -30,7 +30,8 @@ POST {{baseUrl}}/zoqq/api/v1/user
     | x-api-key | string | Yes | Shared X-API key provided by Zoqq |
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | Yes | Bearer token  |
+    | Content-Type | string | Yes | Must be application/json |
  
    <h3>Request Body Parameters</h3>
 
@@ -437,7 +438,8 @@ All parameters used in create user can be updated, except Agent Code, subagent C
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | Yes | Bearer token  |
+    | Content-Type | string | Yes | Must be application/json |
     
   </div>
 
@@ -697,6 +699,7 @@ This API allows users to accept the terms and conditions.
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
     | Authorization | string | Yes | Bearer token |
+    | Content-Type | string | Yes | Must be application/json |
 
   </div>
 
@@ -881,6 +884,7 @@ This API activates a user account in the system.
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
     | Authorization | string | Yes | Bearer token |
+    | Content-Type | string | Yes | Must be application/json |
 
   </div>
 
@@ -1039,7 +1043,7 @@ This API activates a user account in the system.
   </div> 
 </div>
 
-## Retrieve an RFI
+## Retrieve RFI
 
 This API retrieves details of an RFI using the given RFI ID.
 
@@ -1064,7 +1068,8 @@ This API retrieves details of an RFI using the given RFI ID.
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Nullable) |
+    | Authorization | string | Yes | Bearer token  |
+    | Content-Type | string | Yes | Must be application/json |
 
     <h3>Response Fields</h3>
     
@@ -1177,7 +1182,7 @@ This API retrieves details of an RFI using the given RFI ID.
 </div>
 
 
-##  Respond an RFI
+## Respond RFI
 
 This API allows you to respond to an RFI request by providing the required answers.
 

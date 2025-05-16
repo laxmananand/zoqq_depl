@@ -696,13 +696,13 @@ const sidebars = {
             },
             {
               type: "link",
-              href: "/docs/api-reference/onboarding#retrieve-an-rfi",
-              label: "🟢 GET Retrieve an RFI",
+              href: "/docs/api-reference/onboarding#retrieve-rfi",
+              label: "🟢 GET Retrieve  RFI",
             },
             {
               type: "link",
-              href: "/docs/api-reference/onboarding#respond-an-rfi",
-              label: "🟡 POST Respond an RFI",
+              href: "/docs/api-reference/onboarding#respond-rfi",
+              label: "🟡 POST Respond  RFI",
             },
           ],
         },

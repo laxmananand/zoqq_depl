@@ -38,7 +38,7 @@ POST {{baseUrl}}/zoqq/api/v1/account
     | x-program-id | string | Yes | Program identifier based on requirement |
     | x-request-id | string | Yes | Idempotency key for request tracking |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token (Optional) |
+    | Authorization | string | Yes | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
     
     <h3>Request Body Parameters</h3>
@@ -400,7 +400,8 @@ GET {{baseUrl}}/zoqq/api/v1/account
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key (UUID recommended) |
     | x-user-id | string | Yes | Unique user identifier |
-    | Authorization | string | No | Bearer token (Optional) |
+    | Authorization | string | Yes | Bearer token  |
+    | Content-Type | string | Yes | Must be application/json |
 
     <h3>Query Parameters</h3>
     
@@ -664,7 +665,8 @@ GET {{baseUrl}}/zoqq/api/v1/account/balance
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key (UUID recommended) |
     | x-user-id | string | Yes | Unique user identifier |
-    | Authorization | string | No | Bearer token (Optional) |
+    | Authorization | string | Yes | Bearer token  |
+    | Content-Type | string | Yes | Must be application/json |
     
     
     <h3>Response Parameters</h3>
@@ -882,7 +884,8 @@ GET {{baseUrl}}/zoqq/api/v1/account/transactions
     | x-request-id | string | Yes | Idempotency key (UUID recommended) |
     | x-user-id | string | Yes | Unique user identifier |
     | x-account-id | string   | Yes      | Global account identifier |
-    | Authorization | string | No | Bearer token (Optional) |
+    | Authorization | string | Yes | Bearer token  |
+    | Content-Type | string | Yes | Must be application/json |
     
     <h3>Query Parameters</h3>
     
@@ -1125,7 +1128,8 @@ This API returns paginated balance history with filters for date range. Includes
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key (UUID recommended) |
     | x-user-id | string | Yes | Unique user identifier |
-    | Authorization | string | No | Bearer token (Optional) |
+    | Authorization | string | Yes | Bearer token  |
+    | Content-Type | string | Yes | Must be application/json |
     
     <h3>Query Parameters</h3>
     

@@ -841,7 +841,8 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiary
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token () |
+    | Authorization | string | No | Bearer token  |
+    | Content-Type | string | Yes | Must be application/json |
     
     <h3>Query Parameters</h3>
     
@@ -985,7 +986,8 @@ GET {{baseUrl}}/zoqq/api/v1/transfer/beneficiarylist
     | x-program-id | string | Yes | Program identifier |
     | x-request-id | string | Yes | Idempotency key |
     | x-user-id | string | Yes | User identification key |
-    | Authorization | string | No | Bearer token () |
+    | Authorization | string | No | Bearer token  |
+    | Content-Type | string | Yes | Must be application/json |
     
     <h3>Query Parameters</h3>
     

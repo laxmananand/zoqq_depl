@@ -32,6 +32,7 @@ This API authenticates and retrieves an access token for API operations.To get s
     |-----------|------|----------|-------------|
     | x-client-id | string | Yes | Client identification key |
     | x-api-key | string | Yes | API secret key for authentication |
+    | Content-Type | string | Yes | Must be application/json |
     
   </div>
 
