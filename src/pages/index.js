@@ -79,15 +79,19 @@ export default function Home() {
                 icon: "🌐",
               },
             ].map((item, index) => (
-              <div 
-                className="col col--4 margin-bottom--lg" 
+              <div
+                className="col col--4 margin-bottom--lg"
                 key={index}
                 style={{ display: "flex", justifyContent: "center" }}
               >
                 <Link
                   to={item.link}
                   className={styles.cardLink}
-                  style={{ textDecoration: "none", width: "100%", maxWidth: "360px" }}
+                  style={{
+                    textDecoration: "none",
+                    width: "100%",
+                    maxWidth: "360px",
+                  }}
                 >
                   <div
                     className="card shadow--md"
@@ -113,11 +117,19 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="margin-top--md margin-bottom--md">
-          <h2 className="text--center margin-top--md margin-bottom--md">
+        <section className="margin-top--md margin-bottom--lg">
+          <h2 className="text--center margin-top--md margin-bottom--lg">
             💼 Who Uses ZOQQ?
           </h2>
-          <div className="row">
+          <div
+            className="row"
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center", // Centers the cards
+              gap: "16px", // Adds spacing between cards
+            }}
+          >
             {[
               {
                 title: "E-commerce Platforms & Marketplaces",
@@ -128,11 +140,6 @@ export default function Home() {
                 title: "Freelancer & Gig Platforms",
                 description:
                   "Platforms enabling seamless payments for freelancers and gig workers globally.",
-              },
-              {
-                title: "Crypto & Stablecoin Apps",
-                description:
-                  "Applications facilitating crypto transactions and stablecoin operations.",
               },
               {
                 title: "OTAs & Travel Aggregators",
@@ -150,13 +157,21 @@ export default function Home() {
                   "Businesses managing international payments and financial operations.",
               },
             ].map((item, index) => (
-              <div className="col col--4 margin-bottom--lg" key={index}>
-                <div className="card shadow--md">
+              <div
+                className="col"
+                key={index}
+                style={{
+                  flex: "0 0 calc(33.333% - 16px)", // 3 cards per row (adjust for spacing)
+                  maxWidth: "calc(33.333% - 16px)", // Ensures 3 cards fit
+                  minWidth: "280px", // Minimum card width
+                }}
+              >
+                <div className="card shadow--md h-full">
                   <div className="card__header">
-                    <h3>{item.title}</h3>
+                    <h3 className="text--center">{item.title}</h3>
                   </div>
                   <div className="card__body">
-                    <p>{item.description}</p>
+                    <p className="text--center">{item.description}</p>
                   </div>
                 </div>
               </div>
