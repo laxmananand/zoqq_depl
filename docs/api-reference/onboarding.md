@@ -8,6 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 ## Create User
+
 This API creates a new user account with business and personal details.
 
 <Tabs>
@@ -32,62 +33,58 @@ POST {{baseUrl}}/zoqq/api/v1/user
     | x-request-id | string | Yes | Idempotency key |
     | Authorization | string | Yes | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
- 
+
    <h3>Request Body Parameters</h3>
 
- | Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| emailId | string | Yes | User's email address |
-| amount | string | Yes | amount(estimated_monthly_revenue) |
-| currency | string | Yes | Currency_estimated_monthly_revenue  |
-| businessName | string | Yes | Registered business name |
-| businessStructure | string | Yes | Business structure type |
-| contactNumber | string | Yes | Business contact number |
-| identificationType | string | Yes | ID document type (e.g., Passport) |
-| Idnumber | string | Yes | Identification number |
-| issuingCountryCode | string | Yes | Country that issued the ID |
-| effectiveAt | string | Yes | ID document effective date (YYYY-MM-DD) |
-| expireAt | string | Yes | ID document expiry date (YYYY-MM-DD) |
-| firstName | string | Yes | User's first name |
-| middleName | string | No | User's middle name |
-| lastName | string | Yes | User's last name |
-| dateOfBirth | string | Yes | Date of birth (YYYY-MM-DD) |
-| nationality | string | Yes | Nationality of the user |
-| mobile | string | Yes | Mobile number |
-| roles | string | Yes | User role (e.g., BENEFICIAL_OWNER) |
-| legalEntityType | string | Yes | Legal type of the entity (e.g., BUSINESS) |
-| asTrustee | boolean | Yes | Whether the user is acting as a trustee |
-| agreedToTermsAndConditions | boolean | Yes | Whether the user has agreed to terms and conditions |
-| productReference | string | Yes | Possible enum values<ul><li>ACCEPT_ONLINE_PAYMENTS</li><li>COLLECT_MARKETPLACE_PROCEEDS</li><li>RECEIVE_TRANSFERS</li><li>GET_PAID</li><li>CONVERT_FUNDS</li><li>MAKE_TRANSFERS</li><li>CREATE_CARDS</li><li>MANAGE_EXPENSES</li><li>USE_AWX_API</li><li>TRANSFER_CNY_INBOUND</li></ul> |
-| type | string | Yes | Type of entity number (e.g., brn) |
-| number | string | Yes | Business registration number |
-| descriptionOfGoodsOrServices | string | Yes | Description of services or goods |
-| industryCategoryCode | string | Yes | Industry classification code |
-| operatingCountry | string | Yes | Country where business operates |
-| registrationAddressLine1 | string | Yes | Business registration address line 1 |
-| registrationAddressLine2 | string | No | Business registration address line 2 |
-| registrationCountryCode | string | Yes | Business registration country code |
-| registrationPostcode | string | Yes | Business registration postcode |
-| registrationState | string | Yes | Business registration state |
-| registrationSuburb | string | Yes | Business registration suburb |
-| residentialAddressLine1 | string | Yes | Residential address line 1 |
-| residentialCountryCode | string | Yes | Residential country code |
-| residentialPostcode | string | Yes | Residential postcode |
-| residentialState | string | Yes | Residential state |
-| residentialSuburb | string | Yes | Residential suburb |
-| fileId | string | Yes | Business document file ID |
-| tag | string | Yes | Tag for business document. Possible values:<br /><ul><li>ACRA_COMPANY_PROFILE_DOCUMENT</li><li>ANNUAL_REPORT</li><li>ANNUAL_RETURN</li><li>ARTICLES_OF_ASSOCIATION</li><li>ASIC_CURRENT_COMPANY_EXTRACT</li><li>ASSUMED_NAME_CERTIFICATE</li><li>BUSINESS_LICENSE</li><li>CERTIFICATE_OF_INCORPORATION</li><li>CERTIFICATION_REGISTRATION</li><li>COMPANY_CERTIFICATE</li><li>COMPANY_CONSTITUTION</li><li>COMPANY_PROFILE</li><li>CONFIRMATION_STATEMENT</li><li>DIRECTOR_LIST</li><li>LEGAL_NAME_AND_ADDRESS</li><li>OPERATING_AGREEMENT</li><li>PARTNERSHIP_AGREEMENT</li><li>REGISTRATION_CERTIFICATE</li><li>SHAREHOLDING_STRUCTURE_CHART</li><li>SUPPORTIVE_OTHER</li><li>TRUST_DEED</li><li>UNIT_HOLDER_REGISTER</li><li>UBO_SUPPORTIVE</li><li>THIRD_PARTY_SHAREHOLDING_DOCUMENT</li></ul> |
-| frontFileId | string | Yes | ID document front side file ID |
-| personDocumentsFileId | string | Yes | File ID for person documents |
-| personDocumentsTag | string | Yes | Tag for person documents |
-| liveSelfieFileId | string | Yes | Live selfie file ID | 
-| countryCode | string | Yes | Business Registered countryCode  ISO 2-letter country code (e.g., SG, IN, AU) | 
+| Parameter                    | Type    | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ---------------------------- | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| emailId                      | string  | Yes      | User's email address                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| amount                       | string  | Yes      | amount(estimated_monthly_revenue)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| currency                     | string  | Yes      | Currency_estimated_monthly_revenue                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| businessName                 | string  | Yes      | Registered business name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| businessStructure            | string  | Yes      | Business structure type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| contactNumber                | string  | Yes      | Business contact number                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| identificationType           | string  | Yes      | ID document type (e.g., Passport)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Idnumber                     | string  | Yes      | Identification number                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| issuingCountryCode           | string  | Yes      | Country that issued the ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| effectiveAt                  | string  | Yes      | ID document effective date (YYYY-MM-DD)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| expireAt                     | string  | Yes      | ID document expiry date (YYYY-MM-DD)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| firstName                    | string  | Yes      | User's first name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| middleName                   | string  | No       | User's middle name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| lastName                     | string  | Yes      | User's last name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| dateOfBirth                  | string  | Yes      | Date of birth (YYYY-MM-DD)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| nationality                  | string  | Yes      | Nationality of the user                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| mobile                       | string  | Yes      | Mobile number                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| roles                        | string  | Yes      | User role (e.g., BENEFICIAL_OWNER)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| legalEntityType              | string  | Yes      | Legal type of the entity (e.g., BUSINESS)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| asTrustee                    | boolean | Yes      | Whether the user is acting as a trustee                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| agreedToTermsAndConditions   | boolean | Yes      | Whether the user has agreed to terms and conditions                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| productReference             | string  | Yes      | Possible enum values<ul><li>ACCEPT_ONLINE_PAYMENTS</li><li>COLLECT_MARKETPLACE_PROCEEDS</li><li>RECEIVE_TRANSFERS</li><li>GET_PAID</li><li>CONVERT_FUNDS</li><li>MAKE_TRANSFERS</li><li>CREATE_CARDS</li><li>MANAGE_EXPENSES</li><li>USE_AWX_API</li><li>TRANSFER_CNY_INBOUND</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| type                         | string  | Yes      | Type of entity number (e.g., brn)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| number                       | string  | Yes      | Business registration number                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| descriptionOfGoodsOrServices | string  | Yes      | Description of services or goods                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| industryCategoryCode         | string  | Yes      | Industry classification code                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| operatingCountry             | string  | Yes      | Country where business operates                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| registrationAddressLine1     | string  | Yes      | Business registration address line 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| registrationAddressLine2     | string  | No       | Business registration address line 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| registrationCountryCode      | string  | Yes      | Business registration country code                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| registrationPostcode         | string  | Yes      | Business registration postcode                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| registrationState            | string  | Yes      | Business registration state                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| registrationSuburb           | string  | Yes      | Business registration suburb                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| residentialAddressLine1      | string  | Yes      | Residential address line 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| residentialCountryCode       | string  | Yes      | Residential country code                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| residentialPostcode          | string  | Yes      | Residential postcode                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| residentialState             | string  | Yes      | Residential state                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| residentialSuburb            | string  | Yes      | Residential suburb                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| fileId                       | string  | Yes      | Business document file ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| tag                          | string  | Yes      | Tag for business document. Possible values:<br /><ul><li>ACRA_COMPANY_PROFILE_DOCUMENT</li><li>ANNUAL_REPORT</li><li>ANNUAL_RETURN</li><li>ARTICLES_OF_ASSOCIATION</li><li>ASIC_CURRENT_COMPANY_EXTRACT</li><li>ASSUMED_NAME_CERTIFICATE</li><li>BUSINESS_LICENSE</li><li>CERTIFICATE_OF_INCORPORATION</li><li>CERTIFICATION_REGISTRATION</li><li>COMPANY_CERTIFICATE</li><li>COMPANY_CONSTITUTION</li><li>COMPANY_PROFILE</li><li>CONFIRMATION_STATEMENT</li><li>DIRECTOR_LIST</li><li>LEGAL_NAME_AND_ADDRESS</li><li>OPERATING_AGREEMENT</li><li>PARTNERSHIP_AGREEMENT</li><li>REGISTRATION_CERTIFICATE</li><li>SHAREHOLDING_STRUCTURE_CHART</li><li>SUPPORTIVE_OTHER</li><li>TRUST_DEED</li><li>UNIT_HOLDER_REGISTER</li><li>UBO_SUPPORTIVE</li><li>THIRD_PARTY_SHAREHOLDING_DOCUMENT</li></ul> |
+| frontFileId                  | string  | Yes      | ID document front side file ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| personDocumentsFileId        | string  | Yes      | File ID for person documents                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| personDocumentsTag           | string  | Yes      | Tag for person documents                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| liveSelfieFileId             | string  | Yes      | Live selfie file ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| countryCode                  | string  | Yes      | Business Registered countryCode ISO 2-letter country code (e.g., SG, IN, AU)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
-
- 
 </div>
-
-
 
   <div className="api-docs-right">
     <h3>Request Example</h3>
@@ -220,12 +217,12 @@ POST {{baseUrl}}/zoqq/api/v1/user
       </TabItem>
 
 
-      
+
       <TabItem value="php" label="php">
         ```php
         <?php
         $url = '{{baseUrl}}/zoqq/api/v1/user';
-        
+
         $data = [
             'emailId' => 'testzoqq10@yopmail.com',
             'amount' => '10',
@@ -287,10 +284,10 @@ POST {{baseUrl}}/zoqq/api/v1/user
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        
+
         $response = curl_exec($ch);
         curl_close($ch);
-        
+
         echo $response;
         ?>
         ```
@@ -311,7 +308,7 @@ POST {{baseUrl}}/zoqq/api/v1/user
                 {
                     Method = HttpMethod.Post,
                     RequestUri = new Uri("{{baseUrl}}/zoqq/api/v1/user"),
-                    Headers = 
+                    Headers =
                     {
                         { "x-api-key", "{{Shared Xapikey By Zoqq}}" },
                         { "x-program-id", "{{BasedOnRequirement}}" },
@@ -409,6 +406,7 @@ POST {{baseUrl}}/zoqq/api/v1/user
         ```
       </TabItem>
     </Tabs>
+
   </div>
 </div>
 
@@ -440,7 +438,7 @@ All parameters used in create user can be updated, except Agent Code, subagent C
     | x-user-id | string | Yes | User identification key |
     | Authorization | string | Yes | Bearer token  |
     | Content-Type | string | Yes | Must be application/json |
-    
+
   </div>
 
   <div className="api-docs-right">
@@ -1072,7 +1070,7 @@ This API retrieves details of an RFI using the given RFI ID.
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Response Fields</h3>
-    
+
     | Field | Type | Description |
     |-------|------|-------------|
     | account_id | string | Unique account identifier |
@@ -1110,8 +1108,157 @@ This API retrieves details of an RFI using the given RFI ID.
           -H "x-user-id: {{Useridentificationkey}}"
         ```
       </TabItem>
-      
-      <TabItem value="response" label="Response Example">
+      <TabItem value="java" label="Java">
+        ```java
+        import java.io.BufferedReader;
+        import java.io.InputStreamReader;
+        import java.net.HttpURLConnection;
+        import java.net.URL;
+
+        public class CurlRequest {
+            public static void main(String[] args) {
+                try {
+                    String baseUrl = "{{baseUrl}}";
+                    String apiKey = "{{Shared Xapikey By Zoqq}}";
+                    String programId = "{{BasedOnRequirement}}";
+                    String requestId = "{{IdempotencyKey}}";
+                    String userId = "{{Useridentificationkey}}";
+
+                    URL url = new URL(baseUrl + "/zoqq/api/v1/user/rfi");
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+
+                    // Set headers
+                    connection.setRequestProperty("x-api-key", apiKey);
+                    connection.setRequestProperty("x-program-id", programId);
+                    connection.setRequestProperty("x-request-id", requestId);
+                    connection.setRequestProperty("x-user-id", userId);
+
+                    int responseCode = connection.getResponseCode();
+                    System.out.println("Response Code: " + responseCode);
+
+                    BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String inputLine;
+                    StringBuilder response = new StringBuilder();
+
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    in.close();
+
+                    System.out.println(response.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        ```
+      </TabItem>
+
+      <TabItem value="python" label="Python">
+        ```python
+        import requests
+
+        headers = {
+            "x-api-key": "{{Shared Xapikey By Zoqq}}",
+            "x-program-id": "{{BasedOnRequirement}}",
+            "x-request-id": "{{IdempotencyKey}}",
+            "x-user-id": "{{Useridentificationkey}}"
+        }
+
+        response = requests.get(
+            "{{baseUrl}}/zoqq/api/v1/user/rfi",
+            headers=headers
+        )
+
+        print(response.json())
+        ```
+      </TabItem>
+      <TabItem value="php" label="php">
+        ```php
+        <?php
+          $baseUrl = "{{baseUrl}}";
+          $apiKey = "{{Shared Xapikey By Zoqq}}";
+          $programId = "{{BasedOnRequirement}}";
+          $requestId = "{{IdempotencyKey}}";
+          $userId = "{{Useridentificationkey}}";
+
+          $url = $baseUrl . "/zoqq/api/v1/user/rfi";
+
+          $headers = [
+              "x-api-key: " . $apiKey,
+              "x-program-id: " . $programId,
+              "x-request-id: " . $requestId,
+              "x-user-id: " . $userId
+          ];
+
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, $url);
+          curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_HTTPGET, true);
+
+          $response = curl_exec($ch);
+          $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+          if (curl_errno($ch)) {
+              echo 'Error:' . curl_error($ch);
+          } else {
+              echo "HTTP Code: " . $httpCode . "\n";
+              echo "Response: " . $response;
+          }
+
+          curl_close($ch);
+          ?>
+        ```
+      </TabItem>
+      <TabItem value="csharp" label="C#">
+        ```csharp
+        using System;
+        using System.Net.Http;
+        using System.Threading.Tasks;
+
+        class Program
+        {
+            static async Task Main(string[] args)
+            {
+                string baseUrl = "{{baseUrl}}";
+                string apiKey = "{{Shared Xapikey By Zoqq}}";
+                string programId = "{{BasedOnRequirement}}";
+                string requestId = "{{IdempotencyKey}}";
+                string userId = "{{Useridentificationkey}}";
+
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(baseUrl);
+
+                    // Add headers
+                    client.DefaultRequestHeaders.Add("x-api-key", apiKey);
+                    client.DefaultRequestHeaders.Add("x-program-id", programId);
+                    client.DefaultRequestHeaders.Add("x-request-id", requestId);
+                    client.DefaultRequestHeaders.Add("x-user-id", userId);
+
+                    try
+                    {
+                        HttpResponseMessage response = await client.GetAsync("/zoqq/api/v1/user/rfi");
+                        response.EnsureSuccessStatusCode();
+
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine($"Status Code: {response.StatusCode}");
+                        Console.WriteLine($"Response: {responseBody}");
+                    }
+                    catch (HttpRequestException e)
+                    {
+                        Console.WriteLine($"Error: {e.Message}");
+                    }
+                }
+            }
+        }
+        ```
+      </TabItem>
+    </Tabs>
+    <h3>Response Examples</h3>
+    <TabItem value="response" label="Response Example">
         ```json
         {
           "account_id": "acct_e_2wbiZ3Mx-ynlX-7Qidbg",
@@ -1157,30 +1304,9 @@ This API retrieves details of an RFI using the given RFI ID.
         }
         ```
       </TabItem>
-      
-      <TabItem value="python" label="Python">
-        ```python
-        import requests
-        
-        headers = {
-            "x-api-key": "{{Shared Xapikey By Zoqq}}",
-            "x-program-id": "{{BasedOnRequirement}}",
-            "x-request-id": "{{IdempotencyKey}}",
-            "x-user-id": "{{Useridentificationkey}}"
-        }
-        
-        response = requests.get(
-            "{{baseUrl}}/zoqq/api/v1/user/rfi",
-            headers=headers
-        )
-        
-        print(response.json())
-        ```
-      </TabItem>
-    </Tabs>
+
   </div>
 </div>
-
 
 ## Respond RFI
 
@@ -1212,7 +1338,7 @@ This API allows you to respond to an RFI request by providing the required answe
     | Content-Type | string | Yes | Must be application/json |
 
     <h3>Request Body Parameters</h3>
-    
+
     | Field | Type | Required | Description |
     |-------|------|----------|-------------|
     | id | string | Yes | RFI question identifier |
@@ -1229,6 +1355,7 @@ This API allows you to respond to an RFI request by providing the required answe
     - `ADDRESS`: For proof of address verification
     - `DOCUMENT`: For identity document verification
     - `TEXT`: For simple text responses
+
   </div>
   
   <div className="api-docs-right">
@@ -1256,18 +1383,49 @@ This API allows you to respond to an RFI request by providing the required answe
           }'
         ```
       </TabItem>
-      
-      <TabItem value="response" label="Response Example">
-        ```json
-        {
-          "status": "SUBMITTED",
-          "rfi_id": "de73d13b-cb60-4541-8fa6-4bc50c1cbe92",
-          "submitted_at": "2023-04-15T08:30:45Z",
-          "next_steps": "Verification may take 1-3 business days"
+      <TabItem value="java" label="Java">
+        ```java
+        import java.io.OutputStream;
+        import java.net.HttpURLConnection;
+        import java.net.URL;
+        import java.nio.charset.StandardCharsets;
+
+        public class ZoqqApiClient {
+            public static void main(String[] args) throws Exception {
+                String baseUrl = "{{baseUrl}}";
+                String jsonBody = "{\n" +
+                        "  \"id\": \"de73d13b-cb60-4541-8fa6-4bc50c1cbe92\",\n" +
+                        "  \"type\": \"ADDRESS\",\n" +
+                        "  \"address_line1\": \"200 Collins Street\",\n" +
+                        "  \"address_line2\": \"200 Collins Street\",\n" +
+                        "  \"country_code\": \"AU\",\n" +
+                        "  \"postcode\": \"3000\",\n" +
+                        "  \"state\": \"VIC\",\n" +
+                        "  \"suburb\": \"Melbourne\"\n" +
+                        "}";
+
+                URL url = new URL(baseUrl + "/zoqq/api/v1/user/rfi");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("x-api-key", "{{Shared Xapikey By Zoqq}}");
+                conn.setRequestProperty("x-program-id", "{{BasedOnRequirement}}");
+                conn.setRequestProperty("x-request-id", "{{IdempotencyKey}}");
+                conn.setRequestProperty("x-user-id", "{{Useridentificationkey}}");
+                conn.setRequestProperty("Content-Type", "application/json");
+                conn.setDoOutput(true);
+
+                try(OutputStream os = conn.getOutputStream()) {
+                    byte[] input = jsonBody.getBytes(StandardCharsets.UTF_8);
+                    os.write(input, 0, input.length);
+                }
+
+                int responseCode = conn.getResponseCode();
+                System.out.println("Response Code: " + responseCode);
+                // Handle response here
+            }
         }
         ```
       </TabItem>
-      
       <TabItem value="python" label="Python">
         ```python
         import requests
@@ -1300,7 +1458,87 @@ This API allows you to respond to an RFI request by providing the required answe
         print(response.json())
         ```
       </TabItem>
-      
+      <TabItem value="php" label="php">
+        ```php
+        <?php
+        $baseUrl = "{{baseUrl}}";
+        $url = $baseUrl . "/zoqq/api/v1/user/rfi";
+
+        $headers = [
+            'x-api-key: {{Shared Xapikey By Zoqq}}',
+            'x-program-id: {{BasedOnRequirement}}',
+            'x-request-id: {{IdempotencyKey}}',
+            'x-user-id: {{Useridentificationkey}}',
+            'Content-Type: application/json'
+        ];
+
+        $data = [
+            'id' => 'de73d13b-cb60-4541-8fa6-4bc50c1cbe92',
+            'type' => 'ADDRESS',
+            'address_line1' => '200 Collins Street',
+            'address_line2' => '200 Collins Street',
+            'country_code' => 'AU',
+            'postcode' => '3000',
+            'state' => 'VIC',
+            'suburb' => 'Melbourne'
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        echo "Response Code: " . $httpCode . "\n";
+        // Handle response here
+
+        curl_close($ch);
+        ?>
+        ```
+      </TabItem>
+      <TabItem value="csharp" label="C#">
+        ```csharp
+        using System;
+        using System.Net.Http;
+        using System.Text;
+        using System.Threading.Tasks;
+
+        class Program
+        {
+            static async Task Main(string[] args)
+            {
+                var baseUrl = "{{baseUrl}}";
+                var client = new HttpClient();
+
+                client.DefaultRequestHeaders.Add("x-api-key", "{{Shared Xapikey By Zoqq}}");
+                client.DefaultRequestHeaders.Add("x-program-id", "{{BasedOnRequirement}}");
+                client.DefaultRequestHeaders.Add("x-request-id", "{{IdempotencyKey}}");
+                client.DefaultRequestHeaders.Add("x-user-id", "{{Useridentificationkey}}");
+
+                var jsonBody = @"{
+                    ""id"": ""de73d13b-cb60-4541-8fa6-4bc50c1cbe92"",
+                    ""type"": ""ADDRESS"",
+                    ""address_line1"": ""200 Collins Street"",
+                    ""address_line2"": ""200 Collins Street"",
+                    ""country_code"": ""AU"",
+                    ""postcode"": ""3000"",
+                    ""state"": ""VIC"",
+                    ""suburb"": ""Melbourne""
+                }";
+
+                var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync($"{baseUrl}/zoqq/api/v1/user/rfi", content);
+
+                Console.WriteLine($"Response Code: {(int)response.StatusCode}");
+                // Handle response here
+            }
+        }
+        ```
+      </TabItem>
+
       <TabItem value="advanced" label="With Attachments">
         ```json
         {
@@ -1319,5 +1557,17 @@ This API allows you to respond to an RFI request by providing the required answe
         ```
       </TabItem>
     </Tabs>
+    <h3>Response Examples</h3>
+    <TabItem value="response" label="Response Example">
+        ```json
+        {
+          "status": "SUBMITTED",
+          "rfi_id": "de73d13b-cb60-4541-8fa6-4bc50c1cbe92",
+          "submitted_at": "2023-04-15T08:30:45Z",
+          "next_steps": "Verification may take 1-3 business days"
+        }
+        ```
+      </TabItem>
+
   </div>
 </div>
